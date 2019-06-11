@@ -12,7 +12,7 @@ import "antd/dist/antd.css";
 
 function IndexPage() {
   return (
-    <div className={styles.normal}>
+    <div className={styles.normal}> 
       <div className={styles.login}>
         <Input
           placeholder="请输入用户名"
