@@ -1,7 +1,9 @@
+import {login} from '../services'
+
 
 export default {
   // 命名空间
-  namespace: 'example',
+  namespace: 'user',
 
   // 模块内部的状态
   state: {},
@@ -13,6 +15,11 @@ export default {
 
   // 异步操作
   effects: {
+    *login({payload},{call,put}){
+      console.log('payload...',payload,login);
+      let data= yield call(login,payload);
+      console.log('data...',data)
+    },
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
       yield put({ type: 'save' });
     },
