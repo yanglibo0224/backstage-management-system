@@ -1,3 +1,4 @@
+
 import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import styles from './index.scss';
@@ -79,6 +80,7 @@ function IndexPage(props) {
       </Form>
     </div>
   </div>
+
 }
 
 
