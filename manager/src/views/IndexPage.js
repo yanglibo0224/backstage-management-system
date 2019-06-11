@@ -1,8 +1,14 @@
 import React from 'react';
+// import { Router,Route,Switch } from 'dva/router';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
-import { Input, Tooltip, Icon, Checkbox, Button } from 'antd';
+import { Input, Icon, Checkbox, Button } from 'antd';
 import "antd/dist/antd.css";
+// import Products from '../routes/Products';
+// import { withRouter, Link } from 'dva/router';
+// const { history } = this.props;
+// import api from '@/index';
+
 
 function IndexPage() {
   return (
@@ -20,7 +26,7 @@ function IndexPage() {
           <Checkbox onChange={onChange}>记住密码</Checkbox>
           <a href="">忘记密码</a>
         </div>
-        <Button type="primary" block>
+        <Button type="primary" block onClick={herf=>window.location.href="http://localhost:8000/#/home"}>
           登陆
         </Button>
       </div>
@@ -29,6 +35,11 @@ function IndexPage() {
   function onChange(e) {
     console.log(`checked = ${e.target.checked}`);
   }
+  // function details(){
+  //   api._history.push({
+  //     pathname:`/products`
+  //   })
+  // }
 }
 
 IndexPage.propTypes = {
