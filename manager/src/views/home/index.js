@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar } from 'antd';
 import { Layout } from 'antd';
-import { Menu, Icon, Button } from 'antd';
+import { Menu, Icon } from 'antd';
 const { Header, Sider } = Layout;
 const { SubMenu } = Menu;
 

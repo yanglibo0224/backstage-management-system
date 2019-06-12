@@ -1,26 +1,24 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import styles from './index.scss';
-import { Form, Input, Icon, Checkbox, Button } from 'antd';
-import "antd/dist/antd.css";
-
+import { Form, Input, Icon, Checkbox, Button, message } from 'antd';
+import './index.scss';
 
 function IndexPage(props) {
-  //获取login
-  // let { login } = props;
-  // useEffect(() => {
-  //   login({
-  //     user_name: "chenmanjie",
-  //     user_pwd: "Chenmanjie123!"
-  //   })
-  // }, []);
-  const {login,user} = props;
-    useEffect(()=>{
-        console.log(props);
-    }, []);
-    useState(()=>{
-        console.log('useState....',props);
-    })
+  const { login } = props;
+  const { getFieldDecorator } = props.form;
+
+  //判断是否登陆
+  useEffect(() => {
+    console.log('useState....', props);
+    if (props.isLogin === 1) {
+      message.success('登陆成功');
+      console.log('props.history',props.history);
+      let pathname=decodeURIComponent(props.history.location.search.split('=')[1]);
+      props.history.replace(pathname);
+    } else if (props.isLogin === -1) {
+      message.success('用户名或密码错误');
+    }
+  }, [props.isLogin]);
 
   // 处理表单提交
   let handleSubmit = e => {
@@ -36,11 +34,11 @@ function IndexPage(props) {
       }
     });
   };
+
   // 表单校验
-  const { getFieldDecorator } = props.form;
   return <div style={{ background: "rgb(0,0,128)", height: '100%', overflow: "hidden" }} >
-    <div style={{width:'350px',background:"#fff",height:"250px",paddingTop:'20px',position:'absolute',top:"50%",marginTop:'-150px',right:'120px'}} >
-      <Form onSubmit={handleSubmit} className="login-form" style={{margin:'0 auto'}} >
+    <div style={{ width: '350px', background: "#fff", height: "250px", paddingTop: '20px', position: 'absolute', top: "50%", marginTop: '-150px', right: '120px' }} >
+      <Form onSubmit={handleSubmit} className="login-form" style={{ margin: '0 auto' }} >
         <Form.Item >
           {getFieldDecorator('username', {
             validateTrigger: 'onBlur',
@@ -66,12 +64,12 @@ function IndexPage(props) {
         <Form.Item >
           {getFieldDecorator('remember', {
             valuePropName: 'checked',
-            initialValue: true,
+            initialValue: false,
           })(<Checkbox>记住密码</Checkbox>)}
           <a className="login-form-forgot" href="">
             忘记密码
         </a>
-          <Button type="primary" htmlType="submit" onClick={herf => window.location.href = "http://localhost:8000/#/Products"} className="login-form-button">
+          <Button type="primary" htmlType="submit" className="login-form-button">
             登录
           </Button>
         </Form.Item>
@@ -81,48 +79,11 @@ function IndexPage(props) {
 
 }
 
-
-
-
-
-
-// class IndexPage extends Component {
-//   componentDidMount(){
-//     //调登陆接口
-//     let {login}=this.props;
-//     login({
-//       user_name:"chenmanjie",
-//       user_pwd:"Chenmanjie123!"
-//     })
-//   }
-
-//   render() {
-//     return <div className={styles.normal}>
-//       <div className={styles.login}>
-//         <Input
-//           placeholder="请输入用户名"
-//           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.65)' }} />}
-//         />
-//         <Input.Password
-//           placeholder="请输入用户密码"
-//           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,0.65)' }} />}
-//         />
-//         <div className={styles.select}>
-//           {/* <Checkbox onChange={onChange}>记住密码</Checkbox> */}
-//           <a href="">忘记密码</a>
-//         </div>
-//         <Button type="primary" block onClick={herf => window.location.href = "http://localhost:8000/#/Products"}>
-//           登陆
-//         </Button>
-//       </div>
-//     </div>
-//   }
-
-// }
-
 const mapStateToProps = state => {
   console.log('state...', state);
-  return state
+  return {
+    ...state.user
+  }
 }
 const mapDispatchToProps = dispatch => {
   return {
