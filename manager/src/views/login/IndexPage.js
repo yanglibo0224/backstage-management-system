@@ -74,7 +74,7 @@ function IndexPage(props) {
           <a className="login-form-forgot" href="">
             忘记密码
         </a>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" onClick={herf => window.location.href = "http://localhost:8000/#/Products"} className="login-form-button">
             登录
           </Button>
         </Form.Item>
