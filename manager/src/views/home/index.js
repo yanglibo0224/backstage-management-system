@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar } from 'antd';
 import { Layout } from 'antd';
 import { Menu, Icon, Button } from 'antd';
-const { Header, Sider } = Layout;
+const { Header, Sider,Content } = Layout;
 const { SubMenu } = Menu;
 
 class Products extends React.Component {
@@ -68,7 +68,10 @@ class Products extends React.Component {
                 }
 
               >
-                <Menu.Item   key="1">添加试题</Menu.Item>
+                <Menu.Item   key="1">
+                  
+                添加试题
+                </Menu.Item>
                 <Menu.Item  key="2">试题分类</Menu.Item>
                 <Menu.Item  key="3">查看试题</Menu.Item>
               </SubMenu>
@@ -125,6 +128,9 @@ class Products extends React.Component {
               </Menu>
             </div>
           </Sider>
+          <Content> 
+
+          </Content>
         </Layout>
       </Layout>
     );
@@ -133,6 +139,11 @@ class Products extends React.Component {
 
 export default Products
 
+
+//登陆(用户名,密码(一般都是加密后的)) => token(令牌) => redux(传递数据) 
+
+//本地存储(硬盘里) cookie(时效性,)
+  
 
 
 

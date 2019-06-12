@@ -1,15 +1,37 @@
 import {login} from '../services'
-
+import {setToken,getToken}  from '../utils/user'
+import {routerRedux} from 'dva/router'
 
 export default {
   // 命名空间
   namespace: 'user',
 
   // 模块内部的状态
-  state: {},
-
+  state: {
+    isLogin:0
+  },
+  //订阅路由跳转
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
+      return history.listen(({pathname})=>{
+        if(pathname.indexOf('/')=== -1){
+          //不去登陆页面做token检测
+          if(!getToken()){
+            //利用redux做路由跳转
+            dispatch(routerRedux.replace({
+              pathname:`/products?redirect=${encodeURIComponent(pathname)}`
+            }))
+          }
+        }else{
+          //去登陆页面,如果已登录跳回首页
+          if(getToken()){
+            //利用redux做路由跳转
+            dispatch(routerRedux.replace({
+              pathname:"/products"
+            }))
+          }
+        }
+      })
     },
   },
 
@@ -19,17 +41,23 @@ export default {
       console.log('payload...',payload,login);
       let data= yield call(login,payload);
       console.log('data...',data)
-    },
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'save' });
-    },
+
+      //设置登录态到cookie里
+      if(data.code===1){
+        setToken(data.token)
+      }
+      yield put({
+        type:'updataLogin',
+        payload:data.code===1?1:-1
+      })
+
+    }
   },
 
   // 同步操作
   reducers: {
-    save(state, action) {
-      return { ...state, ...action.payload };
-    },
-  },
-
+    updateLogin(state, {payload}){
+      return {...state, isLogin: payload}
+    }
+  }
 };
