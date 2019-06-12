@@ -15,7 +15,7 @@ export default {
   subscriptions: {
       setup({ dispatch, history }) {  // eslint-disable-line
         return history.listen(({ pathname })=>{
-          console.log('pathname',pathname);
+          // console.log('pathname',pathname);
           if(pathname.indexOf('/')===-1){
             //没获取到值，去登陆页面
             if(!getToken()){
