@@ -1,8 +1,6 @@
-
 import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import styles from './index.scss';
-
 import { Form, Input, Icon, Checkbox, Button } from 'antd';
 import "antd/dist/antd.css";
 
@@ -65,7 +63,7 @@ function IndexPage(props) {
             />,
           )}
         </Form.Item>
-        <Form.Item  >
+        <Form.Item >
           {getFieldDecorator('remember', {
             valuePropName: 'checked',
             initialValue: true,
