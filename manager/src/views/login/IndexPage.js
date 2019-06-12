@@ -1,52 +1,32 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
+import { Form, Input, Icon, Checkbox, Button, message } from 'antd';
 import './index.scss';
 
-import { Form, Input, Icon, Checkbox, Button,message } from 'antd';
-import "antd/dist/antd.css";
-
-
 function IndexPage(props) {
-
+  console.log(props.isLogin)
   //判断是否登陆
-  useEffect(()=>{
-      //提示登陆成功
-      if(props.isLogin===1){
-        message.success('登陆成功') 
-        
-        //储存cookie
-        //跳转主页面
-        console.log('props.history',props.history);
-        let pathName=decodeURIComponent(props.history.location.search.split('=')[1]);
-        props.history.replace(pathName)
-      }else if(props.isLogin === -1){
-        //登陆失败
-        message.error('用户名密码不正确')
-      }
-  },[props.isLogin])
+  useEffect(() => {
+    if (props.isLogin === 1) {
+      // 1.提示登陆成功
+      message.success('登陆成功');
+      // 2.存储cookie
+      // 3.跳转主页面
+      console.log('props.history', props.history);
+      let pathName = decodeURIComponent(props.history.location.search.split('=')[1]);
+      props.history.replace(pathName);
+    } else if (props.isLogin === -1) {
+      // 登陆失败
+      message.error('用户名或密码错误')
+    }
+  }, [props.isLogin]);
 
-  //获取login
-  // let { login } = props;
-  // useEffect(() => {
-  //   login({
-  //     user_name: "chenmanjie",
-  //     user_pwd: "Chenmanjie123!"
-  //   })
-  // }, []);
-  // const {login,user} = props;
-  //   useEffect(()=>{
-  //       console.log(props);
-  //   }, []);
-  //   useState(()=>{
-  //       console.log('useState....',props);
-  //   })
 
   // 处理表单提交
   let handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         // 调登录接口
         props.login({
           user_name: values.username,
@@ -58,8 +38,8 @@ function IndexPage(props) {
   // 表单校验
   const { getFieldDecorator } = props.form;
   return <div style={{ background: "rgb(0,0,128)", height: '100%', overflow: "hidden" }} >
-    <div style={{width:'350px',background:"#fff",height:"250px",paddingTop:'20px',position:'absolute',top:"50%",marginTop:'-150px',right:'120px'}} >
-      <Form onSubmit={handleSubmit} className="login-form" style={{margin:'0 auto'}} >
+    <div style={{ width: '350px', background: "#fff", height: "250px", paddingTop: '20px', position: 'absolute', top: "50%", marginTop: '-150px', right: '120px' }} >
+      <Form onSubmit={handleSubmit} className="login-form" style={{ margin: '0 auto' }} >
         <Form.Item >
           {getFieldDecorator('username', {
             validateTrigger: 'onBlur',
@@ -100,48 +80,10 @@ function IndexPage(props) {
 }
 
 
-
-
-
-
-// class IndexPage extends Component {
-//   componentDidMount(){
-//     //调登陆接口
-//     let {login}=this.props;
-//     login({
-//       user_name:"chenmanjie",
-//       user_pwd:"Chenmanjie123!"
-//     })
-//   }
-
-//   render() {
-//     return <div className={styles.normal}>
-//       <div className={styles.login}>
-//         <Input
-//           placeholder="请输入用户名"
-//           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.65)' }} />}
-//         />
-//         <Input.Password
-//           placeholder="请输入用户密码"
-//           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,0.65)' }} />}
-//         />
-//         <div className={styles.select}>
-//           {/* <Checkbox onChange={onChange}>记住密码</Checkbox> */}
-//           <a href="">忘记密码</a>
-//         </div>
-//         <Button type="primary" block onClick={herf => window.location.href = "http://localhost:8000/#/Products"}>
-//           登陆
-//         </Button>
-//       </div>
-//     </div>
-//   }
-
-// }
-
 const mapStateToProps = state => {
-    return {
-      ...state.user
-    }
+  return {
+    ...state.user
+  }
 }
 const mapDispatchToProps = dispatch => {
   return {
@@ -154,4 +96,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'normal_login' })(IndexPage));
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(IndexPage));

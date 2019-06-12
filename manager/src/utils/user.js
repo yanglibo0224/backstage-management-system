@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie'
 
-const key = 'authorization'
+const key = 'authorization';
 //获取token
 export function getToken(){
   return Cookie.get(key)
