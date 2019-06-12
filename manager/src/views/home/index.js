@@ -1,9 +1,20 @@
 import React from 'react';
 import { Avatar } from 'antd';
 import { Layout } from 'antd';
-import { Menu, Icon} from 'antd';
+import { Menu, Icon } from 'antd';
 import { Link, Switch, Route } from 'dva/router'
-import Addques from '../questions/Addques'
+import Addques from '../questions/addques/Addques'
+import Classify from '../questions/classify/classify'
+import Examine from '../questions/examine/examine'
+import Adduser from '../user/adduser/Adduser'
+import Usershow from '../user/usershow/Usershow'
+import Addexam from '../exam/addexam/Addexam'
+import Examlist from '../exam/examlist/examList'
+import Classgav from '../class/classgav/classGav'
+import Classroom from '../class/classroom/classRoom'
+import Student from '../class/student/student'
+import Awaiting from '../papers/awaiting/Awaiting'
+
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -87,8 +98,12 @@ class Products extends React.Component {
               </span>
                   }
                 >
-                  <Menu.Item key="4">添加用户</Menu.Item>
-                  <Menu.Item key="5">用户展示</Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to="/user/adduser">添加用户</Link>
+                  </Menu.Item>
+                  <Menu.Item key="5">
+                    <Link to="/user/usershow">用户展示</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub3"
@@ -99,8 +114,12 @@ class Products extends React.Component {
               </span>
                   }
                 >
-                  <Menu.Item key="6">添加考试</Menu.Item>
-                  <Menu.Item key="7">试卷列表</Menu.Item>
+                  <Menu.Item key="6">
+                    <Link to="/exam/addexam">添加考试</Link>
+                  </Menu.Item>
+                  <Menu.Item key="7">
+                    <Link to="/exam/examlist">试卷列表</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub4"
@@ -112,9 +131,15 @@ class Products extends React.Component {
                   }
 
                 >
-                  <Menu.Item key="8">班级管理</Menu.Item>
-                  <Menu.Item key="9">教室管理</Menu.Item>
-                  <Menu.Item key="10">学生管理</Menu.Item>
+                  <Menu.Item key="8">
+                    <Link to="/class/classgav">班级管理</Link>
+                  </Menu.Item>
+                  <Menu.Item key="9">
+                    <Link to="/class/classroom">教室管理</Link>
+                  </Menu.Item>
+                  <Menu.Item key="10">
+                    <Link to="/class/student">学生管理</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub5"
@@ -126,7 +151,9 @@ class Products extends React.Component {
                   }
 
                 >
-                  <Menu.Item key="11">待批班级</Menu.Item>
+                  <Menu.Item key="11">
+                    <Link to='/papers/awaiting' >待批班级</Link>
+                  </Menu.Item>
                 </SubMenu>
               </Menu>
             </div>
@@ -134,8 +161,20 @@ class Products extends React.Component {
           <Content>
             <Switch>
               <Route path="/products/addques" component={Addques}></Route>
-              <Route path="/products/classify" component={null}></Route>
-              <Route path="/products/examine" component={null}></Route> 
+              <Route path="/products/classify" component={Classify}></Route>
+              <Route path="/products/examine" component={Examine}></Route>
+
+              <Route path="/user/adduser" component={Adduser}></Route>
+              <Route path="/user/usershow" component={Usershow}></Route>
+
+              <Route path="/exam/addexam" component={Addexam}></Route>
+              <Route path="/exam/examlist" component={Examlist}></Route>
+
+              <Route path="/class/classgav" component={Classgav}></Route>
+              <Route path="/class/classroom" component={Classroom}></Route>
+              <Route path="/class/student" component={Student}></Route>
+
+              <Route path="/papers/awaiting" component={Awaiting}></Route>  
             </Switch>
           </Content>
         </Layout>
