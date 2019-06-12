@@ -1,12 +1,30 @@
 import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import styles from './index.scss';
+import './index.scss';
 
-import { Form, Input, Icon, Checkbox, Button } from 'antd';
+import { Form, Input, Icon, Checkbox, Button,message } from 'antd';
 import "antd/dist/antd.css";
 
 
 function IndexPage(props) {
+
+  //判断是否登陆
+  useEffect(()=>{
+      //提示登陆成功
+      if(props.isLogin===1){
+        message.success('登陆成功') 
+        
+        //储存cookie
+        //跳转主页面
+        console.log('props.history',props.history);
+        let pathName=decodeURIComponent(props.history.location.search.split('=')[1]);
+        props.history.replace(pathName)
+      }else if(props.isLogin === -1){
+        //登陆失败
+        message.error('用户名密码不正确')
+      }
+  },[props.isLogin])
+
   //获取login
   // let { login } = props;
   // useEffect(() => {
@@ -15,13 +33,13 @@ function IndexPage(props) {
   //     user_pwd: "Chenmanjie123!"
   //   })
   // }, []);
-  const {login,user} = props;
-    useEffect(()=>{
-        console.log(props);
-    }, []);
-    useState(()=>{
-        console.log('useState....',props);
-    })
+  // const {login,user} = props;
+  //   useEffect(()=>{
+  //       console.log(props);
+  //   }, []);
+  //   useState(()=>{
+  //       console.log('useState....',props);
+  //   })
 
   // 处理表单提交
   let handleSubmit = e => {
@@ -30,7 +48,7 @@ function IndexPage(props) {
       if (!err) {
         console.log('Received values of form: ', values);
         // 调登录接口
-        login({
+        props.login({
           user_name: values.username,
           user_pwd: values.password
         })
@@ -72,7 +90,7 @@ function IndexPage(props) {
           <a className="login-form-forgot" href="">
             忘记密码
         </a>
-          <Button type="primary" htmlType="submit" onClick={herf => window.location.href = "http://localhost:8000/#/Products"} className="login-form-button">
+          <Button type="primary" htmlType="submit" className="login-form-button">
             登录
           </Button>
         </Form.Item>
@@ -121,8 +139,9 @@ function IndexPage(props) {
 // }
 
 const mapStateToProps = state => {
-  console.log('state...', state);
-  return state
+    return {
+      ...state.user
+    }
 }
 const mapDispatchToProps = dispatch => {
   return {
