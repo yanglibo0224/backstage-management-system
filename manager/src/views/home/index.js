@@ -55,12 +55,12 @@ class Products extends React.Component {
             <div style={{ width: 256 }}>
               <Menu
                 defaultSelectedKeys={['1']}
-                defaultOpenKeys={['question']}
-                theme="dark"
+                defaultOpenKeys={['sub1']}
                 mode="inline"
+                theme="dark"
               >
                 <SubMenu
-                  key="question"
+                  key="sub1"
                   title={
                     <span  >
                       <Icon type="sliders" />
@@ -69,13 +69,13 @@ class Products extends React.Component {
                   }
                 >
                   <Menu.Item key="1">
-                    <Link to="/question/addques">添加试题</Link>
+                    <Link to="/products/addques">添加试题</Link>
                   </Menu.Item>
                   <Menu.Item key="2">
-                    {/* <Link to="/products/classify">试题分类</Link> */}
+                    <Link to="/products/classify">试题分类</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
-                    {/* <Link to="/products/examine">查看试题</Link> */}
+                    <Link to="/products/examine">查看试题</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -133,9 +133,9 @@ class Products extends React.Component {
           </Sider>
           <Content>
             <Switch>
-              <Route path="/question/addques" component={null}></Route>
-              {/* <Route path="/products/classify" component={null}></Route> */}
-              {/* <Route path="/products/examine" component={null}></Route> */}
+              <Route path="/products/addques" component={Addques}></Route>
+              <Route path="/products/classify" component={null}></Route>
+              <Route path="/products/examine" component={null}></Route> 
             </Switch>
           </Content>
         </Layout>

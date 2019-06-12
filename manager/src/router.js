@@ -5,9 +5,9 @@ import Products from './views/home/index';
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <Switch>
-        <Route path="/products"  component={Products} />
-        <Route path="/"  component={IndexPage} />
+      <Switch><Route path="/login"  component={IndexPage} />
+        <Route path="/"  component={Products} />
+        
       </Switch>
     </Router>
   );
