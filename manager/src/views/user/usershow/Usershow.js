@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-
-class Addques extends Component {
+class Usershow extends Component {
   constructor(props) {
     super(props);
     this.state = {  };
   }
   render() {
     return (
-        <div>12</div>
+        <div>
+          <h1 className='h1' >添加试题</h1>
+        </div>
     );
   }
 }
 
-export default Addques;
+export default Usershow;
