@@ -12,11 +12,27 @@ function IndexPage(props) {
     console.log('useState....', props);
     if (props.isLogin === 1) {
       message.success('登陆成功');
-      console.log('props.history',props.history);
-      let pathname=decodeURIComponent(props.history.location.search.split('=')[1]);
+      console.log('props.history', props.history);
+      let pathname = decodeURIComponent(props.history.location.search.split('=')[1]);
       props.history.replace(pathname);
     } else if (props.isLogin === -1) {
       message.error('用户名或密码错误');
+    }
+  }, [props.isLogin]);
+
+  //判断是否登陆
+  useEffect(() => {
+    if (props.isLogin === 1) {
+      // 1.提示登陆成功
+      message.success('登陆成功');
+      // 2.存储cookie
+      // 3.跳转主页面
+      console.log('props.history', props.history);
+      let pathName = decodeURIComponent(props.history.location.search.split('=')[1]);
+      props.history.replace(pathName);
+    } else if (props.isLogin === -1) {
+      // 登陆失败
+      message.error('用户名或密码错误')
     }
   }, [props.isLogin]);
 
@@ -25,9 +41,8 @@ function IndexPage(props) {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         // 调登录接口
-        login({
+        props.login({
           user_name: values.username,
           user_pwd: values.password
         })
@@ -81,6 +96,10 @@ function IndexPage(props) {
 
 const mapStateToProps = state => {
   console.log('state...', state);
+}
+
+const mapStateToProps = state => {
+
   return {
     ...state.user
   }
