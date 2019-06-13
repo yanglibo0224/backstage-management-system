@@ -1,0 +1,39 @@
+:global{
+  .top{
+    width:100%;
+    background: #fff;
+    border-radius: 10px;
+    height:130px;
+    padding-top:30px;
+    padding-left:40px;
+    padding-right:300px;
+    display: flex;
+    justify-content: space-between
+  }
+  span{
+    width:33%
+  }
+  .bottom {
+    li{
+      padding:0 40px;
+      box-sizing: border-box;
+      height: 69px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span{
+        font-size: 16px;
+      }
+      .btn{
+        font-size: 14px;
+        button{
+          box-sizing: border-box;
+          text-align: center;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
