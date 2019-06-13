@@ -1,17 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect } from 'react';
+import { connect } from 'dva';
+import axios from 'axios'
 import './index.scss'
-class Addques extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  };
-  }
-  render() {
+function Addques(props)  {
+    console.log(props)
+    useEffect(()=>{
+      axios.post('/exam/questions').then(res=>{
+        console.log
+      })
+    })
     return (
         <div>
           <h1 className='h1' >添加试题</h1>
         </div>
     );
+}
+
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    questions(payload) {
+      dispatch({
+        type: 'exam/questions',
+        payload
+      })
+    }
   }
 }
 
-export default Addques;
+export default connect(mapStateToProps, mapDispatchToProps)(Addques);
