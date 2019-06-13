@@ -4,7 +4,7 @@ import { Form, Input, Icon, Checkbox, Button, message } from 'antd';
 import './index.scss';
 
 function IndexPage(props) {
-  const { login } = props;
+  // const { login } = props;
   const { getFieldDecorator } = props.form;
 
   //判断是否登陆
@@ -13,7 +13,7 @@ function IndexPage(props) {
     if (props.isLogin === 1) {
       message.success('登陆成功');
       console.log('props.history', props.history);
-      let pathname = decodeURIComponent(props.history.location.search.split('=')[1]);
+      let pathname = decodeURIComponent(props.location.search.split('=')[1]);
       props.history.replace(pathname);
     } else if (props.isLogin === -1) {
       message.error('用户名或密码错误');
@@ -91,19 +91,14 @@ function IndexPage(props) {
       </Form>
     </div>
   </div>
-
 }
 
 const mapStateToProps = state => {
-  console.log('state...', state);
-}
-
-const mapStateToProps = state => {
-
   return {
     ...state.user
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
     login(payload) {
