@@ -1,8 +1,9 @@
 import React from 'react';
 import { Avatar } from 'antd';
-import { Layout } from 'antd';
+import { Layout ,Spin } from 'antd';
 import { Menu, Icon } from 'antd';
-import { Link, Switch, Route } from 'dva/router'
+import { Link, Switch, Route ,Redirect } from 'dva/router';
+import { connect } from 'dva';
 import Addques from './questions/addques/Addques'
 import Classify from './questions/classify/classify'
 import Examine from './questions/examine/examine'
@@ -14,6 +15,7 @@ import Classgav from './class/classgav/classGav'
 import Classroom from './class/classroom/classRoom'
 import Student from './class/student/student'
 import Awaiting from './papers/awaiting/Awaiting'
+import './IndexPage.css';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -162,7 +164,7 @@ class Products extends React.Component {
 
           <Content>
             <Switch>
-              {/* <Redirect to='/products/addques' from='/' ></Redirect> */}
+              <Redirect exact from='/' to='/products/addques'></Redirect> 
               <Route path="/products/addques" component={Addques}></Route>
               <Route path="/products/classify" component={Classify}></Route>
               <Route path="/products/examine" component={Examine}></Route>
@@ -179,6 +181,9 @@ class Products extends React.Component {
 
               <Route path="/papers/awaiting" component={Awaiting}></Route>
             </Switch>
+            { this.props.loading ? <div style={{width:'87%',height:'88%',position:'absolute',left:'200px',top:'80px',background:'rgba(0,0,0,.5)'}}>
+              <Spin />
+            </div>:null }
           </Content>
         </Layout>
       </Layout>
@@ -186,7 +191,14 @@ class Products extends React.Component {
   }
 }
 
-export default Products
+const mapStateToProps = state =>{
+  console.log('state',state);
+  return {
+    loading:state.loading.global
+  }
+}
+
+export default connect(mapStateToProps)(Products);
 
 
 //登陆(用户名,密码(一般都是加密后的)) => token(令牌) => redux(传递数据) 

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Table } from 'antd';
+import { connect } from 'dva';
 import './index.scss';
 
 const columns = [
   {
     title: '类型ID',
     dataIndex: 'ID',
-    render: text => <a href="javascript:;">{text}</a>,
+    render: text => <a href="javascript:;">{text}</a>
   },
   {
     title: '类型名称',
@@ -50,6 +51,9 @@ const data = [
 ];
 
 function classify(props) {
+  useEffect(() => {
+    props.subjectType()
+  },[])
   return (
     <div className="classify">
       <h1 className='h1'>试题分类</h1>
@@ -61,4 +65,19 @@ function classify(props) {
   );
 }
 
-export default classify;
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    subjectType() {
+      dispatch({
+        type: 'exam/subjectType'
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(classify);
