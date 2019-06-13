@@ -1,20 +1,17 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { Input, Select, Button } from 'antd';
-import axios from 'axios';
 import './index.scss';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 function Addques(props) {
-  // console.log(props.exam.examTypeData.forEach(item=>{
-    // console.log(item.exam_name)
-  // }))
   useEffect(() => {
-    props.examTypec();
+
+    props.examTypea();
     // props.subjectType()
-  })
+  },[])
 
   function onChange(value) {
     console.log(`selected ${value}`);
@@ -141,17 +138,12 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    examTypec(payload) {
+    examTypea() {
       dispatch({
-        type: 'exam/examTypeac'
+
+        type: 'exam/examTypea'
       })
-    },
-    // subjectType(payload) {
-    //   dispatch({
-    //     type: '/exam/subjectType',
-    //     payload
-    //   })
-    // }
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Addques);
