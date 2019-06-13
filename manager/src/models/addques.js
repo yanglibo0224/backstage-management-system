@@ -25,14 +25,14 @@ export default {
         action:data.data
       })
     },
-    *subjectType({ payload }, { call, put }) {
-      let data = yield call(subjectType);
-      console.log('data...', data)
-      yield put({
-        type:"getsubjectType",
-        action:data.data
-      })
-    }
+    // *subjectType({ payload }, { call, put }) {
+    //   let data = yield call(subjectType);
+    //   console.log('data...', data)
+    //   yield put({
+    //     type:"getsubjectType",
+    //     action:data.data
+    //   })
+    // }
   },
 
   // 同步操作
@@ -43,11 +43,11 @@ export default {
        examTypeData:action
      }
    },
-   getsubjectType(state,{action}){
-    return{
-      ...state,
-      subjectData:action
-    }
-   }
+  //  getsubjectType(state,{action}){
+  //   return{
+  //     ...state,
+  //     subjectData:action
+  //   }
+  //  }
   }
 };

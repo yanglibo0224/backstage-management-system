@@ -13,7 +13,7 @@ function Addques(props) {
   // }))
   useEffect(() => {
     props.examTypec();
-    props.subjectType()
+    // props.subjectType()
   })
 
   function onChange(value) {
@@ -146,12 +146,12 @@ const mapDispatchToProps = dispatch => {
         type: 'exam/examTypeac'
       })
     },
-    subjectType(payload) {
-      dispatch({
-        type: '/exam/subjectType',
-        payload
-      })
-    }
+    // subjectType(payload) {
+    //   dispatch({
+    //     type: '/exam/subjectType',
+    //     payload
+    //   })
+    // }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Addques);
