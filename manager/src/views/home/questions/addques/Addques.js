@@ -8,9 +8,12 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function Addques(props) {
-  console.log(props)
+  // console.log(props.exam.examTypeData.forEach(item=>{
+    // console.log(item.exam_name)
+  // }))
   useEffect(() => {
-    props.add()
+    props.examTypec();
+    props.subjectType()
   })
 
   function onChange(value) {
@@ -60,10 +63,18 @@ function Addques(props) {
               option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            <Option value="week1">周考1</Option>
+          {
+            props.exam.examTypeData && props.exam.examTypeData.map((item)=>{
+             return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+             }
+            )
+          }
+              
+
+            {/* <Option value="week1">周考1</Option>
             <Option value="week2">周考2</Option>
             <Option value="week3">周考3</Option>
-            <Option value="month">月考</Option>
+            <Option value="month">月考</Option> */}
           </Select>
         </div>
         <div>
@@ -91,6 +102,7 @@ function Addques(props) {
             <Option value="项目实战">项目实战</Option>
           </Select>
         </div>
+        
         <div>
           <p>请选择考试类型：</p>
           <Select
@@ -129,9 +141,14 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    add(payload) {
+    examTypec(payload) {
       dispatch({
-        type: 'exam/questions',
+        type: 'exam/examTypeac'
+      })
+    },
+    subjectType(payload) {
+      dispatch({
+        type: '/exam/subjectType',
         payload
       })
     }

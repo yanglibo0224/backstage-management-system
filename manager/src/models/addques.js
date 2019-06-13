@@ -1,10 +1,14 @@
-import { add } from '../services'
+        
+import { examTypea ,subjectType} from '../services'
 export default {
   // 命名空间
   namespace: 'exam',
 
   // 模块内部的状态
-  state: {},
+  state: {
+    examTypeData:[],
+    subjectData:[]
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -13,21 +17,37 @@ export default {
 
   // 异步操作
   effects: {
-    *add({ payload }, { call, put }) {
-      console.log('payload...', payload);
-      let data = yield call(add, payload);
+    *examTypeac({ payload }, { call, put }) {
+      let data = yield call(examTypea);
+      // console.log('data...', data)
+      yield put({
+        type:"getexamType",
+        action:data.data
+      })
+    },
+    *subjectType({ payload }, { call, put }) {
+      let data = yield call(subjectType);
       console.log('data...', data)
       yield put({
-        type:'addquestion',
-        payload
+        type:"getsubjectType",
+        action:data.data
       })
     }
   },
 
   // 同步操作
   reducers: {
-    addquestion(state, action) {
-      return { ...state, ...action.payload };
-    },
-  },
+   getexamType(state,{action}){
+     return{
+       ...state,
+       examTypeData:action
+     }
+   },
+   getsubjectType(state,{action}){
+    return{
+      ...state,
+      subjectData:action
+    }
+   }
+  }
 };

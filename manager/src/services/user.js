@@ -9,10 +9,3 @@ export function login(params) {
   })
 }
 
-export function add(params) {
-  return request({
-    url: '/exam/questions',
-    method: 'POST',
-    data: params
-  })
-}

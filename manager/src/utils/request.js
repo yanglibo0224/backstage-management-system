@@ -3,7 +3,6 @@ import {getToken} from './user'
 const service = axios.create({
   baseURL:'http://169.254.12.77:7001/',
   timeout:5000
-
 })
 
 service.interceptors.request.use(
