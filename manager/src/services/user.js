@@ -9,11 +9,10 @@ export function login(params) {
   })
 }
 
-//添加试题
-export function addQuestion() {
+export function add(params) {
   return request({
-    url: '/exam/question',
+    url: '/exam/questions',
     method: 'POST',
-    data: ''
+    data: params
   })
 }

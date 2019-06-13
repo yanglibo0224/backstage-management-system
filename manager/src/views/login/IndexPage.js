@@ -14,13 +14,12 @@ function IndexPage(props) {
       // 3.跳转主页面
       console.log('props.history', props.history);
       let pathName = decodeURIComponent(props.history.location.search.split('=')[1]);
-      props.history.replace(pathName);
+      props.history.replace(pathName||'/');
     } else if (props.isLogin === -1) {
       // 登陆失败
       message.error('用户名或密码错误')
     }
   }, [props.isLogin]);
-
 
   // 处理表单提交
   let handleSubmit = e => {
