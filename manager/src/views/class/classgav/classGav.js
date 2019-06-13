@@ -7,7 +7,7 @@ class Classgav extends Component {
   render() {
     return (
         <div>
-          <h1 className='h1' >添加试题</h1>
+          <h1 className='h1'>添加试题</h1>
         </div>
     );
   }
