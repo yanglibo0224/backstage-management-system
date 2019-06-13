@@ -2,18 +2,18 @@ import React from 'react';
 import { Avatar } from 'antd';
 import { Layout } from 'antd';
 import { Menu, Icon } from 'antd';
-import { Link, Switch, Route } from 'dva/router'
-import Addques from '../questions/addques/Addques'
-import Classify from '../questions/classify/classify'
-import Examine from '../questions/examine/examine'
-import Adduser from '../user/adduser/Adduser'
-import Usershow from '../user/usershow/Usershow'
-import Addexam from '../exam/addexam/Addexam'
-import Examlist from '../exam/examlist/examList'
-import Classgav from '../class/classgav/classGav'
-import Classroom from '../class/classroom/classRoom'
-import Student from '../class/student/student'
-import Awaiting from '../papers/awaiting/Awaiting'
+import { Link, Switch, Route,Redirect } from 'dva/router'
+import Addques from './questions/addques/Addques'
+import Classify from './questions/classify/classify'
+import Examine from './questions/examine/examine'
+import Adduser from './user/adduser/Adduser'
+import Usershow from './user/usershow/Usershow'
+import Addexam from './exam/addexam/Addexam'
+import Examlist from './exam/examlist/examList'
+import Classgav from './class/classgav/classGav'
+import Classroom from './class/classroom/classRoom'
+import Student from './class/student/student'
+import Awaiting from './papers/awaiting/Awaiting'
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -162,6 +162,7 @@ class Products extends React.Component {
 
           <Content>
             <Switch>
+              {/* <Redirect to='/products/addques' from='/' ></Redirect> */}
               <Route path="/products/addques" component={Addques}></Route>
               <Route path="/products/classify" component={Classify}></Route>
               <Route path="/products/examine" component={Examine}></Route>
