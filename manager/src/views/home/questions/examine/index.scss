@@ -1,0 +1,18 @@
+:global{
+    nav>span{
+        color: rgb(55, 36,37);
+    }
+    .search{
+        display: flex;
+        height: 100px;
+        align-items: center;
+    }
+    .select_opt{
+        display: flex;
+        margin-right: 40px;
+    }
+    .btn_add_type{
+        width: 120px;
+        height: 32px;
+    }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar } from 'antd';
 import { Layout } from 'antd';
 import { Menu, Icon } from 'antd';
-import { Link, Switch, Route,Redirect } from 'dva/router'
+import { Link, Switch, Route } from 'dva/router'
 import Addques from './questions/addques/Addques'
 import Classify from './questions/classify/classify'
 import Examine from './questions/examine/examine'
@@ -177,7 +177,7 @@ class Products extends React.Component {
               <Route path="/class/classroom" component={Classroom}></Route>
               <Route path="/class/student" component={Student}></Route>
 
-              <Route path="/papers/awaiting" component={Awaiting}></Route>  
+              <Route path="/papers/awaiting" component={Awaiting}></Route>
             </Switch>
           </Content>
         </Layout>

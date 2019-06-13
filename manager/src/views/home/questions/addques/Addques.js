@@ -1,7 +1,6 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { Input, Select, Button } from 'antd';
-import axios from 'axios';
 import './index.scss';
 
 const { TextArea } = Input;

@@ -1,5 +1,4 @@
-import React, { Component, useEffect } from 'react';
-import { connect } from 'dva';
+import React from 'react';
 import { Button, Table } from 'antd';
 import './index.scss';
 
@@ -55,9 +54,7 @@ function classify(props) {
     <div className="classify">
       <h1 className='h1'>试题分类</h1>
       <div className="main">
-        <Button type="primary" icon="plus" className="btn btn_add">
-          添加类型
-        </Button>
+        <Button type="primary" icon="plus" className="btn btn_add">添加类型</Button>
         <Table columns={columns} dataSource={data} />
       </div>
     </div>
