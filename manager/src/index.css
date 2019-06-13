@@ -1,8 +1,6 @@
-
 html, body, :global(#root) {
   height: 100%;
 }
-
 .ant-menu-item-active{
   color:#fff;
 }

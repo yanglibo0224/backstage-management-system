@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-class Examine extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  };
-  }
-  render() {
-    return (
-        <div>
-          <h1 className='h1' >添加试题</h1>
-        </div>
-    );
-  }
+import React, { Component, useEffect } from 'react';
+import { connect } from 'dva';
+import { Button, Table } from 'antd';
+import './index.scss';
+
+function examine(props) {
+  return (
+    <div className="examine">
+      <h1 className='h1'>查看试题</h1>
+    </div>
+  );
 }
 
-export default Examine;
+export default examine;
