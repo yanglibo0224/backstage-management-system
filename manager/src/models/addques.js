@@ -1,4 +1,4 @@
-import { questions } from '../services'
+import { add } from '../services'
 export default {
   // 命名空间
   namespace: 'exam',
@@ -15,14 +15,18 @@ export default {
   effects: {
     *add({ payload }, { call, put }) {
       console.log('payload...', payload);
-      // let data = yield call(questions, payload);
-      // console.log('data...', data)
+      let data = yield call(add, payload);
+      console.log('data...', data)
+      yield put({
+        type:'addquestion',
+        payload
+      })
     }
   },
 
   // 同步操作
   reducers: {
-    save(state, action) {
+    addquestion(state, action) {
       return { ...state, ...action.payload };
     },
   },

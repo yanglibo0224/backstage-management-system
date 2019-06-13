@@ -5,9 +5,7 @@ import './index.scss'
 function Addques(props)  {
     console.log(props)
     useEffect(()=>{
-      axios.post('/exam/questions').then(res=>{
-        console.log
-      })
+      props.add()
     })
     return (
         <div>
@@ -15,8 +13,6 @@ function Addques(props)  {
         </div>
     );
 }
-
-
 const mapStateToProps = state => {
   return {
     ...state
@@ -24,7 +20,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    questions(payload) {
+    add(payload) {
       dispatch({
         type: 'exam/questions',
         payload
@@ -32,5 +28,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Addques);
