@@ -1,40 +1,78 @@
-import React, { useEffect } from 'react';
-import { Button, Table } from 'antd';
+import React, { Component, useEffect } from 'react';
+import { Button, Input, Table, Modal } from 'antd'
 import { connect } from 'dva';
-import './index.scss';
+import typeStyle from './index.scss';
 
-const columns = [
-  {
-    title: '类型ID',
-    dataIndex: 'questions_type_id',
-    render: text => <a href="javascript:;">{text}</a>
-  },
-  {
-    title: '类型名称',
-    dataIndex: 'questions_type_text',
-  },
-  {
-    title: '操作',
-    dataIndex: '',
-  },
-];
-
-
-function classify(props) {
-  useEffect(() => {
-    props.getQuestionsType()
-    // props.subjectType()
-  },[])
-  return (
-    <div className="classify">
-      <h1 className='h1'>试题分类</h1>
-      <div className="main">
-        <Button type="primary" icon="plus" className="btn btn_add">添加类型</Button>
-        <Table columns={columns}  dataSource={props.exam.getQuestionsTypeData} />
-      
+class classify extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      visible: false,
+      value: ''
+    }
+  }
+  handleCancel = e => {
+    this.setState({
+      visible: false
+    })
+  };
+  typeAdd = () => {
+    this.setState({
+      visible: true
+    })
+  };
+  handleOk = e => {
+    let { insertadd } = this.props
+    insertadd({ text: this.state.value, sort: 'chenmanjie' })
+    this.setState({
+      visible: false
+    })
+  };
+  componentDidMount() {
+    let { getQuestionsType } = this.props
+    getQuestionsType()
+  }
+  render() {
+    const columns = [
+      {
+        title: '类型ID',
+        dataIndex: 'questions_type_id',
+      },
+      {
+        title: '类型名称',
+        dataIndex: 'questions_type_text',
+      },
+      {
+        title: '操作',
+        dataIndex: "",
+      },
+    ];
+    return (
+      <div className={typeStyle.wrap}>
+        <p className={typeStyle.title}>试题分类</p>
+        <div className={typeStyle.bottom}>
+          <div>
+            <Button type="primary" onClick={this.typeAdd} icon="plus" size="large">
+              添加类型
+                      </Button>
+            <Modal
+              title="Basic Modal"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
+              <Input placeholder="请输入类型名称" value={this.state.value}
+                onChange={(e) => { this.setState({ value: e.target.value }) }}
+              />
+            </Modal>
+          </div>
+          <div className={typeStyle.list}>
+            <Table columns={columns} dataSource={this.props.exam.getQuestionsTypeData} />
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
 }
 
 const mapStateToProps = state => {
@@ -44,10 +82,13 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getQuestionsType(){
+    getQuestionsType() {
       dispatch({
-        type:'exam/getQuestionsType'
+        type: 'exam/getQuestionsType'
       })
+    }, insertadd(payload) {
+      console.log(payload)
+      dispatch({ type: 'exam/insertQuestionsType', payload })
     }
   }
 }
