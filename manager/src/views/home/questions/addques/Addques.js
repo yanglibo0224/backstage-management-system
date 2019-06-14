@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { Input, Select, Button } from 'antd';
+import Editor from 'for-editor';
 import './index.scss';
 
 const { TextArea } = Input;
@@ -65,12 +66,6 @@ function Addques(props) {
              }
             )
           }
-              
-
-            {/* <Option value="week1">周考1</Option>
-            <Option value="week2">周考2</Option>
-            <Option value="week3">周考3</Option>
-            <Option value="month">月考</Option> */}
           </Select>
         </div>
         <div>
@@ -126,6 +121,7 @@ function Addques(props) {
           <TextArea rows={10} placeholder="请输入内容..." className="txt" />
         </div>
         <Button type="primary" className="btn">提交</Button>
+        <Editor />
       </div>
     </div>
   );

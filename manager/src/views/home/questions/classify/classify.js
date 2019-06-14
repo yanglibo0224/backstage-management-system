@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Button, Table } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Table, Modal, Form, Input } from 'antd';
 import { connect } from 'dva';
 import './index.scss';
 
@@ -7,7 +7,7 @@ const columns = [
   {
     title: '类型ID',
     dataIndex: 'ID',
-    render: text => <a href="javascript:;">{text}</a>
+    // render: text => <a href="javascript:;">{text}</a>
   },
   {
     title: '类型名称',
@@ -42,7 +42,7 @@ const data = [
     ID: 'n66k4n-i9zpen',
     Name: '修改bug',
     operation: '',
-  },{
+  }, {
     key: '5',
     ID: 'v8i73-r8oai',
     Name: '手写代码',
@@ -51,14 +51,37 @@ const data = [
 ];
 
 function classify(props) {
+  //添加类型弹框
+  let [showDialog, updateDialog] = useState(false);
+
   useEffect(() => {
     props.subjectType()
-  },[])
+  }, [])
+
+  // 提交试题类型
+  let handleSubmit = e=>{
+
+  };
+
+  const { getFieldDecorator } = props.form;
   return (
     <div className="classify">
       <h1 className='h1'>试题分类</h1>
       <div className="main">
-        <Button type="primary" icon="plus" className="btn btn_add">添加类型</Button>
+        <Button type="primary" icon="plus" className="btn btn_add" onClick={()=>updateDialog(true)}>添加类型</Button>
+        <Modal visible={showDialog} onCancel={() => updateDialog(false)}>
+          <Form onSubmit={handleSubmit} >
+            <Form.Item>
+              {getFieldDecorator('username', {
+                rules: [{ required: true, message: '创建新类型' }],
+              })(
+                <Input
+                  placeholder="请输入类型名称"
+                />,
+              )}
+            </Form.Item>
+          </Form>
+        </Modal>
         <Table columns={columns} dataSource={data} />
       </div>
     </div>
@@ -66,6 +89,7 @@ function classify(props) {
 }
 
 const mapStateToProps = state => {
+  console.log('exam' + state)
   return {
     ...state
   }
@@ -80,4 +104,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(classify);
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(classify));

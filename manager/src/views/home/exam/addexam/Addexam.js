@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import './index.scss'
+import { Input, Select, InputNumber, DatePicker, Button } from 'antd';
+import './index.scss';
 
-import { Input, Select, InputNumber, DatePicker,Button } from 'antd';
-import moment from 'moment';
 const InputGroup = Input.Group;
 const { Option } = Select;
-const { MonthPicker, RangePicker } = DatePicker;
-
-
 
 class Addexam extends Component {
   constructor(props) {
@@ -17,11 +13,11 @@ class Addexam extends Component {
   render() {
     return (
       <div>
-        <h1 className='h1' >添加考试</h1>
+        <h1 className='h1'>添加考试</h1>
         <div className='wrap'>
-          <div className='box' >
-            <p><li><span>*</span>试卷名称:</li>  <Input placeholder='' className='input' /></p>
-            <InputGroup >
+          <div className='box'>
+            <p><li><span>*</span>试卷名称:</li><Input placeholder='' className='input' /></p>
+            <InputGroup>
               <p><li><span>*</span>选择考试类型:</li>
                 <Select defaultValue="Option1" style={{ width: '10%' }} >
                   <Option value="Option1">Option1</Option>

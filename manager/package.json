@@ -12,6 +12,7 @@
     "babel-plugin-import": "^1.12.0",
     "dva": "^2.4.1",
     "dva-loading": "^3.0.5",
+    "for-editor": "^0.0.13",
     "js-cookie": "^2.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

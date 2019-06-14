@@ -6,6 +6,7 @@ import reqwest from 'reqwest';
 const { Option } = Select;
 const count = 3;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
+// const fakeDataUrl = `http://169.254.12.77:7001/exam/questions/new?results=${count}&inc=name,gender,email,nat&noinfo`;
 
 class LoadMoreList extends React.Component {
   state = {

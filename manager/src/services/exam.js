@@ -2,7 +2,7 @@ import request from '../utils/request';
 
 export function examTypea() {
   return request({
-    url: '/exam/questions/new',
+    url: '/exam/examType',
     method:'GET'
   })
 }

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import './index.scss'
-import { Input, Select, Buttonp,Button } from 'antd';
-const InputGroup = Input.Group;
+import { Select ,Button } from 'antd';
+// const InputGroup = Input.Group;
 const { Option } = Select;
 const ButtonGroup = Button.Group;
 class Examlist extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+      this.state = {
     };
   }
 
-  
   render() {
     return (
       <div>
-        <h1 className='h1' >试卷列表</h1>
+        <h1 className='h1'>试卷列表</h1>
         <div className='wrap' style={{ padding: '20px' }} >
           <div className='top'  >
 

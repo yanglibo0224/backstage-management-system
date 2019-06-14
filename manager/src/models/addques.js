@@ -27,10 +27,10 @@ export default {
     *subjectType({ payload }, { call, put }) {
       let data = yield call(subjectType);
       console.log('data2...', data)
-      // yield put({
-      //   type:"getsubjectType",
-      //   action:data.data
-      // })
+      yield put({
+        type:"getsubjectType",
+        action:data.data
+      })
     }
   },
 
@@ -42,11 +42,11 @@ export default {
     //     examTypeData:action
     //   }
     // },
-    // getsubjectType(state,{action}){
-    //   return{
-    //     ...state,
-    //     subjectData:action
-    //   }
-    // }
+    getsubjectType(state,{action}){
+      return{
+        ...state,
+        subjectData:action
+      }
+    }
   }
 };
