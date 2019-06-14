@@ -32,3 +32,11 @@ export function getQuestionsTypea() {
     method:'GET'
   })
 }
+// /exam/insertQuestionsType
+export function insertQuestionsType(params){
+  return request({
+      url:'/exam/insertQuestionsType',
+      method:'POST',
+      data: params
+  })
+}
