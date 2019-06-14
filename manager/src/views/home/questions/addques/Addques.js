@@ -4,7 +4,6 @@ import { Input, Select, Button, Form, message } from 'antd';
 import Editor from 'for-editor'
 import styles from './index.scss';
 
-const { TextArea } = Input;
 const { Option } = Select;
 
 function Addques(props) {

@@ -38,3 +38,10 @@ export function insertQuestionsType(params){
       data: params
   })
 }
+//获取所有试题
+export function getQuestions(){
+  return request({
+      url:'/exam/questions/new',
+      method:'GET'
+  })
+}

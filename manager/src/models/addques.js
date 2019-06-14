@@ -1,4 +1,4 @@
-import { examTypea, subjectTypea, getQuestionsTypea ,add,insertQuestionsType} from '../services'
+import { examTypea, subjectTypea, getQuestionsTypea, add, insertQuestionsType, getQuestions } from '../services'
 export default {
   // 命名空间
   namespace: 'exam',
@@ -8,8 +8,9 @@ export default {
     examTypeData: [],
     subjectData: [],
     getQuestionsTypeData: [],
-    addQuestionsFlag:0,
-    insertQuestionsFlag:0
+    addQuestionsFlag: 0,
+    insertQuestionsFlag: 0,
+    getQuestionsData: []
   },
 
   subscriptions: {
@@ -55,11 +56,19 @@ export default {
       })
     },
     *insertQuestionsType({ payload }, { call, put }) {
-      let data = yield call(insertQuestionsType,payload);
+      let data = yield call(insertQuestionsType, payload);
       console.log('data2...', data)
       yield put({
         type: 'insertQuestions',
         action: data.code === 1 ? 1 : -1
+      })
+    },
+    // 获取所有试题
+    *getQuestions({ payload }, { call, put }) {
+      let data = yield call(getQuestions)
+      yield put({
+        type: 'getQuestionsAll',
+        action: data.data
       })
     }
   },
@@ -85,16 +94,22 @@ export default {
         getQuestionsTypeData: action
       }
     },
-    updateAdd(state, {action}){
+    updateAdd(state, { action }) {
       return {
-          ...state,
-          addQuestionsFlag: action
+        ...state,
+        addQuestionsFlag: action
       };
     },
-    insertQuestions(state, {action}){
+    insertQuestions(state, { action }) {
       return {
-          ...state,
-          insertQuestionsFlag: action
+        ...state,
+        insertQuestionsFlag: action
+      };
+    },
+    getQuestionsAll(state, { action }) {
+      return {
+        ...state,
+        getQuestionsData: action
       };
     },
   }

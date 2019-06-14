@@ -32,6 +32,7 @@ class classify extends Component {
     let { getQuestionsType } = this.props
     getQuestionsType()
   }
+  
   render() {
     const columns = [
       {
