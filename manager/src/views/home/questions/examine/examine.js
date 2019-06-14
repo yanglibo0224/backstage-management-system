@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { Button, Select, List, Skeleton } from 'antd';
-import './index.scss';
 import { connect } from 'dva';
-
+import styles from './index.scss';
 import reqwest from 'reqwest';
 
 const { Option } = Select;
 const count = 3;
+const fakeDataUrl = [];
 
-// /exam/questions/new
-const fakeDataUrl =[]
 //  `https://http://169.254.12.77:7001/exam/questions/new/?data=1&inc=name,gender,email,nat&noinfo`;
 
 class LoadMoreList extends React.Component {
@@ -126,24 +124,22 @@ function examine(props) {
   }
 
   return (
-    <div className="examine">
-      <h1 className='h1'>查看试题</h1>
-      <div className="main">
-        <header>
+    <div className="content">
+      <h2 className='title'>查看试题</h2>
+      <div>
+        <header className={styles.header}>
           <nav>
             <span>课程类型：</span>
-            <Button type="link">all</Button>
+            <Button className={styles.btns} type="link">All</Button>
             {
-            props.exam.subjectData && props.exam.subjectData.map((item)=>{
-              return  <Button key={item.subject_id} value={item.subject_id} type="link">{item.subject_text}</Button>  
-            })
-          }
-
-            
+              props.exam.subjectData && props.exam.subjectData.map((item) => {
+                return <Button className={styles.btns} key={item.subject_id} value={item.subject_id} type="link">{item.subject_text}</Button>
+              })
+            }
           </nav>
           <div className="search">
             <div className="select_opt">
-              <p>考试类型：</p>
+              <p className={styles.p}>考试类型：</p>
               <Select
                 showSearch
                 style={{ width: 200 }}
@@ -157,21 +153,16 @@ function examine(props) {
                   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-               {
-              props.exam.examTypeData && props.exam.examTypeData.map((item) => {
-                return <Option key={item.exam_id} value={item.exam_id} value="week1">{item.exam_name}</Option>
-
-              }
-              )
-            }
-                
-                {/* <Option value="week2">周考2</Option>
-                <Option value="week3">周考3</Option>
-                <Option value="month">月考</Option> */}
+                {
+                  props.exam.examTypeData && props.exam.examTypeData.map((item) => {
+                    return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                  }
+                  )
+                }
               </Select>
             </div>
             <div className="select_opt">
-              <p>题目类型：</p>
+              <p className={styles.p}>题目类型：</p>
               <Select
                 showSearch
                 style={{ width: 200 }}
@@ -185,21 +176,22 @@ function examine(props) {
                   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-               {
-             props.exam.getQuestionsTypeData && props.exam.getQuestionsTypeData.map((item)=>{
-              return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
-              })
-          }
+                {
+                  props.exam.getQuestionsTypeData && props.exam.getQuestionsTypeData.map((item) => {
+                    return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                  })
+                }
               </Select>
             </div>
             <Button type="primary" icon="search" className="btn btn_add_type">查询</Button>
           </div>
-          <LoadMoreList />
         </header>
+        <LoadMoreList />
       </div>
     </div>
   );
 }
+
 const mapStateToProps = state => {
   return {
     ...state

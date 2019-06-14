@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Table, Modal, Form, Input } from 'antd';
+import React, { useEffect } from 'react';
+import { Button, Table } from 'antd';
 import { connect } from 'dva';
 import './index.scss';
 
@@ -7,7 +7,7 @@ const columns = [
   {
     title: '类型ID',
     dataIndex: 'questions_type_id',
-    render: text => <a href="javascript:;">{text}</a>
+    // render: text => <a href="javascript:;">{text}</a>
   },
   {
     title: '类型名称',
@@ -21,13 +21,12 @@ const columns = [
 
 function classify(props) {
   useEffect(() => {
-    props.getQuestionsType()
-    // props.subjectType()
+    props.getQuestionsType();
   },[])
 
   return (
-    <div className="classify">
-      <h1 className='h1'>试题分类</h1>
+    <div className='content'>
+      <h2>试题分类</h2>
       <div className="main">
         <Button type="primary" icon="plus" className="btn btn_add">添加类型</Button>
         <Table columns={columns}  dataSource={props.exam.getQuestionsTypeData} />

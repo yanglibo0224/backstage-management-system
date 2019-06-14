@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.scss'
 import { Select ,Button } from 'antd';
-// const InputGroup = Input.Group;
 const { Option } = Select;
 const ButtonGroup = Button.Group;
 class Examlist extends Component {
