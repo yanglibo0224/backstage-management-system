@@ -1,4 +1,6 @@
-import { examTypea, subjectTypea, getQuestionsTypea, add, insertQuestionsType, getQuestions } from '../services'
+
+import { examTypea, subjectTypea, getQuestionsTypea, add, insertQuestionsType } from '../services';
+
 export default {
   // 命名空间
   namespace: 'exam',
@@ -9,8 +11,8 @@ export default {
     subjectData: [],
     getQuestionsTypeData: [],
     addQuestionsFlag: 0,
-    insertQuestionsFlag: 0,
-    getQuestionsData: []
+
+    insertQuestionsFlag: 0
   },
 
   subscriptions: {
@@ -38,7 +40,6 @@ export default {
         action: data.data
       })
     },
-
     *subjectTypea({ payload }, { call, put }) {
       let data = yield call(subjectTypea);
       console.log('data2...', data)
@@ -54,6 +55,7 @@ export default {
         type: "getQuestionsTypeData",
         action: data.data
       })
+
     },
     *insertQuestionsType({ payload }, { call, put }) {
       let data = yield call(insertQuestionsType, payload);
@@ -64,18 +66,17 @@ export default {
       })
     },
     // 获取所有试题
-    *getQuestions({ payload }, { call, put }) {
-      let data = yield call(getQuestions)
-      yield put({
-        type: 'getQuestionsAll',
-        action: data.data
-      })
-    }
+    // *getQuestions({ payload }, { call, put }) {
+    //   let data = yield call(getQuestions)
+    //   yield put({
+    //     type: 'getQuestionsAll',
+    //     action: data.data
+    //   })
+    // }
   },
 
   // 同步操作
   reducers: {
-
     getexamType(state, { action }) {
       return {
         ...state,
@@ -95,6 +96,7 @@ export default {
       }
     },
     updateAdd(state, { action }) {
+
       return {
         ...state,
         addQuestionsFlag: action
@@ -105,12 +107,6 @@ export default {
         ...state,
         insertQuestionsFlag: action
       };
-    },
-    getQuestionsAll(state, { action }) {
-      return {
-        ...state,
-        getQuestionsData: action
-      };
-    },
+    }
   }
 };

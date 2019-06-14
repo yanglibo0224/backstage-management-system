@@ -3,6 +3,7 @@ import { Button, Input, Table, Modal } from 'antd'
 import { connect } from 'dva';
 import typeStyle from './index.scss';
 
+
 class classify extends Component {
   constructor(props) {
     super(props)
@@ -49,15 +50,15 @@ class classify extends Component {
       },
     ];
     return (
-      <div className={typeStyle.wrap}>
-        <p className={typeStyle.title}>试题分类</p>
-        <div className={typeStyle.bottom}>
+      <div className="content">
+        <h2 className='title'>试题分类</h2>
+        <div className='main'>
           <div>
             <Button type="primary" onClick={this.typeAdd} icon="plus" size="large">
               添加类型
-                      </Button>
+            </Button>
             <Modal
-              title="Basic Modal"
+              title="创建新类型"
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
@@ -77,6 +78,7 @@ class classify extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log('exam' + state)
   return {
     ...state
   }

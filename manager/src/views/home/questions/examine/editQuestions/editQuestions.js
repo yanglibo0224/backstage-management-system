@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import Editor from 'for-editor';
 import styles from './index.scss';
-import { Input, Select, Button, Form, message, Modal } from 'antd';
+import { Input, Select, Button, Form, message } from 'antd';
 
+const { TextArea } = Input;
 const { Option } = Select;
 
 function Addques(props) {
@@ -35,20 +36,11 @@ function Addques(props) {
     });
   }
 
-  function confirm() {
-    Modal.confirm({
-      title: '你确定要添加这道试题吗?',
-      content: '真的要添加吗?',
-      cancelText: '取消',
-      okText: '确认'
-    });
-  }
-
   const { getFieldDecorator } = props.form;
 
-  return <div className='content'>
-    <h2 className={styles.title}>添加试题</h2>
-    <div className='main'>
+  return <div className={styles.content}>
+    <h2 className={styles.title}>编辑试题</h2>
+    <div className={styles.main}>
       <Form onSubmit={handleSubmit} className="login-form">
         <div className={styles.markcont}>
           <p>题目信息</p>
@@ -57,34 +49,16 @@ function Addques(props) {
             {getFieldDecorator('title', {
               rules: [{ required: true, message: '请输入题目标题!' }],
             })(
-              <Input placeholder="请输入题目标题,不超过20个" style={{ width: '400px', height: '44px' }} />
-              )}
+              <Input placeholder="请输入题目标题,不超过20个" />
+            )}
           </Form.Item>
           <p>题目管理</p>
           <Form.Item>
             {getFieldDecorator('questions_stem', {
               initialValue: ''
             })(
-              <Editor />
-              )}
-          </Form.Item>
-        </div>
-        <div>
-          <p>请选择考试类型：</p>
-          <Form.Item>
-            {getFieldDecorator('exam_id', {
-              rules: [{ required: true, message: '请输入题目标题!' }],
-              initialValue: '请选择考试类型'
-            })(
-              <Select style={{ width: 160 }}>
-                {
-                  props.exam.examTypeData && props.exam.examTypeData.map((item) => {
-                    return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
-                  }
-                  )
-                }
-              </Select>
-              )}
+              <Editor width="1000px" height="300px" />
+            )}
           </Form.Item>
         </div>
         <div>
@@ -101,8 +75,9 @@ function Addques(props) {
                   })
                 }
               </Select>
-              )}
+            )}
           </Form.Item>
+
         </div>
         <div>
           <p>请选择题目类型：</p>
@@ -118,7 +93,7 @@ function Addques(props) {
                   })
                 }
               </Select>
-              )}
+            )}
           </Form.Item>
         </div>
         <div className={styles.markcont}>
@@ -127,16 +102,15 @@ function Addques(props) {
             {getFieldDecorator('questions_answer', {
               initialValue: ''
             })(
-              <Editor />
-              )}
+              <Editor width="1000px" height="300px" />
+            )}
           </Form.Item>
         </div>
-        <Button onClick={confirm} type="primary" htmlType="submit" className={styles.submit_btn}>提交</Button>
+        <Button type="primary" htmlType="submit" className={styles.submit_btn}>提交</Button>
       </Form>
     </div>
   </div>
 }
-
 const mapStateToProps = state => {
   return {
     ...state
