@@ -1,11 +1,15 @@
-import React from 'react';
-import { Button, Select, List , Skeleton } from 'antd';
+import React, { useEffect } from 'react';
+import { Button, Select, List, Skeleton } from 'antd';
 import './index.scss';
+import { connect } from 'dva';
+
 import reqwest from 'reqwest';
 
 const { Option } = Select;
 const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
+// /exam/questions/new
+const fakeDataUrl =[]
+//  `https://http://169.254.12.77:7001/exam/questions/new/?data=1&inc=name,gender,email,nat&noinfo`;
 
 class LoadMoreList extends React.Component {
   state = {
@@ -99,6 +103,11 @@ class LoadMoreList extends React.Component {
 }
 
 function examine(props) {
+  useEffect(() => {
+    props.examTypea();
+    props.subjectType();
+    props.getQuestionsType()
+  }, [])
   function onChange(value) {
     console.log(`selected ${value}`);
   }
@@ -122,9 +131,14 @@ function examine(props) {
         <header>
           <nav>
             <span>课程类型：</span>
-            <Button type="link">All</Button>
-            <Button type="link">javaScript上</Button>
-            <Button type="link">javaScript下</Button>
+            <Button type="link">all</Button>
+            {
+            props.exam.subjectData && props.exam.subjectData.map((item)=>{
+              return  <Button key={item.subject_id} value={item.subject_id} type="link">{item.subject_text}</Button>  
+            })
+          }
+
+            
           </nav>
           <div className="search">
             <div className="select_opt">
@@ -142,10 +156,17 @@ function examine(props) {
                   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="week1">周考1</Option>
-                <Option value="week2">周考2</Option>
+               {
+              props.exam.examTypeData && props.exam.examTypeData.map((item) => {
+                return <Option key={item.exam_id} value={item.exam_id} value="week1">{item.exam_name}</Option>
+
+              }
+              )
+            }
+                
+                {/* <Option value="week2">周考2</Option>
                 <Option value="week3">周考3</Option>
-                <Option value="month">月考</Option>
+                <Option value="month">月考</Option> */}
               </Select>
             </div>
             <div className="select_opt">
@@ -163,11 +184,11 @@ function examine(props) {
                   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="简答题">简答题</Option>
-                <Option value="代码阅读题">代码阅读题</Option>
-                <Option value="代码补全">代码补全</Option>
-                <Option value="修改bug">修改bug</Option>
-                <Option value="手写代码">手写代码</Option>
+               {
+             props.exam.getQuestionsTypeData && props.exam.getQuestionsTypeData.map((item)=>{
+              return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+              })
+          }
               </Select>
             </div>
             <Button type="primary" icon="search" className="btn btn_add_type">查询</Button>
@@ -178,5 +199,28 @@ function examine(props) {
     </div>
   );
 }
-
-export default examine;
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    examTypea() {
+      dispatch({
+        type: 'exam/examTypea'
+      })
+    },
+    subjectType() {
+      dispatch({
+        type: 'exam/subjectTypea'
+      })
+    },
+    getQuestionsType() {
+      dispatch({
+        type: 'exam/getQuestionsType'
+      })
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(examine);

@@ -1,135 +1,136 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import { Input, Select, Button } from 'antd';
-import './index.scss';
+import { Input, Select, Button, Form, message } from 'antd';
+import Editor from 'for-editor'
+import styles from './index.scss';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 function Addques(props) {
   useEffect(() => {
-
+    props.userInfo();
     props.examTypea();
-    // props.subjectType()
-  },[])
+    props.subjectType();
+    props.getQuestionsType()
+    if (props.addQuestionsFlag === 1) {
+      // 添加成功
+      message.success('添加成功！')
 
-  function onChange(value) {
-    console.log(`selected ${value}`);
+    } else if (props.addQuestionsFlag === -1) {
+      // 添加失败
+      message.error('添加失败！')
+    }
+  }, [props.addQuestionsFlag])
+
+  // 表单提交
+  let handleSubmit = e => {
+    e.preventDefault();
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        let params = values;
+        params.user_id = props.user.userInfoData.user_id;
+        console.log(params);
+        props.add(params)
+      }
+    });
   }
 
-  function onBlur() {
-    console.log('blur');
-  }
+  const { getFieldDecorator } = props.form;
 
-  function onFocus() {
-    console.log('focus');
-  }
-
-  function onSearch(val) {
-    console.log('search:', val);
-  }
-
-  return (
-    <div className="addques">
-      <h1 className='h1'>添加试题</h1>
-      <div className="main">
-        <div className="ipt_box">
+  return <div className={styles.content}>
+    <h2 className={styles.title}>添加试题</h2>
+    <div className={styles.main}>
+      <Form onSubmit={handleSubmit} className="login-form">
+        <div className={styles.markcont}>
           <p>题目信息</p>
-          <p>题干</p>
-          <Input placeholder="请输入题目标题，不超过20个字" />
+          <Form.Item>
+            {getFieldDecorator('title', {
+              rules: [{ required: true, message: '请输入题目标题!' }],
+            })(
+              <Input placeholder="请输入题目标题,不超过20个" />
+            )}
+          </Form.Item>
+          <p>题目管理</p>
+          <Form.Item>
+            {getFieldDecorator('questions_stem', {
+              initialValue: ''
+            })(
+              <Editor height="auto" />
+            )}
+          </Form.Item>
         </div>
         <div>
-          <p>题目主题</p>
-          <TextArea rows={10} placeholder="请输入内容..." className="txt" /> 
-          {/* <div id="div1">
-            <p>请输入内容...</p>
-          </div> */}
-        </div>
-        <div className="select">
           <p>请选择考试类型：</p>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="周考1"
-            optionFilterProp="children"
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-          {
-            props.exam.examTypeData && props.exam.examTypeData.map((item)=>{
-             return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
-             }
-            )
-          }
-              
-
-            {/* <Option value="week1">周考1</Option>
-            <Option value="week2">周考2</Option>
-            <Option value="week3">周考3</Option>
-            <Option value="month">月考</Option> */}
-          </Select>
+          <Form.Item>
+            {getFieldDecorator('exam_id', {
+              rules: [{ required: true, message: '请输入题目标题!' }],
+              initialValue: '请选择考试类型'
+            })(
+              <Select style={{ width: 160 }}>
+                {
+                  props.exam.examTypeData && props.exam.examTypeData.map((item) => {
+                    return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                  }
+                  )
+                }
+              </Select>
+            )}
+          </Form.Item>
         </div>
         <div>
           <p>请选择课程类型：</p>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="javaScript上"
-            optionFilterProp="children"
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="javaScript上">javaScript上</Option>
-            <Option value="javaScript下">javaScript下</Option>
-            <Option value="模块化开发">模块化开发</Option>
-            <Option value="移动端开发">移动端开发</Option>
-            <Option value="node基础">node基础</Option>
-            <Option value="组件化开发(vue)">组件化开发(vue)</Option>
-            <Option value="渐进式开发(react)">渐进式开发(react)</Option>
-            <Option value="项目实战">项目实战</Option>
-          </Select>
-        </div>
-        
-        <div>
-          <p>请选择考试类型：</p>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="简答题"
-            optionFilterProp="children"
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="简答题">简答题</Option>
-            <Option value="代码阅读题">代码阅读题</Option>
-            <Option value="代码补全">代码补全</Option>
-            <Option value="修改bug">修改bug</Option>
-            <Option value="手写代码">手写代码</Option>
-          </Select>
+          <Form.Item>
+            {getFieldDecorator('subject_id', {
+              rules: [{ required: true, message: '请输入题目标题!' }],
+              initialValue: '请选择课程类型'
+            })(
+              <Select style={{ width: 160 }}>
+                {
+                  props.exam.subjectData && props.exam.subjectData.map((item) => {
+                    return <Option key={item.subject_id} value={item.subject_id}>{item.subject_text}</Option>
+                  })
+                }
+              </Select>
+            )}
+          </Form.Item>
+
         </div>
         <div>
-          <p>答案信息</p>
-          <TextArea rows={10} placeholder="请输入内容..." className="txt" />
+          <p>请选择题目类型：</p>
+          <Form.Item>
+            {getFieldDecorator('questions_type_id', {
+              rules: [{ required: true, message: '请输入题目标题!' }],
+              initialValue: '请选择题目类型'
+            })(
+              <Select style={{ width: 160 }}>
+                {
+                  props.exam.getQuestionsTypeData && props.exam.getQuestionsTypeData.map((item) => {
+                    return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                  })
+                }
+              </Select>
+            )}
+          </Form.Item>
+
         </div>
-        <Button type="primary" className="btn">提交</Button>
-      </div>
+        <div className={styles.markcont}>
+          <h2 className={styles.daanTit}>答案信息</h2>
+          <Form.Item>
+            {getFieldDecorator('questions_answer', {
+              initialValue: ''
+            })(
+              <Editor height="auto" />
+            )}
+          </Form.Item>
+        </div>
+        <Button type="primary" htmlType="submit" className={styles.submit_btn} >提交</Button>
+      </Form>
     </div>
-  );
+  </div>
+
+
 }
 const mapStateToProps = state => {
   return {
@@ -138,12 +139,35 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    // 添加试题
+    add(payload) {
+      console.log(payload)
+      dispatch({
+        type: "exam/add",
+        payload
+      })
+    },
     examTypea() {
       dispatch({
-
         type: 'exam/examTypea'
+      })
+    },
+    subjectType() {
+      dispatch({
+        type: 'exam/subjectTypea'
+      })
+    },
+    getQuestionsType() {
+      dispatch({
+        type: 'exam/getQuestionsType'
+      })
+    },
+    // 获取用户信息
+    userInfo() {
+      dispatch({
+        type: "user/userInfo"
       })
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Addques);
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Addques));

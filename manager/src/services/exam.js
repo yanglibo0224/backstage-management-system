@@ -2,13 +2,29 @@ import request from '../utils/request';
 
 export function examTypea() {
   return request({
-    url: '/exam/questions/new',
+    url: '/exam/examType',
     method:'GET'
+  })
+}
+// 添加试题
+export function add(params){
+  return request({
+      url:'/exam/questions',
+      method:'POST',
+      data: params
   })
 }
 
 //获取所有试题类型
-export function subjectType() {
+export function subjectTypea() {
+  return request({
+    url: '/exam/subject',
+    method:'GET'
+  })
+}
+
+//获取所有考试类型
+export function getQuestionsTypea() {
   return request({
     url: '/exam/getQuestionsType',
     method:'GET'
