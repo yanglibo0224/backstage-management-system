@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Radio, Select, Button, Form, List } from 'antd';
+import { Link } from 'dva/router'
 import styleSee from './index.scss';
 import './style.scss'
 import { connect } from 'dva';
@@ -94,22 +95,24 @@ function examine(props) {
             className="demo-loadmore-list"
             itemLayout="horizontal"
             style={{ padding: 20 }}
-            dataSource={props.exam.getQuestionsData&&props.exam.getQuestionsData}
+            dataSource={props.exam.getQuestionsData && props.exam.getQuestionsData}
             renderItem={item => (
-              <List.Item actions={[<a>编辑</a>]} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <p>{item.title}</p>
-                  <div className="color">
-                    <p className="content_every_cont_left_left_y">{item.questions_type_text}</p>
-                    <p className="content_every_cont_left_center_y">{item.subject_text}</p>
-                    <p className="content_every_cont_left_right_y">{item.exam_name}</p>
+              <List.Item actions={[<Link to={{ pathname: '/products/addques', state: item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
+                <Link to={{ pathname: '/products/detail', state: item.questions_id }} className="table-href">
+                  <div>
+                    <p>{item.title}</p>
+                    <div className="color">
+                      <p className="content_every_cont_left_left_y">{item.questions_type_text}</p>
+                      <p className="content_every_cont_left_center_y">{item.subject_text}</p>
+                      <p className="content_every_cont_left_right_y">{item.exam_name}</p>
+                    </div>
+                    <p>{item.user_name} 发布</p>
                   </div>
-                  <p>{item.user_name} 发布</p>
-                </div>
+                </Link>
               </List.Item>
             )}
           />
-           {/* <List
+          {/* <List
             renderItem={item => (                
                 <List.Item actions={[<Link to={{pathname:'/questions/add', state:item.questions_id}}>编辑</Link>]} style={{display:'flex',justifyContent:'space-between'}} className="table-list">
                     <Link to={{pathname:'/questions/detail', state:item.questions_id}} className="table-href"> 
@@ -156,6 +159,13 @@ const mapDispatchToProps = dispatch => {
     // 获取所有试题
     questions() {
       dispatch({ type: 'exam/getQuestions' })
+    },
+    // 按条件获取试题
+    getQuestion(payload) {
+      dispatch({
+        type: "exam/getQuestion",
+        payload
+      })
     }
   }
 }

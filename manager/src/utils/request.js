@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {getToken} from './user'
 const service = axios.create({
-  baseURL:'http://169.254.12.77:7001/',
+  baseURL:'http://192.168.43.79:7001/',
   timeout:5000
 })
 

@@ -1,4 +1,4 @@
-import { examTypea, subjectTypea, getQuestionsTypea, add, insertQuestionsType, getQuestions } from '../services'
+import { examTypea, subjectTypea, getQuestionsTypea, getQuestion, add, insertQuestionsType, getQuestions } from '../services'
 export default {
   // 命名空间
   namespace: 'exam',
@@ -70,8 +70,19 @@ export default {
         type: 'getQuestionsAll',
         action: data.data
       })
+    },
+    // 按条件获取试题
+    *getQuestion({ payload }, { call, put }) {
+      let data = yield call(getQuestion, payload)
+      console.log("获取试题.....", data)
+      yield put({
+        type: 'getQuestionSearch',
+        action: data.data
+      });
     }
   },
+  
+
 
   // 同步操作
   reducers: {
@@ -112,5 +123,11 @@ export default {
         getQuestionsData: action
       };
     },
+    getQuestionSearch(state, { action }) {
+      return {
+        ...state,
+        getQuestionsData: action
+      };
+    }
   }
 };
