@@ -1,38 +1,47 @@
-:global{
-  .h1{
-    margin:30px 0;
-    margin-left: 25px;
-    font-size: 22px;
-  }
+.title{
+  margin-bottom: 20px;
+  font-weight:500;
+  font-size: 22px;
+  height: 50px;
+}
+html,body,#root{
+  width: 100%;
+  height: 100%;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
   .main{
-    padding:20px;
-    margin: 0 25px;
-    box-sizing: border-box;
-    background: #fff;
-    border-radius: 15px;
+      width: 100%;
+      background: #fff;
+      flex:1;
+      padding: 20px;
+      box-sizing: border-box;
+      border-radius:10px;
   }
-  p{
-    font-size: 16px;
-    margin-bottom: 6px;
-    color: rgb(55, 36,37);
+  .markcont{
+      width:500px;
+      overflow: hidden;
+      p{
+          font-size: 20px;
+          margin-top:10px;
+      }
+      input{
+          height: 45px;
+          font-size: 14px;
+          margin-bottom: 20px;
+      }
+      
   }
-  .addques .main>div:nth-child(1){
-    margin-top: 0;
+  .daanTit{
+      margin-top:15px;
   }
-  .addques .main>div{
-    margin: 30px 0;
+  .submit_btn{
+      margin-top:15px;
   }
-  .ipt_box Input{
-    width: 400px;
-    height: 40px;
-  }
-  .txt{
-    width: 1250px;
-    font-size: 16px;
-  }
-  .btn{
-    width: 110px;
-    height: 40px;
-    background: linear-gradient(-90deg,#4e75ff,#0139fd)!important;
-  }
+ 
 }

@@ -8,4 +8,10 @@ export function login(params) {
     data: params
   })
 }
-
+//获取用户信息
+export function userInfo(params){
+  return request({
+      url:'/user/userInfo',
+      method:'GET'
+  })
+}
