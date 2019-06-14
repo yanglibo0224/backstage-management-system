@@ -1,5 +1,5 @@
-import axios from 'axios'
-import {getToken} from './user'
+import axios from 'axios';
+import {getToken} from './user';
 const service = axios.create({
   baseURL:'http://169.254.12.77:7001/',
   timeout:5000
@@ -26,6 +26,5 @@ service.interceptors.response.use(
   }
 )
 
-
-export default service
+export default service;
 

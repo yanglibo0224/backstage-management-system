@@ -1,4 +1,3 @@
-
 export default {
   // 命名空间
   namespace: 'example',
@@ -24,5 +23,4 @@ export default {
       return { ...state, ...action.payload };
     },
   },
-
 };

@@ -1,6 +1,5 @@
-import { login,userInfo } from '../services'
-
-import { setToken, getToken } from '../utils/user'
+import { login, userInfo } from '../services';
+import { setToken, getToken } from '../utils/user';
 import { routerRedux } from 'dva/router';
 
 export default {
@@ -8,7 +7,6 @@ export default {
   namespace: 'user',
 
   // 模块内部的状态
-
   state: {
     isLogin: 0,
     userInfoData: {}
@@ -46,14 +44,12 @@ export default {
     *login({ payload }, { call, put }) {
       console.log('payload...', payload, login);
       let data = yield call(login, payload);
-      console.log('data...', data)
-
+      console.log('data...', data);
       //设置登录态到cookie里
       if (data.code === 1) {
         setToken(data.token)
       }
       yield put({
-
         type: 'updateLogin',
         payload: data.code === 1 ? 1 : -1
       })
@@ -74,7 +70,7 @@ export default {
       return { ...state, isLogin: payload }
     },
     getUserInfo(state, { action }) {
-      return {  ...state, userInfoData: action }
-    },
+      return { ...state, userInfoData: action }
+    }
   }
 };

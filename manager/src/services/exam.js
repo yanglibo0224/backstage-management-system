@@ -1,11 +1,13 @@
 import request from '../utils/request';
 
+//获取所有的考试类型
 export function examTypea() {
   return request({
     url: '/exam/examType',
     method:'GET'
   })
 }
+
 // 添加试题
 export function add(params){
   return request({

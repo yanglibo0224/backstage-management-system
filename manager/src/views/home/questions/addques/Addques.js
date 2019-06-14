@@ -84,7 +84,7 @@ function Addques(props) {
                   )
                 }
               </Select>
-            )}
+              )}
           </Form.Item>
         </div>
         <div>
@@ -103,7 +103,6 @@ function Addques(props) {
               </Select>
               )}
           </Form.Item>
-
         </div>
         <div>
           <p>请选择题目类型：</p>
@@ -137,6 +136,7 @@ function Addques(props) {
     </div>
   </div>
 }
+
 const mapStateToProps = state => {
   return {
     ...state
