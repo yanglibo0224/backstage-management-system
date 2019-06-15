@@ -1,107 +1,11 @@
 import React, { useEffect } from 'react';
-
-import { Button, Select, List, Skeleton,Form } from 'antd';
+import { Radio, Select, Button, Form, List } from 'antd';
+import { Link } from 'dva/router'
+import styleSee from './index.scss';
+import './style.scss'
 import { connect } from 'dva';
-import styles from './index.scss';
-import reqwest from 'reqwest';
 
 const { Option } = Select;
-const count = 3;
-const fakeDataUrl = [];
-
-//  `https://http://169.254.12.77:7001/exam/questions/new/?data=1&inc=name,gender,email,nat&noinfo`;
-
-class LoadMoreList extends React.Component {
-  state = {
-    initLoading: true,
-    loading: false,
-    data: [],
-    list: [],
-  };
-
-  componentDidMount() {
-    this.getData(res => {
-      this.setState({
-        initLoading: false,
-        data: res.results,
-        list: res.results,
-      });
-    });
-  }
-
-  getData = callback => {
-    reqwest({
-      url: fakeDataUrl,
-      type: 'json',
-      method: 'get',
-      contentType: 'application/json',
-      success: res => {
-        callback(res);
-      },
-    });
-  };
-
-  onLoadMore = () => {
-    this.setState({
-      loading: true,
-      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
-    });
-    this.getData(res => {
-      const data = this.state.data.concat(res.results);
-      this.setState(
-        {
-          data,
-          list: data,
-          loading: false,
-        },
-        () => {
-          // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-          // In real scene, you can using public method of react-virtualized:
-          // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-          window.dispatchEvent(new Event('resize'));
-        },
-      );
-    });
-  };
-
-  render() {
-    const { initLoading, loading, list } = this.state;
-    const loadMore =
-      !initLoading && !loading ? (
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: 12,
-            height: 32,
-            lineHeight: '32px',
-          }}
-        >
-          <Button onClick={this.onLoadMore}>loading more</Button>
-        </div>
-      ) : null;
-
-    return (
-      <List
-        className="demo-loadmore-list"
-        loading={initLoading}
-        itemLayout="horizontal"
-        loadMore={loadMore}
-        dataSource={list}
-        renderItem={item => (
-          <List.Item actions={[<a>编辑</a>]}>
-            <Skeleton avatar title={false} loading={item.loading} active>
-              <List.Item.Meta
-                title={<a href="https://ant.design">{item.name.last}</a>}
-                description="dingshaoshan发布"
-              />
-            </Skeleton>
-          </List.Item>
-        )}
-      />
-    );
-  }
-}
-
 function examine(props) {
   useEffect(() => {
     // 获取考试类型
@@ -128,70 +32,91 @@ function examine(props) {
   const { getFieldDecorator } = props.form;
 
   return (
-
-    <div className="content">
-      <h2 className='title'>查看试题</h2>
-      <div>
-        <header className={styles.header}>
-          <nav>
-            <span>课程类型：</span>
-            <Button className={styles.btns} type="link">All</Button>
-            {
-              props.exam.subjectData && props.exam.subjectData.map((item) => {
-                return <Button className={styles.btns} key={item.subject_id} value={item.subject_id} type="link">{item.subject_text}</Button>
-              })
-            }
-          </nav>
-          <div className="search">
-            <div className="select_opt">
-              <p className={styles.p}>考试类型：</p>
-              <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder=""
-                optionFilterProp="children"
-               
-                filterOption={(input, option) =>
-                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-              >
+    <div className={styleSee.wrap} style={{width:'100%'}}>
+      <Form onSubmit={handleSearch} className="login-form" style={{maxWidth:'1200px'}} >
+        <h2 className={styleSee.title}>查看试题</h2>
+        <div className={styleSee.bottom}>
+          <div className={styleSee.Bottom_top}>
+            <div className={styleSee.Bottom_tit}>课程类型:</div>
+            {getFieldDecorator('subject_id', {
+              valuePropName: 'checked',
+              initialValue: undefined,
+            })(
+              <Radio.Group defaultValue="a" buttonStyle="solid" className={styleSee.radio_list}>
+                <Radio.Button value={undefined} className={styleSee.radio_item}>All</Radio.Button>
                 {
-                  props.exam.examTypeData && props.exam.examTypeData.map((item) => {
-                    return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
-                  }
-                  )
-                }
-              </Select>
-            </div>
-            <div className="select_opt">
-              <p className={styles.p}>题目类型：</p>
-              <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder=""
-                optionFilterProp="children"
-               
-                filterOption={(input, option) =>
-                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-              >
-                {
-                  props.exam.getQuestionsTypeData && props.exam.getQuestionsTypeData.map((item) => {
-                    return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                  props.exam.subjectData && props.exam.subjectData.map((item) => {
+                    return <Radio.Button value={item.subject_id} key={item.subject_id} className={styleSee.radio_item}>{item.subject_text}</Radio.Button>
                   })
                 }
-              </Select>
+              </Radio.Group>
+            )}
+
+          </div>
+          <div className={styleSee.top_search}>
+            <div className={styleSee.Bottom_babel}>
+              <div className={styleSee.Bottom_tit}>考试类型:</div>
+              <Form.Item>
+                {getFieldDecorator('exam_id', {
+                  initialValue: undefined
+                })(
+                  <Select style={{ width: 160 }}>
+                    {
+                      props.exam.examTypeData && props.exam.examTypeData.map((item) => {
+                        return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                      }
+                      )
+                    }
+                  </Select>
+                )}
+              </Form.Item>
+            </div>
+            <div className={styleSee.Bottom_babel}>
+              <div className={styleSee.Bottom_tit}>题目类型:</div>
+              <Form.Item>
+                {getFieldDecorator('questions_type_id', {
+                  initialValue: undefined
+                })(
+                  <Select style={{ width: 160 }}>
+                    {
+                      props.exam.getQuestionsTypeData && props.exam.getQuestionsTypeData.map((item) => {
+                        return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                      })
+                    }
+                  </Select>
+                )}
+              </Form.Item>
             </div>
             <Button type="primary" htmlType="submit" icon="search">查 询</Button>
           </div>
-
-        </header>
-        <LoadMoreList />
-      </div>
+        </div>
+        <div className={styleSee.see_context}>
+          <List
+            className="demo-loadmore-list"
+            itemLayout="horizontal"
+            style={{ padding: 20 }}
+            dataSource={props.exam.getQuestionsData && props.exam.getQuestionsData}
+            renderItem={item => (
+              <List.Item actions={[<Link to={{ pathname: '/products/addques', state: item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
+                <Link to={{ pathname: '/products/detail', state: item.questions_id }} className="table-href">
+                  <div>
+                    <p>{item.title}</p>
+                    <div className="color">
+                      <p className="content_every_cont_left_left_y">{item.questions_type_text}</p>
+                      <p className="content_every_cont_left_center_y">{item.subject_text}</p>
+                      <p className="content_every_cont_left_right_y">{item.exam_name}</p>
+                    </div>
+                    <p>{item.user_name} 发布</p>
+                  </div>
+                </Link>
+              </List.Item>
+            )}
+          />
+        </div>
+      </Form>
     </div>
   )
 }
-
 const mapStateToProps = state => {
   return {
     ...state
@@ -217,8 +142,14 @@ const mapDispatchToProps = dispatch => {
     // 获取所有试题
     questions() {
       dispatch({ type: 'exam/getQuestions' })
+    },
+    // 按条件获取试题
+    getQuestion(payload) {
+      dispatch({
+        type: "exam/getQuestion",
+        payload
+      })
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(examine))
-
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(examine));

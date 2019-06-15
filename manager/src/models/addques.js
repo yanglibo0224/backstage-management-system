@@ -1,5 +1,4 @@
-
-import { examTypea, subjectTypea, getQuestionsTypea, add, insertQuestionsType } from '../services';
+import { examTypea, subjectTypea, getQuestionsTypea, getQuestion, add, insertQuestionsType, getQuestions } from '../services';
 
 export default {
   // 命名空间
@@ -11,8 +10,8 @@ export default {
     subjectData: [],
     getQuestionsTypeData: [],
     addQuestionsFlag: 0,
-
-    insertQuestionsFlag: 0
+    insertQuestionsFlag: 0,
+    getQuestionsData: []
   },
 
   subscriptions: {
@@ -65,14 +64,22 @@ export default {
         action: data.code === 1 ? 1 : -1
       })
     },
-    // 获取所有试题
-    // *getQuestions({ payload }, { call, put }) {
-    //   let data = yield call(getQuestions)
-    //   yield put({
-    //     type: 'getQuestionsAll',
-    //     action: data.data
-    //   })
-    // }
+    *getQuestions({ payload }, { call, put }) {
+      let data = yield call(getQuestions)
+      yield put({
+        type: 'getQuestionsAll',
+        action: data.data
+      })
+    },
+    // 按条件获取试题
+    *getQuestion({ payload }, { call, put }) {
+      let data = yield call(getQuestion, payload)
+      console.log("获取试题.....", data)
+      yield put({
+        type: 'getQuestionSearch',
+        action: data.data
+      });
+    }
   },
 
   // 同步操作
@@ -96,7 +103,6 @@ export default {
       }
     },
     updateAdd(state, { action }) {
-
       return {
         ...state,
         addQuestionsFlag: action
@@ -106,6 +112,18 @@ export default {
       return {
         ...state,
         insertQuestionsFlag: action
+      };
+    },
+    getQuestionsAll(state, { action }) {
+      return {
+        ...state,
+        getQuestionsData: action
+      };
+    },
+    getQuestionSearch(state, { action }) {
+      return {
+        ...state,
+        getQuestionsData: action
       };
     }
   }

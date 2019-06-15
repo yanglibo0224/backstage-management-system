@@ -47,3 +47,12 @@ export function getQuestions(){
       method:'GET'
   })
 }
+
+// getQuestion条件获取试题
+export function getQuestion(params){
+  return request({
+      url:'/exam/questions/condition',
+      method:'GET',
+      params:params
+  })
+}
