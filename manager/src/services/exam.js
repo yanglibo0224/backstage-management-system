@@ -40,3 +40,19 @@ export function insertQuestionsType(params){
       data: params
   })
 }
+//获取所有试题
+export function getQuestions(){
+  return request({
+      url:'/exam/questions/new',
+      method:'GET'
+  })
+}
+
+// getQuestion条件获取试题
+export function getQuestion(params){
+  return request({
+      url:'/exam/questions/condition',
+      method:'GET',
+      params:params
+  })
+}
