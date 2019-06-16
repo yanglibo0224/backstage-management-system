@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Radio, Select, Button, Form, List } from 'antd';
-import { Link } from 'dva/router'
+import { Link,Route,Switch } from 'dva/router'
 import styleSee from './index.scss';
 import './style.scss'
 import { connect } from 'dva';
-
+import examLists from './examList'
 const { Option } = Select;
 function examine(props) {
   useEffect(() => {
@@ -97,8 +97,9 @@ function examine(props) {
             style={{ padding: 20 }}
             dataSource={props.exam.getQuestionsData && props.exam.getQuestionsData}
             renderItem={item => (
-              <List.Item actions={[<Link to={{ pathname: '/products/addques', state: item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
-                <Link to={{ pathname: '/products/detail', state: item.questions_id }} className="table-href">
+            
+              <List.Item actions={[<Link to={{ pathname: `/products/addques` ,state:item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
+                <Link to={{ pathname: `/products/detail`, state: item.questions_id }} className="table-href">
                   <div>
                     <p>{item.title}</p>
                     <div className="color">
@@ -112,26 +113,12 @@ function examine(props) {
               </List.Item>
             )}
           />
-          {/* <List
-            renderItem={item => (                
-                <List.Item actions={[<Link to={{pathname:'/questions/add', state:item.questions_id}}>编辑</Link>]} style={{display:'flex',justifyContent:'space-between'}} className="table-list">
-                    <Link to={{pathname:'/questions/detail', state:item.questions_id}} className="table-href"> 
-                    <div>
-                        <p>{item.title}</p>
-                        <div className="color">
-                            <p className="content_every_cont_left_left_y">{item.questions_type_text}</p>
-                            <p className="content_every_cont_left_center_y">{item.subject_text}</p>
-                            <p className="content_every_cont_left_right_y">{item.exam_name}</p>
-                        </div>
-                        <p style={{color:'blue'}}>{item.user_name} 发布</p>
-                    </div>
-                    </Link>
-                </List.Item>
-            )}
-        /> */}
         </div>
       </Form>
+      <Switch><Route path='/question/examlist' component={examLists} ></Route></Switch>
+
     </div>
+    
   )
 }
 const mapStateToProps = state => {

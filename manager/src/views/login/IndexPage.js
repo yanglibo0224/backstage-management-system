@@ -65,7 +65,7 @@ function IndexPage(props) {
           {getFieldDecorator('remember', {
             valuePropName: 'checked',
             initialValue: true,
-          })(<Checkbox>记住密码</Checkbox>)}
+          })(<Checkbox style={{width:'120px'}}><span>记住密码</span></Checkbox>)}
           <a className="login-form-forgot" href="">
             忘记密码
         </a>
