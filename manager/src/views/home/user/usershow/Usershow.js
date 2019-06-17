@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Table } from 'antd';
 import './index.scss';
+import { Button, Icon , Table} from 'antd';
+const ButtonGroup = Button.Group;
 
 const columns = [
   {
@@ -41,7 +42,7 @@ const data = [
     ID: 'n66k4n-i9zpen',
     Name: '修改bug',
     operation: '',
-  },{
+  }, {
     key: '5',
     ID: 'v8i73-r8oai',
     Name: '手写代码',
@@ -54,7 +55,14 @@ function classify(props) {
     <div className="classify">
       <h1 className='h1'>用户展示</h1>
       <div className="wrapper">
-        <h2>用户数据</h2>
+        <ButtonGroup>
+          <Button>用户数据</Button>
+          <Button>身份数据</Button>
+          <Button>api接口权限</Button>
+          <Button>身份和api接口关系</Button>
+          <Button>视图接口权限</Button>
+          <Button>身份和视图权限关系</Button>
+        </ButtonGroup>
         <Table columns={columns} dataSource={data} />
       </div>
     </div>
