@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Radio, Select, Button, Form, List } from 'antd';
-import { Link } from 'dva/router';
+import { Link, Route, Switch } from 'dva/router';
 import styleSee from './index.scss';
 import './style.scss';
 import { connect } from 'dva';
+import examLists from './examList';
 
 const { Option } = Select;
+
 function examine(props) {
   useEffect(() => {
     // 获取考试类型
@@ -97,8 +99,9 @@ function examine(props) {
             style={{ padding: 20 }}
             dataSource={props.exam.getQuestionsData && props.exam.getQuestionsData}
             renderItem={item => (
-              <List.Item actions={[<Link to={{ pathname: '/products/addques', state: item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
-                <Link to={{ pathname: '/products/detail', state: item.questions_id }} className="table-href">
+
+              <List.Item actions={[<Link to={{ pathname: `/products/addques`, state: item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
+                <Link to={{ pathname: `/products/detail`, state: item.questions_id }} className="table-href">
                   <div>
                     <p>{item.title}</p>
                     <div className="color">
@@ -114,7 +117,10 @@ function examine(props) {
           />
         </div>
       </Form>
+      <Switch><Route path='/question/examlist' component={examLists} ></Route></Switch>
+
     </div>
+
   )
 }
 
@@ -142,7 +148,9 @@ const mapDispatchToProps = dispatch => {
     },
     // 获取所有试题
     questions() {
-      dispatch({ type: 'exam/getQuestions' })
+      dispatch({
+        type: 'exam/getQuestions'
+      })
     },
     // 按条件获取试题
     getQuestion(payload) {
@@ -153,4 +161,5 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(examine));

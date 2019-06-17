@@ -29,7 +29,7 @@ class classify extends Component {
       visible: false
     })
   };
-  componentDidMount() {
+  componentDidMount() { 
     let { getQuestionsType } = this.props
     getQuestionsType()
   }
