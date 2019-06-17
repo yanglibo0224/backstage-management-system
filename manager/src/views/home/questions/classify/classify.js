@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Button, Input, Table, Modal } from 'antd'
 import { connect } from 'dva';
 import typeStyle from './index.scss';
@@ -78,7 +78,7 @@ class classify extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('exam' + state)
+  // console.log('exam' + state)
   return {
     ...state
   }
@@ -89,7 +89,8 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'exam/getQuestionsType'
       })
-    }, insertadd(payload) {
+    }, 
+    insertadd(payload) {
       console.log(payload)
       dispatch({ type: 'exam/insertQuestionsType', payload })
     }

@@ -192,7 +192,7 @@ class Products extends React.Component {
 }
 
 const mapStateToProps = state =>{
-  console.log('state',state);
+  // console.log('state',state);
   return {
     loading:state.loading.global
   }

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Radio, Select, Button, Form, List } from 'antd';
-import { Link } from 'dva/router'
+import { Link } from 'dva/router';
 import styleSee from './index.scss';
-import './style.scss'
+import './style.scss';
 import { connect } from 'dva';
 
 const { Option } = Select;
