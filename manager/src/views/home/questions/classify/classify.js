@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Modal } from 'antd'
+import { Button, Input, Table, Modal } from 'antd';
 import { connect } from 'dva';
 import typeStyle from './index.scss';
 
@@ -92,7 +92,9 @@ const mapDispatchToProps = dispatch => {
     }, 
     insertadd(payload) {
       console.log(payload)
-      dispatch({ type: 'exam/insertQuestionsType', payload })
+      dispatch({ 
+        type: 'exam/insertQuestionsType', payload 
+      })
     }
   }
 }
