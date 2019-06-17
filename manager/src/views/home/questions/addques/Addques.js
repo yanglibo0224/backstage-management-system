@@ -8,10 +8,13 @@ const { Option } = Select;
 
 function Addques(props) {
   useEffect(() => {
+    console.log(props)
+    
     props.userInfo();
     props.examTypea();
     props.subjectType();
-    props.getQuestionsType()
+    props.getQuestionsType();
+    // props.getQuestion({question_id:`${props.history.location.state}`});
     if (props.addQuestionsFlag === 1) {
       // 添加成功
       message.success('添加成功！')
@@ -174,6 +177,13 @@ const mapDispatchToProps = dispatch => {
     userInfo() {
       dispatch({
         type: "user/userInfo"
+      })
+    },
+    // 按条件获取试题
+    getQuestion(payload) {
+      dispatch({
+        type: "exam/getQuestion",
+        payload
       })
     }
   }

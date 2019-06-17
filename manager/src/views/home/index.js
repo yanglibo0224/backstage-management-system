@@ -15,6 +15,9 @@ import Classgav from './class/classgav/classGav'
 import Classroom from './class/classroom/classRoom'
 import Student from './class/student/student'
 import Awaiting from './papers/awaiting/Awaiting'
+import Detail from './questions/addques/detail'
+
+
 import './IndexPage.css';
 
 const { Header, Sider, Content } = Layout;
@@ -168,6 +171,7 @@ class Products extends React.Component {
               <Route path="/products/addques" component={Addques}></Route>
               <Route path="/products/classify" component={Classify}></Route>
               <Route path="/products/examine" component={Examine}></Route>
+              <Route path="/products/detail" component={Detail}></Route>
 
               <Route path="/user/adduser" component={Adduser}></Route>
               <Route path="/user/usershow" component={Usershow}></Route>
@@ -192,7 +196,7 @@ class Products extends React.Component {
 }
 
 const mapStateToProps = state =>{
-  console.log('state',state);
+  // console.log('state',state);
   return {
     loading:state.loading.global
   }
