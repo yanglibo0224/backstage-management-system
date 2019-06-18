@@ -56,7 +56,6 @@ export default {
     },
     *userInfo({ payload }, { call, put }) {
       let data = yield call(userInfo);
-      console.log(data);
       yield put({
         type: 'getUserInfo',
         action: data.data

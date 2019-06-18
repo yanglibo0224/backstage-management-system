@@ -33,7 +33,7 @@ export default {
     },
     *examTypea({ payload }, { call, put }) {
       let data = yield call(examTypea);
-      console.log('data...', data)
+      // console.log('data...', data)
       yield put({
         type: "getexamType",
         action: data.data
@@ -41,7 +41,7 @@ export default {
     },
     *subjectTypea({ payload }, { call, put }) {
       let data = yield call(subjectTypea);
-      console.log('data2...', data)
+      // console.log('data2...', data)
       yield put({
         type: "getsubjectType",
         action: data.data
@@ -49,7 +49,7 @@ export default {
     },
     *getQuestionsType({ payload }, { call, put }) {
       let data = yield call(getQuestionsTypea);
-      console.log('data2...', data)
+      // console.log('data2...', data)
       yield put({
         type: "getQuestionsTypeData",
         action: data.data
@@ -58,7 +58,7 @@ export default {
     },
     *insertQuestionsType({ payload }, { call, put }) {
       let data = yield call(insertQuestionsType, payload);
-      console.log('data2...', data)
+      // console.log('data2...', data)
       yield put({
         type: 'insertQuestions',
         action: data.code === 1 ? 1 : -1
@@ -75,7 +75,7 @@ export default {
     // 按条件获取试题
     *getQuestion({ payload }, { call, put }) {
       let data = yield call(getQuestion, payload)
-      console.log("获取试题.....", data)
+      // console.log("获取试题.....", data)
       yield put({
         type: 'getQuestionSearch',
         action: data.data

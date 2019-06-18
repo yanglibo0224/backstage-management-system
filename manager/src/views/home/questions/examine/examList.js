@@ -1,18 +1,19 @@
-import React, { Component,useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
 
-function examLists(props){
-  useEffect(()=>{
-    
-    props.getQuestion({question_id:`${props.history.location.state}`})
+function examLists(props) {
+  useEffect(() => {
+    props.getQuestion({ question_id: `${props.history.location.state}` })
     console.log(props)
   })
-    return (
-      <div>
-          list
-      </div>
-    )
+
+  return (
+    <div>
+      list
+    </div>
+  )
 }
+
 const mapStateToProps = state => {
   return {
     ...state
@@ -29,4 +30,5 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(examLists)
+
+export default connect(mapStateToProps, mapDispatchToProps)(examLists);

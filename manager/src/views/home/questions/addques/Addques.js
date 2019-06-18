@@ -8,8 +8,6 @@ const { Option } = Select;
 
 function Addques(props) {
   useEffect(() => {
-    console.log(props)
-    
     props.userInfo();
     props.examTypea();
     props.subjectType();
@@ -50,7 +48,7 @@ function Addques(props) {
   const { getFieldDecorator } = props.form;
 
   return <div className='content'>
-    <h2 className={styles.title}>添加试题</h2>
+    <h2 className='title'>添加试题</h2>
     <div className='main'>
       <Form onSubmit={handleSubmit} className="login-form">
         <div className={styles.markcont}>
@@ -77,7 +75,7 @@ function Addques(props) {
           <Form.Item>
             {getFieldDecorator('exam_id', {
               rules: [{ required: true, message: '请输入题目标题!' }],
-              initialValue: '请选择考试类型'
+              initialValue: '周考1'
             })(
               <Select style={{ width: 160 }}>
                 {
@@ -95,7 +93,7 @@ function Addques(props) {
           <Form.Item>
             {getFieldDecorator('subject_id', {
               rules: [{ required: true, message: '请输入题目标题!' }],
-              initialValue: '请选择课程类型'
+              initialValue: 'javaScript上'
             })(
               <Select style={{ width: 160 }}>
                 {
@@ -112,7 +110,7 @@ function Addques(props) {
           <Form.Item>
             {getFieldDecorator('questions_type_id', {
               rules: [{ required: true, message: '请输入题目标题!' }],
-              initialValue: '请选择题目类型'
+              initialValue: '简答题'
             })(
               <Select style={{ width: 160 }}>
                 {

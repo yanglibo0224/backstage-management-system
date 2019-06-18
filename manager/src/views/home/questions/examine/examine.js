@@ -34,9 +34,9 @@ function examine(props) {
   const { getFieldDecorator } = props.form;
 
   return (
-    <div className={styleSee.wrap} style={{ width: '100%' }}>
-      <Form onSubmit={handleSearch} className="login-form" style={{ maxWidth: '1200px' }} >
-        <h2 className={styleSee.title}>查看试题</h2>
+    <div className='content' style={{ width: '100%' }}>
+        <h2 className='title'>查看试题</h2>
+      <Form onSubmit={handleSearch} className={styleSee.login_form} style={{ maxWidth: '1200px' }} >
         <div className={styleSee.bottom}>
           <div className={styleSee.Bottom_top}>
             <div className={styleSee.Bottom_tit}>课程类型:</div>

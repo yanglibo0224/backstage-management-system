@@ -22,7 +22,7 @@ export default {
   // 异步操作
   effects: {
     // 用户数据
-    *getUserDatas({ }, { call, put }) {
+    *getUserDatas({ payload }, { call, put }) {
       let data = yield call(getUserData);
       // console.log(data.data);
       yield put({
@@ -31,7 +31,7 @@ export default {
       })
     },
     //身份数据
-    *getUseridentitys({ }, { call, put }) {
+    *getUseridentitys({ payload }, { call, put }) {
       let data = yield call(getUseridentity);
       // console.log(data);
       yield put({
@@ -40,7 +40,7 @@ export default {
       })
     },
     //api接口权限
-    *getApiauthoritys({ }, { call, put }) {
+    *getApiauthoritys({ payload }, { call, put }) {
       let data = yield call(getApiauthority);
       console.log(data);
       yield put({
@@ -49,7 +49,7 @@ export default {
       })
     },
     //身份和api接口权限
-    *getIdApis({ }, { call, put }) {
+    *getIdApis({ payload }, { call, put }) {
       let data = yield call(getIdApi);
       yield put({
         type: 'idApi',
@@ -57,7 +57,7 @@ export default {
       })
     },
     //s视图接口权限
-    *getViewAuthoritys({ }, { call, put }) {
+    *getViewAuthoritys({ payload }, { call, put }) {
       let data = yield call(getViewAuthority);
       yield put({
         type: 'viewAuthority',
@@ -65,7 +65,7 @@ export default {
       })
     },
     //身份和视图权限关系
-    *getIdviews({ }, { call, put }) {
+    *getIdviews({ payload }, { call, put }) {
       let data = yield call(getIdview);
       yield put({
         type: 'idview',
