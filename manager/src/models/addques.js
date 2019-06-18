@@ -1,4 +1,5 @@
-import { examTypea, subjectTypea, getQuestionsTypea, getQuestion, add, insertQuestionsType, getQuestions } from '../services';
+
+import { examTypea, subjectTypea, getQuestionsTypea, getQuestion, add, insertQuestionsType, getQuestions } from '../services'
 
 export default {
   // 命名空间
@@ -64,6 +65,8 @@ export default {
         action: data.code === 1 ? 1 : -1
       })
     },
+
+    // 获取所有试题
     *getQuestions({ payload }, { call, put }) {
       let data = yield call(getQuestions)
       yield put({
@@ -80,6 +83,7 @@ export default {
         action: data.data
       });
     }
+
   },
 
   // 同步操作

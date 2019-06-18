@@ -4,10 +4,9 @@ import { Link, Route, Switch } from 'dva/router';
 import styleSee from './index.scss';
 import './style.scss';
 import { connect } from 'dva';
-import examLists from './examList';
 
+import examLists from './examList'
 const { Option } = Select;
-
 function examine(props) {
   useEffect(() => {
     // 获取考试类型
