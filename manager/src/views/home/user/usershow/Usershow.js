@@ -15,6 +15,10 @@ function Adduser(props) {
     props.getApiauthorityList();
     //身份和api权限关系
     props.getIdApiListList();
+    //视图接口权限
+    props.getViewAuthorityList();
+    //身份和视图权限关系
+    props.getIdviewList();
   }, [])
   console.log(props);
 
@@ -55,9 +59,8 @@ function Adduser(props) {
       dataIndex: 'api_authority_method'
     }
   ]
-
-  const columns_idApi=[
-     {
+  const columns_idApi = [
+    {
       title: 'Name',
       dataIndex: 'identity_text',
     },
@@ -72,6 +75,30 @@ function Adduser(props) {
     {
       title: 'email',
       dataIndex: 'api_authority_method'
+    }
+  ]
+  const columns_viewAuthority = [
+    {
+      title: 'Name',
+      dataIndex: 'view_authority_text',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'view_id',
+    }
+  ]
+  const columns_idview = [
+    {
+      title: 'Name',
+      dataIndex: 'identity_text',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'view_authority_text',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'view_id'
     }
   ]
 
@@ -97,9 +124,11 @@ function Adduser(props) {
         </TabPane>
         <TabPane tab="视图接口权限" key="5">
           <h2>视图接口权限</h2>
+          <Table columns={columns_viewAuthority} dataSource={props.userData.viewAuthorityList} />
         </TabPane>
         <TabPane tab="身份和视图权限关系" key="6">
           <h2>身份和视图权限关系</h2>
+          <Table columns={columns_idview} dataSource={props.userData.idviewList} />
         </TabPane>
       </Tabs>
     </div>
@@ -131,6 +160,16 @@ const mapDispatchToProps = dispatch => {
     getIdApiListList() {
       dispatch({
         type: 'userData/getIdApis'
+      })
+    },
+    getViewAuthorityList() {
+      dispatch({
+        type: 'userData/getViewAuthoritys'
+      })
+    },
+    getIdviewList() {
+      dispatch({
+        type: 'userData/getIdviews'
       })
     }
   }

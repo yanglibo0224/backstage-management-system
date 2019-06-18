@@ -1,4 +1,4 @@
-import { getUserData, getUseridentity, getApiauthority, getIdApi } from '../services';
+import { getUserData, getUseridentity, getApiauthority, getIdApi, getViewAuthority, getIdview } from '../services';
 
 export default {
   // 命名空间
@@ -9,7 +9,9 @@ export default {
     userdataList: [],
     userIdentityList: [],
     apiauthorityList: [],
-    idApiList: []
+    idApiList: [],
+    viewAuthorityList: [],
+    idviewList: []
   },
 
   subscriptions: {
@@ -28,6 +30,7 @@ export default {
         action: data.data
       })
     },
+    //身份数据
     *getUseridentitys({ }, { call, put }) {
       let data = yield call(getUseridentity);
       // console.log(data);
@@ -36,6 +39,7 @@ export default {
         action: data.data
       })
     },
+    //api接口权限
     *getApiauthoritys({ }, { call, put }) {
       let data = yield call(getApiauthority);
       console.log(data);
@@ -44,11 +48,27 @@ export default {
         action: data.data
       })
     },
+    //身份和api接口权限
     *getIdApis({ }, { call, put }) {
       let data = yield call(getIdApi);
-      console.log(data);
       yield put({
         type: 'idApi',
+        action: data.data
+      })
+    },
+    //s视图接口权限
+    *getViewAuthoritys({ }, { call, put }) {
+      let data = yield call(getViewAuthority);
+      yield put({
+        type: 'viewAuthority',
+        action: data.data
+      })
+    },
+    //身份和视图权限关系
+    *getIdviews({ }, { call, put }) {
+      let data = yield call(getIdview);
+      yield put({
+        type: 'idview',
         action: data.data
       })
     }
@@ -78,6 +98,18 @@ export default {
       return {
         ...state,
         idApiList: action
+      }
+    },
+    viewAuthority(state, { action }) {
+      return {
+        ...state,
+        viewAuthorityList: action
+      }
+    },
+    idview(state, { action }) {
+      return {
+        ...state,
+        idviewList: action
       }
     }
   }

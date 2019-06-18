@@ -39,3 +39,11 @@ export function getViewAuthority() {
     method: 'GET'
   })
 }
+
+//展示身份和视图权限关系
+export function getIdview() {
+  return request({
+    url: '/user/identity_view_authority_relation',
+    method: 'GET'
+  })
+}
