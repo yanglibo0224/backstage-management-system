@@ -7,7 +7,7 @@ const columns = [
   {
     title: '用户数据',
     dataIndex: 'ID',
-    render: text => <a href="javascript:;">{text}</a>,
+    // render: text => <a href="javascript:;">{text}</a>,
   },
   {
     title: '密码',

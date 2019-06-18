@@ -4,7 +4,7 @@ import { Form, Input, Icon, Checkbox, Button, message } from 'antd';
 import './index.scss';
 
 function IndexPage(props) {
-  console.log(props.isLogin)
+  console.log(props.isLogin);
   //判断是否登陆
   useEffect(() => {
     if (props.isLogin === 1) {
@@ -34,6 +34,7 @@ function IndexPage(props) {
       }
     });
   };
+
   // 表单校验
   const { getFieldDecorator } = props.form;
   return <div style={{ background: "rgb(0,0,128)", height: '100%', overflow: "hidden" }} >
@@ -64,24 +65,21 @@ function IndexPage(props) {
         <Form.Item  >
           {getFieldDecorator('remember', {
             valuePropName: 'checked',
-            initialValue: true,
-          })(<Checkbox style={{width:'120px'}}><span>记住密码</span></Checkbox>)}
+            initialValue: false,
+          })(<Checkbox>记住密码</Checkbox>)}
           <a className="login-form-forgot" href="">
             忘记密码
         </a>
           <Button type="primary" htmlType="submit"  className="login-form-button">
-            登录
+            登陆
           </Button>
         </Form.Item>
       </Form>
     </div>
   </div>
-
 }
 
-
 const mapStateToProps = state => {
-
   return {
     ...state.user
   }
