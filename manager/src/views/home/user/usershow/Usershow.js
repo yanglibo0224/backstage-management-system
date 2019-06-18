@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Tabs, Table } from 'antd';
 import { connect } from 'dva';
 import './index.scss';
@@ -6,80 +6,94 @@ import './index.scss';
 const { TabPane } = Tabs;
 
 function Adduser(props) {
+  useEffect(() => {
+    //用户数据
+    props.getUserDataList();
+    //身份数据
+    props.getUseridentityList();
+    //api接口权限
+    props.getApiauthorityList();
+    //身份和api权限关系
+    props.getIdApiListList();
+  }, [])
+  console.log(props);
+
   function callback(key) {
     console.log(key);
   }
   const columns_user = [
     {
       title: 'Name',
-      dataIndex: 'name',
+      dataIndex: 'user_name',
     },
     {
       title: 'Age',
-      dataIndex: 'age',
+      dataIndex: 'user_id',
     },
     {
       title: 'Address',
-      dataIndex: 'address',
-    },
-  ];
-  const data_user = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
+      dataIndex: 'identity_text',
+    }
   ];
   const columns_identity = [
     {
       title: 'Name',
-      dataIndex: 'name',
+      dataIndex: 'identity_text'
     }
   ]
-  const data_identity = [
+  const columns_apiauthority = [
     {
-      key: '1',
-      name: 'John Brown'
+      title: 'Name',
+      dataIndex: 'api_authority_text',
     },
     {
-      key: '2',
-      name: 'Jim Green'
+      title: 'Age',
+      dataIndex: 'api_authority_url',
     },
     {
-      key: '3',
-      name: 'Joe Black'
+      title: 'Address',
+      dataIndex: 'api_authority_method'
+    }
+  ]
+
+  const columns_idApi=[
+     {
+      title: 'Name',
+      dataIndex: 'identity_text',
     },
-  ];
+    {
+      title: 'Age',
+      dataIndex: 'identity_api_authority_relation_id',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'api_authority_url'
+    },
+    {
+      title: 'email',
+      dataIndex: 'api_authority_method'
+    }
+  ]
+
   return (
     <div className="content">
       <h1 className="title">用户展示</h1>
       <Tabs onChange={callback} type="card" className="main">
         <TabPane tab="用户数据" key="1">
           <h2>用户数据</h2>
-          <Table columns={columns_user} dataSource={data_user} size="middle" />
+          <Table columns={columns_user} dataSource={props.userData.userdataList} />
         </TabPane>
         <TabPane tab="身份数据" key="2">
           <h2>身份数据</h2>
-          <Table columns={columns_identity} dataSource={data_identity} size="middle" />
+          <Table columns={columns_identity} dataSource={props.userData.userIdentityList} />
         </TabPane>
         <TabPane tab="api接口权限" key="3">
           <h2>api接口权限</h2>
+          <Table columns={columns_apiauthority} dataSource={props.userData.apiauthorityList} />
         </TabPane>
         <TabPane tab="身份和api接口权限" key="4">
           <h2>身份和api接口权限</h2>
+          <Table columns={columns_idApi} dataSource={props.userData.idApiList} />
         </TabPane>
         <TabPane tab="视图接口权限" key="5">
           <h2>视图接口权限</h2>
@@ -93,16 +107,30 @@ function Adduser(props) {
 }
 
 const mapStateToProps = state => {
-  console.log('userData' + state)
   return {
     ...state
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getUserData() {
+    getUserDataList() {
       dispatch({
-        type: 'userData/getUserData'
+        type: 'userData/getUserDatas'
+      })
+    },
+    getUseridentityList() {
+      dispatch({
+        type: 'userData/getUseridentitys'
+      })
+    },
+    getApiauthorityList() {
+      dispatch({
+        type: 'userData/getApiauthoritys'
+      })
+    },
+    getIdApiListList() {
+      dispatch({
+        type: 'userData/getIdApis'
       })
     }
   }

@@ -7,3 +7,35 @@ export function getUserData() {
     method: 'GET'
   })
 }
+
+// 展示身份数据
+export function getUseridentity() {
+  return request({
+    url: '/user/identity',
+    method: 'GET'
+  })
+}
+
+//展示api接口权限数据
+export function getApiauthority() {
+  return request({
+    url: '/user/api_authority',
+    method: 'GET'
+  })
+}
+
+//展示身份和api权限关系
+export function getIdApi() {
+  return request({
+    url: '/user/identity_api_authority_relation',
+    method: 'GET'
+  })
+}
+
+//获取视图权限数据
+export function getViewAuthority() {
+  return request({
+    url: '/user/view_authority',
+    method: 'GET'
+  })
+}
