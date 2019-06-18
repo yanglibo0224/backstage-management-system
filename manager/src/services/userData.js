@@ -31,3 +31,11 @@ export function getIdApi() {
     method: 'GET'
   })
 }
+
+//获取视图权限数据
+export function getViewAuthority() {
+  return request({
+    url: '/user/view_authority',
+    method: 'GET'
+  })
+}
