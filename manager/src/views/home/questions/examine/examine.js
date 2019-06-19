@@ -4,10 +4,9 @@ import { Link, Route, Switch } from 'dva/router';
 import styleSee from './index.scss';
 import './style.scss';
 import { connect } from 'dva';
-import examLists from './examList';
 
+import examLists from './examList'
 const { Option } = Select;
-
 function examine(props) {
   useEffect(() => {
     // 获取考试类型
@@ -52,7 +51,7 @@ function examine(props) {
                   })
                 }
               </Radio.Group>
-              )}
+            )}
 
           </div>
           <div className={styleSee.top_search}>
@@ -70,7 +69,7 @@ function examine(props) {
                       )
                     }
                   </Select>
-                  )}
+                )}
               </Form.Item>
             </div>
             <div className={styleSee.Bottom_babel}>
@@ -86,7 +85,7 @@ function examine(props) {
                       })
                     }
                   </Select>
-                  )}
+                )}
               </Form.Item>
             </div>
             <Button type="primary" htmlType="submit" icon="search">查 询</Button>
@@ -123,7 +122,6 @@ function examine(props) {
 
   )
 }
-
 const mapStateToProps = state => {
   return {
     ...state

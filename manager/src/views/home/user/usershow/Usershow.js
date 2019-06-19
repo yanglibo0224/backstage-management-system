@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Tabs, Table } from 'antd';
 import { connect } from 'dva';
+
 import './index.scss';
 
 const { TabPane } = Tabs;
