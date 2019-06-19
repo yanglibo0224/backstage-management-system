@@ -12,6 +12,8 @@ function Addexam(props) {
     props.getExamType();
     //获取所有的课程
     props.getSubjectType();
+    //创建试卷
+    // props.createTest();
   }, [])
   console.log(props);
 
@@ -44,7 +46,7 @@ function Addexam(props) {
             </p>
             <p>
               <li><span>* </span>设置题量:</li>
-              <InputNumber />
+              <InputNumber min={3} max={10} />
             </p>
           </InputGroup>
           <div className={styles.timer}>
@@ -76,6 +78,11 @@ const mapDispatchToProps = dispatch => {
         type: 'exam/subjectTypea'
       })
     },
+    createTest() {
+      dispatch({
+        type: 'management/createTest'
+      })
+    }
   }
 }
 

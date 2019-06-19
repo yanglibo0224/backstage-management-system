@@ -1,8 +1,10 @@
 import request from '../utils/request';
 
-// export function getUserData() {
-//   return request({
-//     url: '/user/user',
-//     method: 'GET'
-//   })
-// }
+//创建试卷
+export function createTestPaper(params) {
+    return request({
+        url: '/exam/exam',
+        method: 'POST',
+        data: params
+    })
+}

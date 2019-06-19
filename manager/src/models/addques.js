@@ -64,7 +64,6 @@ export default {
         action: data.code === 1 ? 1 : -1
       })
     },
-
     // 获取所有试题
     *getQuestions({ payload }, { call, put }) {
       let data = yield call(getQuestions)
@@ -82,7 +81,6 @@ export default {
         action: data.data
       });
     }
-
   },
 
   // 同步操作
