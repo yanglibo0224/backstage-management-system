@@ -41,7 +41,7 @@ export default {
     },
     *subjectTypea({ payload }, { call, put }) {
       let data = yield call(subjectTypea);
-      // console.log('data2...', data)
+      console.log('data2...', data)
       yield put({
         type: "getsubjectType",
         action: data.data
