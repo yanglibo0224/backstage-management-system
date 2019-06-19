@@ -14,6 +14,8 @@ app.model(require('./models/addques').default);
 app.model(require('./models/userData').default);
 app.model(require('./models/adduser').default);
 app.model(require('./models/global').default);
+app.model(require('./models/classRoom').default);
+
 
 // 4. Router
 app.router(require('./router').default);

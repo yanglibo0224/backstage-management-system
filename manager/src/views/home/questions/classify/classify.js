@@ -58,7 +58,7 @@ class classify extends Component {
               添加类型
             </Button>
             <Modal
-              title="创建新类型"
+              title="创建班级"
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
