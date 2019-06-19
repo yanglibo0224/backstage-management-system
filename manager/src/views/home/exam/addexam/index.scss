@@ -9,9 +9,28 @@
     height: 100%;
     background: #fff;
     border-radius: 10px;
-    padding-top:20px;
+    padding-top:10px;
   }
-  p{
+}
+
+.lio,.ps div li,.timer li{
+  margin-bottom: 10px;
+}
+
+.ps,.submit{
+  margin-top: 20px;
+}
+
+.submit{
+  background: linear-gradient(-90deg,#4e75ff,#0139fd)!important;
+  width: 130px;
+  margin-top: 35px;
+}
+
+.input{
+  width: 500px;
+}
+.p{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -21,25 +40,4 @@
     span{
       color:red;
     }
-    .ant-input{
-      width:40%;
-    }
-  }
-}
-
-.lio,.ps p li,.timer li{
-  margin-bottom: 10px;
-}
-
-.ps,.submit{
-  margin-top: 40px;
-}
-
-.ps p{
-  margin-bottom: 40px;
-}
-
-.submit{
-  background: linear-gradient(-90deg,#4e75ff,#0139fd)!important;
-  width: 130px;
 }

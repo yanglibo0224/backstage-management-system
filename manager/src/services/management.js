@@ -8,3 +8,11 @@ export function createTestPaper(params) {
         data: params
     })
 }
+
+//获取试卷详情（教师端）
+export function getExamDetail() {
+    return request({
+        url: '/exam/exam/w5tcy-g2dts',
+        method: 'GET'
+    })
+}

@@ -1,4 +1,4 @@
-import { createTestPaper } from '../services';
+import { createTestPaper, getExamDetail } from '../services';
 
 export default {
     // 命名空间
@@ -6,7 +6,8 @@ export default {
 
     // 模块内部的状态
     state: {
-        createTestList:[]
+        createTestList: 0,
+        examDetailList: []
     },
 
     subscriptions: {
@@ -18,23 +19,23 @@ export default {
     effects: {
         //创建试卷
         *createTest({ payload }, { call, put }) {
-            console.log(payload)
+            console.log(payload);
             let data = yield call(createTestPaper, payload);
             console.log('add...', data);
             yield put({
                 type: 'createTests',
-                action: data.code
+                action: data.code === 1 ? 1 : -1
             })
         },
-        // *add({ payload }, { call, put }) {
-        //     // console.log('payload...',payload)
-        //     let data = yield call(add, payload)
-        //     console.log('add..data...', data)
-        //     yield put({
-        //         type: 'updateAdd',
-        //         action: data.code === 1 ? 1 : -1
-        //     });
-        // },
+        //获取试卷详情（教师端）
+        *getExamDetails({ payload }, { call, put }) {
+            let data = yield call(getExamDetail,payload);
+            console.log('detail...', data);
+            yield put({
+                type: 'examDetail',
+                action: data.data
+            })
+        }
     },
 
     // 同步操作
@@ -44,6 +45,12 @@ export default {
                 ...state,
                 createTestList: action
             };
+        },
+        examDetail(state, { action }) {
+            return {
+                ...state,
+                examDetailList: action
+            }
         }
     }
 };

@@ -18,8 +18,7 @@ function Adduser(props) {
     //获取api接口权限
     props.userauthority()
   }, [])
-  console.log(props)
-
+  // console.log(props)
 
   let handleSubmits = e => {
     e.preventDefault();
@@ -40,7 +39,7 @@ function Adduser(props) {
       if (!err) {
         console.log('Received values of form: ', values);
         let identity_text = { identity_text: values.identity_text }
-        console.log(identity_text)
+        // console.log(identity_text)
         props.Addthea(identity_text)
       }
     });
@@ -103,8 +102,8 @@ function Adduser(props) {
   const { getFieldDecorator } = props.form
   const { flag } = true
   return (
-    <div className="adduser" style={{ padding: '15px' }}>
-      <h1 className="h1">添加用户</h1>
+    <div className="content" style={{ padding: '15px' }}>
+      <h1 className="title">添加用户</h1>
       <div style={{ display: 'flex', flexWrap: "wrap" }} >
         <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={handleSubmits} >
           <Tabs type="card" >
