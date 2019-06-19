@@ -1,9 +1,10 @@
 import React from 'react';
 import { Avatar } from 'antd';
-import { Layout ,Spin } from 'antd';
+import { Layout, Spin } from 'antd';
 import { Menu, Icon } from 'antd';
-import { Link, Switch, Route ,Redirect } from 'dva/router';
+import { Link, Switch, Route, Redirect } from 'dva/router';
 import { connect } from 'dva';
+import { injectIntl } from 'react-intl';
 import Addques from './questions/addques/Addques'
 import Classify from './questions/classify/classify'
 import Examine from './questions/examine/examine'
@@ -16,8 +17,6 @@ import Classroom from './class/classroom/classRoom'
 import Student from './class/student/student'
 import Awaiting from './papers/awaiting/Awaiting'
 import Detail from './questions/addques/detail'
-
-
 import './IndexPage.css';
 
 const { Header, Sider, Content } = Layout;
@@ -42,6 +41,7 @@ class Products extends React.Component {
     });
   };
   render() {
+    console.log(this.props.intl);
     return (
       <Layout style={{ width: '100%', height: '100%', overflow: "hidden" }} >
         <Header className="header" style={{ background: "#fff" }}>
@@ -62,6 +62,7 @@ class Products extends React.Component {
               <Menu.ItemGroup>
                 <Menu.Item key="setting:3">设置</Menu.Item>
                 <Menu.Item key="setting:4">退出登录</Menu.Item>
+                <Menu.Item key="setting:5" onClick={()=>this.props.changeLocal(this.props.locale==='zh'?'en':'zh')}>{this.props.locale === 'zh' ? '中文' : '英文'}</Menu.Item>
               </Menu.ItemGroup>
             </SubMenu>
           </Menu>
@@ -80,19 +81,19 @@ class Products extends React.Component {
                   title={
                     <span  >
                       <Icon type="sliders" />
-                      试题管理
-                  </span>
+                      {this.props.intl.formatMessage({ id: 'router.questions' })}
+                    </span>
 
                   }
                 >
                   <Menu.Item key="1">
-                    <Link to="/products/addques">添加试题</Link>
+                    <Link to="/products/addques">{this.props.intl.formatMessage({ id: 'router.questions.add' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="2">
-                    <Link to="/products/classify">试题分类</Link>
+                    <Link to="/products/classify">{this.props.intl.formatMessage({ id: 'router.questions.type' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
-                    <Link to="/products/examine">查看试题</Link>
+                    <Link to="/products/examine">{this.props.intl.formatMessage({ id: 'router.questions.check' })}</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -100,15 +101,15 @@ class Products extends React.Component {
                   title={
                     <span>
                       <Icon type="user" />
-                      用户管理
-              </span>
+                      {this.props.intl.formatMessage({ id: 'router.user' })}
+                    </span>
                   }
                 >
                   <Menu.Item key="4">
-                    <Link to="/user/adduser">添加用户</Link>
+                    <Link to="/user/adduser">{this.props.intl.formatMessage({ id: 'router.user.add' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="5">
-                    <Link to="/user/usershow">用户展示</Link>
+                    <Link to="/user/usershow">{this.props.intl.formatMessage({ id: 'router.user.display' })}</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -116,15 +117,15 @@ class Products extends React.Component {
                   title={
                     <span>
                       <Icon type="schedule" />
-                      考试管理
-              </span>
+                      {this.props.intl.formatMessage({ id: 'router.user.display' })}
+                    </span>
                   }
                 >
                   <Menu.Item key="6">
-                    <Link to="/exam/addexam">添加考试</Link>
+                    <Link to="/exam/addexam">{this.props.intl.formatMessage({ id: 'router.exam' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="7">
-                    <Link to="/exam/examlist">试卷列表</Link>
+                    <Link to="/exam/examlist">{this.props.intl.formatMessage({ id: 'router.exam.add' })}</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -132,19 +133,19 @@ class Products extends React.Component {
                   title={
                     <span  >
                       <Icon type="project" />
-                      班级管理
-                  </span>
+                      {this.props.intl.formatMessage({ id: 'router.class' })}
+                    </span>
                   }
 
                 >
                   <Menu.Item key="8">
-                    <Link to="/class/classgav">班级管理</Link>
+                    <Link to="/class/classgav">{this.props.intl.formatMessage({ id: 'router.class.management' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="9">
-                    <Link to="/class/classroom">教室管理</Link>
+                    <Link to="/class/classroom">{this.props.intl.formatMessage({ id: 'router.class.classRoom' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="10">
-                    <Link to="/class/student">学生管理</Link>
+                    <Link to="/class/student">{this.props.intl.formatMessage({ id: 'router.class.student' })}</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -152,13 +153,13 @@ class Products extends React.Component {
                   title={
                     <span  >
                       <Icon type="sliders" />
-                      阅卷管理
-                  </span>
+                      {this.props.intl.formatMessage({ id: 'router.mark' })}
+                    </span>
                   }
 
                 >
                   <Menu.Item key="11">
-                    <Link to='/papers/awaiting' >待批班级</Link>
+                    <Link to='/papers/awaiting'>{this.props.intl.formatMessage({ id: 'router.mark.Awaiting' })}</Link>
                   </Menu.Item>
                 </SubMenu>
               </Menu>
@@ -167,7 +168,7 @@ class Products extends React.Component {
 
           <Content>
             <Switch>
-              <Redirect exact from='/' to='/products/addques'></Redirect> 
+              <Redirect exact from='/' to='/products/addques'></Redirect>
               <Route path="/products/addques" component={Addques}></Route>
               <Route path="/products/classify" component={Classify}></Route>
               <Route path="/products/examine" component={Examine}></Route>
@@ -185,9 +186,9 @@ class Products extends React.Component {
 
               <Route path="/papers/awaiting" component={Awaiting}></Route>
             </Switch>
-            { this.props.loading ? <div style={{width:'87%',height:'88%',position:'absolute',left:'200px',top:'80px',background:'rgba(0,0,0,.5)'}}>
+            {this.props.loading ? <div style={{ width: '87%', height: '88%', position: 'absolute', left: '200px', top: '80px', background: 'rgba(0,0,0,.5)' }}>
               <Spin />
-            </div>:null }
+            </div> : null}
           </Content>
         </Layout>
       </Layout>
@@ -195,17 +196,26 @@ class Products extends React.Component {
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   // console.log('state',state);
   return {
-    loading:state.loading.global
+    loading: state.loading.global,
+    locale: state.global.locale
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    changeLocal: payload => {
+      dispatch({
+        type: 'global/changeLocale',
+        payload
+      })
+    }
   }
 }
 
-export default connect(mapStateToProps)(Products);
-
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Products));
 
 //登陆(用户名,密码(一般都是加密后的)) => token(令牌) => redux(传递数据) 
 
 //本地存储(硬盘里) cookie(时效性,)
-
