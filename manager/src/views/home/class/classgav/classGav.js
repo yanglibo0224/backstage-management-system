@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Modal, Select, Form } from 'antd';
+import { Button, Input, Table, Modal, Select, Form,Divider } from 'antd';
 import { connect } from 'dva';
 import typeStyle from './index.scss';
 
@@ -44,6 +44,12 @@ class classGav extends Component {
     let value = e.target.value;
     this.setState({ value3: value })
   }
+  recompose=()=>{
+    this.setState({
+      visible: true,
+    })
+    // console.log(dataIndex)
+  }
   componentDidMount() {
     let { getmanger,subjectType,GetmangerGrade } = this.props
     getmanger()
@@ -66,6 +72,17 @@ class classGav extends Component {
         title: '教室号',
         dataIndex: "grade_name",
       },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <Button  type="primary" onClick={this.recompose}  > 修改</Button>
+            <Divider type="vertical" />
+            <Button  type="primary" onClick={this.recompose} > 删除</Button>
+          </span>
+        ),
+      }
     ];
 
 
@@ -118,7 +135,10 @@ class classGav extends Component {
             console.log(this.props.class.mangerGradList)
           }
           <div className={typeStyle.list}>
-            <Table columns={columns}  dataSource={this.props.class.mangerGradList&&this.props.class.mangerGradList} />
+            <Table columns={columns}  dataSource={this.props.class.mangerGradList&&this.props.class.mangerGradList}
+              
+            />
+            
           </div>
         </div>
       </div>
