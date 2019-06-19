@@ -11,7 +11,7 @@ export default {
     'router.exam.list':'试卷列表',
     'router.class':'班级管理',
     'router.class.management':'班级管理',
-    'router.class.classRoom':'教师管理',
+    'router.class.classRoom':'教室管理',
     'router.class.student':'学生管理',
     'router.mark':'阅卷管理',
     'router.mark.Awaiting':'待批班级'

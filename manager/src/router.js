@@ -19,12 +19,14 @@ const mapStateToProps = state => {
     locale: state.global.locale
   }
 }
-const RouterView = connect(mapStateToProps)(({ locale }) => {
+const RouterView = connect(mapStateToProps)(({ locale, history }) => {
   return <IntlProvider locale={locale} messages={localMap[locale]}>
-    <Switch>
-      <Route path="/login" component={IndexPage} />
-      <Route path="/" component={Products} />
-    </Switch>
+    <Router history={history}>
+      <Switch>
+        <Route path="/login" component={IndexPage} />
+        <Route path="/" component={Products} />
+      </Switch>
+    </Router>
   </IntlProvider>
 })
 
@@ -32,9 +34,7 @@ addLocaleData([...en, ...zh]);
 
 function RouterConfig({ history }) {
   return (
-    <Router history={history}>
-      <RouterView />
-    </Router>
+    <RouterView history={history} />
   );
 }
 

@@ -61,8 +61,8 @@ class Products extends React.Component {
               </Menu.ItemGroup>
               <Menu.ItemGroup>
                 <Menu.Item key="setting:3">设置</Menu.Item>
-                <Menu.Item key="setting:4">退出登录</Menu.Item>
-                <Menu.Item key="setting:5" onClick={()=>this.props.changeLocal(this.props.locale==='zh'?'en':'zh')}>{this.props.locale === 'zh' ? '中文' : '英文'}</Menu.Item>
+                <Menu.Item key="setting:4" onClick={() => this.props.changeLocal(this.props.locale === 'zh' ? 'en' : 'zh')}>{this.props.locale === 'zh' ? '中文' : '英文'}</Menu.Item>
+                <Menu.Item key="setting:5">退出登录</Menu.Item>
               </Menu.ItemGroup>
             </SubMenu>
           </Menu>
@@ -117,15 +117,15 @@ class Products extends React.Component {
                   title={
                     <span>
                       <Icon type="schedule" />
-                      {this.props.intl.formatMessage({ id: 'router.user.display' })}
+                      {this.props.intl.formatMessage({ id: 'router.exam' })}
                     </span>
                   }
                 >
                   <Menu.Item key="6">
-                    <Link to="/exam/addexam">{this.props.intl.formatMessage({ id: 'router.exam' })}</Link>
+                    <Link to="/exam/addexam">{this.props.intl.formatMessage({ id: 'router.exam.add' })}</Link>
                   </Menu.Item>
                   <Menu.Item key="7">
-                    <Link to="/exam/examlist">{this.props.intl.formatMessage({ id: 'router.exam.add' })}</Link>
+                    <Link to="/exam/examlist">{this.props.intl.formatMessage({ id: 'router.exam.list' })}</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
