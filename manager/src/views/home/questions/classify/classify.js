@@ -69,7 +69,8 @@ class classify extends Component {
             </Modal>
           </div>
           <div className={typeStyle.list}>
-            <Table columns={columns} dataSource={this.props.exam.getQuestionsTypeData} />
+          
+            <Table rowKey={item=>item.questions_type_sort}  columns={columns} dataSource={this.props.exam.getQuestionsTypeData} />
           </div>
         </div>
       </div>

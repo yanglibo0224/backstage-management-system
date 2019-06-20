@@ -16,3 +16,29 @@ export function getExamDetail() {
         method: 'GET'
     })
 }
+
+// mangerGradeupdateGet
+export function mangerGradeupdateGet(params) {
+    return request({
+        url: '/manger/grade/update',
+        method: 'PUT',
+        data: params
+    })
+}
+
+//mangerdeleteGet
+export function mangerdeleteGet(params) {
+    return request({
+        url: '/manger/grade/delete',
+        method: 'DELETE',
+        data: params
+    })
+}
+//RoomaddGet
+export function RoomaddGet(params) {
+    return request({
+        url: '/manger/room',
+        method: 'POST',
+        params
+    })
+}
