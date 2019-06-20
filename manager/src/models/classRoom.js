@@ -1,4 +1,4 @@
-import {mangerRoomGet,mangerGradeGet,mangerGradGet} from '../services'
+import {mangerRoomGet,mangerGradeGet,mangerGradGet,mangerGradeupdateGet,mangerdeleteGet,RoomaddGet} from '../services'
 
 export default {
   // 命名空间
@@ -8,7 +8,10 @@ export default {
   state: {
     mangerRoomList:[],
     mangerGradeList:0,
-    mangerGradList:[]
+    mangerGradList:[],
+    mangerGradeupdateList:0,
+    usermangerdeleteList:0,
+    userRoomaddList:0
   },
 
   subscriptions: {
@@ -45,7 +48,34 @@ export default {
         type: 'usermangerGrad',
         action:data.data
       });
-    }
+    },
+    *mangerGradeupdate({ payload }, { call, put }) {
+      // console.log('payload...',payload)
+      let data = yield call(mangerGradeupdateGet,payload)
+      // console.log('add..data...', data)
+      yield put({
+        type: 'usermangerGradeupdate',
+        action:data.code === 1 ? 1 : -1
+      });
+    },
+    *mangerdelete({ payload }, { call, put }) {
+      // console.log('payload...',payload)
+      let data = yield call(mangerdeleteGet,payload)
+      // console.log('add..data...', data)
+      yield put({
+        type: 'usermangerdelete',
+        action:data.code === 1 ? 1 : -1
+      });
+    },
+    *Roomadd({ payload }, { call, put }) {
+      // console.log('payload...',payload)
+      let data = yield call(RoomaddGet,payload)
+      console.log('add..data...', data)
+      yield put({
+        type: 'userRoomadd',
+        action:data.code === 1 ? 1 : -1
+      });
+    },
   },
 
   // 同步操作
@@ -68,6 +98,24 @@ export default {
         ...state,
         mangerGradList: action
       };
-    }
+    },
+    usermangerGradeupdate(state, { action }) {
+      return {
+        ...state,
+        mangerGradeupdateList: action
+      };
+    },
+    usermangerdelete(state, { action }) {
+      return {
+        ...state,
+        usermangerdeleteList: action
+      };
+    },
+    userRoomadd(state, { action }) {
+      return {
+        ...state,
+        userRoomaddList: action
+      };
+    },
   },
 };
