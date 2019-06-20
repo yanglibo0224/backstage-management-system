@@ -43,7 +43,7 @@ function Addexam(props) {
         }
         //创建试卷
         props.createTesta(obj);
-        // props.history.push('/exam/addDetail');
+        props.history.push('/exam/addDetail');
         console.log(props)
       }
     });
@@ -130,7 +130,8 @@ function Addexam(props) {
               </Form.Item>
             </div>
           </div>
-          <Link to="/exam/addDetail"><Button type="primary" htmlType="submit" className={styles.submit}>创建试卷</Button></Link>
+           <Button type="primary" htmlType="submit" className={styles.submit}>创建试卷</Button> 
+           {/* <Link to="/exam/addDetail"><Button type="primary" htmlType="submit" className={styles.submit}>创建试卷</Button></Link>  */}
         </Form>
       </div>
     </div>

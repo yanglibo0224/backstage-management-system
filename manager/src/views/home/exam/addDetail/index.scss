@@ -10,7 +10,18 @@
 }
 .test{
     width: 90%;
-    height: 300px;
     margin-bottom: 10px;
+}
+.del{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: blue;
+}
+.list{
+    width: 100%;
+    margin: 0px;
+    box-sizing: border-box;
     border: 1px solid #ccc;
+    position: relative;
 }

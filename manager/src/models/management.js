@@ -1,4 +1,4 @@
-import { createTestPaper, getExamDetail } from '../services';
+import { createTestPaper, getExamDetail, getTestList, delTest } from '../services';
 
 export default {
     // 命名空间
@@ -6,8 +6,10 @@ export default {
 
     // 模块内部的状态
     state: {
-        createTestList: 0,
-        examDetailList: []
+        createTestList: [],
+        examDetailList: [],
+        testList: [],
+        del:[]
     },
 
     subscriptions: {
@@ -24,16 +26,34 @@ export default {
             console.log('add...', data);
             yield put({
                 type: 'createTests',
-                action: data.code === 1 ? 1 : -1
+                action: data.data
             })
         },
         //获取试卷详情（教师端）
         *getExamDetails({ payload }, { call, put }) {
-            let data = yield call(getExamDetail,payload);
+            let data = yield call(getExamDetail, payload);
             console.log('detail...', data);
             yield put({
                 type: 'examDetail',
                 action: data.data
+            })
+        },
+        //获取试卷列表
+        *getTestLists({ payload }, { call, put }) {
+            let data = yield call(getTestList);
+            console.log('list..', data);
+            yield put({
+                type: 'getTest',
+                action: data.exam
+            })
+        },
+        //删除试卷
+        *delTestList({ payload }, { call, put }) {
+            let data = yield call(delTest);
+            console.log('del', data);
+            yield put({
+                type: 'delTests',
+                action: data
             })
         }
     },
@@ -50,6 +70,18 @@ export default {
             return {
                 ...state,
                 examDetailList: action
+            }
+        },
+        getTest(state, { action }) {
+            return {
+                ...state,
+                testList: action
+            }
+        },
+        delTests(state, { action }) {
+            return {
+                ...state,
+                del:action
             }
         }
     }

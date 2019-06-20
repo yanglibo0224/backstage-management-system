@@ -30,76 +30,92 @@ function Adduser(props) {
     {
       title: 'Name',
       dataIndex: 'user_name',
+      key:'user_name'
     },
     {
       title: 'Age',
       dataIndex: 'user_id',
+      key:'user_id'
     },
     {
       title: 'Address',
       dataIndex: 'identity_text',
+      key:'identity_text'
     }
   ];
   const columns_identity = [
     {
       title: 'Name',
-      dataIndex: 'identity_text'
+      dataIndex: 'identity_text',
+      key:'identity_text'
     }
   ]
   const columns_apiauthority = [
     {
       title: 'Name',
       dataIndex: 'api_authority_text',
+      key:'api_authority_text'
     },
     {
       title: 'Age',
       dataIndex: 'api_authority_url',
+      key:'api_authority_url'
     },
     {
       title: 'Address',
-      dataIndex: 'api_authority_method'
+      dataIndex: 'api_authority_method',
+      key:'api_authority_method'
     }
   ]
   const columns_idApi = [
     {
       title: 'Name',
       dataIndex: 'identity_text',
+      key:'identity_text'
     },
     {
       title: 'Age',
       dataIndex: 'identity_api_authority_relation_id',
+      key:'identity_api_authority_relation_id'
     },
     {
       title: 'Address',
-      dataIndex: 'api_authority_url'
+      dataIndex: 'api_authority_url',
+      key:'api_authority_url'
     },
     {
       title: 'email',
-      dataIndex: 'api_authority_method'
+      dataIndex: 'api_authority_method',
+      key:'api_authority_method'
     }
   ]
   const columns_viewAuthority = [
     {
       title: 'Name',
       dataIndex: 'view_authority_text',
+      key:'view_authority_text'
     },
     {
       title: 'Age',
       dataIndex: 'view_id',
+      key:'view_id'
     }
   ]
   const columns_idview = [
     {
       title: 'Name',
       dataIndex: 'identity_text',
+      key: 'identity_text'
     },
     {
       title: 'Age',
       dataIndex: 'view_authority_text',
+      key: 'view_authority_text'
     },
     {
       title: 'Address',
-      dataIndex: 'view_id'
+      dataIndex: 'view_id',
+      key: 'view_id'
     }
   ]
 

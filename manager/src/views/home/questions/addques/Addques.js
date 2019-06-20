@@ -14,7 +14,7 @@ function Addques(props) {
     props.getQuestionsType();
     // props.getQuestion({question_id:`${props.history.location.state}`});
     if (props.addQuestionsFlag === 1) {
-      // 添加成功
+      // 添加成功 
       message.success('添加成功！')
     } else if (props.addQuestionsFlag === -1) {
       // 添加失败

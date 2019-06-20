@@ -12,6 +12,7 @@ import Adduser from './user/adduser/Adduser'
 import Usershow from './user/usershow/Usershow'
 import Addexam from './exam/addexam/Addexam'
 import Examlist from './exam/examlist/examList'
+import listDetail from './exam/listDetail'
 import AddDetail from './exam/addDetail/index'
 import Classgav from './class/classgav/classGav'
 import Classroom from './class/classroom/classRoom'
@@ -180,6 +181,7 @@ class Products extends React.Component {
               <Route path="/exam/addexam" component={Addexam}></Route>
               <Route path="/exam/examlist" component={Examlist}></Route>
               <Route path="/exam/addDetail" component={AddDetail}></Route>
+              <Route path="/exam/listDetail" component={listDetail}></Route>
 
               <Route path="/class/classgav" component={Classgav}></Route>
               <Route path="/class/classroom" component={Classroom}></Route>

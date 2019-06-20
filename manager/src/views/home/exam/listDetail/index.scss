@@ -1,0 +1,23 @@
+.info{
+    width: 100%;
+    display: flex;
+}
+.left{
+    width: 60%;
+    height: 200px;
+    background: #fff;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+.right{
+    width: 38%;
+    height: 200px;
+    background: #fff;
+    border-radius: 10px;
+}
+.list{
+    width: 95%;
+    margin: 0px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}

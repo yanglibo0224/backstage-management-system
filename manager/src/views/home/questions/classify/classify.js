@@ -39,14 +39,17 @@ class classify extends Component {
       {
         title: '类型ID',
         dataIndex: 'questions_type_id',
+        key:'questions_type_id'
       },
       {
         title: '类型名称',
         dataIndex: 'questions_type_text',
+        key:'questions_type_text'
       },
       {
         title: '操作',
         dataIndex: "",
+        key:''
       },
     ];
     return (

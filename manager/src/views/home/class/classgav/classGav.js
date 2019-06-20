@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Modal, Select, Form,Divider } from 'antd';
+import { Button, Input, Table, Modal, Form, Divider } from 'antd';
 import { connect } from 'dva';
 import typeStyle from './index.scss';
-
-
 
 class classGav extends Component {
   constructor(props) {
@@ -18,7 +16,7 @@ class classGav extends Component {
   handleCancel = e => {
     this.setState({
       visible: false,
-     
+
     })
   };
   typeAdd = () => {
@@ -44,14 +42,14 @@ class classGav extends Component {
     let value = e.target.value;
     this.setState({ value3: value })
   }
-  recompose=()=>{
+  recompose = () => {
     this.setState({
       visible: true,
     })
     // console.log(dataIndex)
   }
   componentDidMount() {
-    let { getmanger,subjectType,GetmangerGrade } = this.props
+    let { getmanger, subjectType, GetmangerGrade } = this.props
     getmanger()
     subjectType()
     GetmangerGrade()
@@ -77,17 +75,17 @@ class classGav extends Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button  type="primary" onClick={this.recompose}  > 修改</Button>
+            <Button type="primary" onClick={this.recompose}  > 修改</Button>
             <Divider type="vertical" />
-            <Button  type="primary" onClick={this.recompose} > 删除</Button>
+            <Button type="primary" onClick={this.recompose} > 删除</Button>
           </span>
         ),
       }
     ];
 
 
-    const {mangerRoomList}= this.props.class
-    const {subjectData} = this.props.exam
+    const { mangerRoomList } = this.props.class
+    const { subjectData } = this.props.exam
     return (
       <div className="content">
         <h2 className='title'>试题分类</h2>
@@ -111,21 +109,21 @@ class classGav extends Component {
               <li>
                 <p>教室号:</p>
                 <select value={this.state.value2} onChange={this.tade}>
-                {
-                  mangerRoomList&&mangerRoomList.map(item=>{
-                   return  <option key={item.room_id} value={item.room_id}>{item.room_text}</option>
-                  })
-                }
+                  {
+                    mangerRoomList && mangerRoomList.map(item => {
+                      return <option key={item.room_id} value={item.room_id}>{item.room_text}</option>
+                    })
+                  }
                 </select>
               </li>
               <li>
                 <p>课程名:</p>
                 <select value={this.state.value3} onChange={this.tade2}>
-                {
-                  subjectData&&subjectData.map(item=>{
-                   return  <option key={item.subject_id} value={item.subject_id}>{item.subject_text}</option>
-                  })
-                }
+                  {
+                    subjectData && subjectData.map(item => {
+                      return <option key={item.subject_id} value={item.subject_id}>{item.subject_text}</option>
+                    })
+                  }
                 </select>
               </li>
 
@@ -135,10 +133,10 @@ class classGav extends Component {
             console.log(this.props.class.mangerGradList)
           }
           <div className={typeStyle.list}>
-            <Table columns={columns}  dataSource={this.props.class.mangerGradList&&this.props.class.mangerGradList}
-              
+            <Table columns={columns} dataSource={this.props.class.mangerGradList && this.props.class.mangerGradList}
+
             />
-            
+
           </div>
         </div>
       </div>
@@ -158,7 +156,7 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'class/mangerRoom'
       })
-    }, 
+    },
     // /manger/room
     // /manger/grade 添加班级
     insertadd(payload) {

@@ -1,53 +1,43 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import styles from './index.scss'
+import { Link } from 'dva/router';
+import styles from './index.scss';
 import { Select, Button, Table } from 'antd';
 
 const { Option } = Select;
 const ButtonGroup = Button.Group;
 
 function Examlist(props) {
+  console.log(props)
+
   useEffect(() => {
     //获取考试类型
     props.getExamType();
     //获取所有的课程
     props.getSubjectType();
+    //获取试卷列表
+    props.getTestList();
   }, [])
-  console.log(props)
 
   const columns = [
-    { title: 'Name', dataIndex: 'name', key: 'name' },
-    { title: 'Age', dataIndex: 'age', key: 'age' },
-    { title: 'Address', dataIndex: 'address', key: 'address' },
+    { title: 'Name', dataIndex: 'title', key: 0 },
+    { title: 'Age', dataIndex: 'grade_name', key: 1 },
+    { title: 'Address', dataIndex: 'user_name', key: 2 },
+    { title: 'Address', 
+      dataIndex: 'start_time',
+      key: 3 ,
+      render: (item) => {return <div><span>{new Date(item*1).toLocaleString()}</span></div> }
+    },
+    { title: 'Address',
+      dataIndex: 'end_time',
+      key: 4, 
+      render: (item) => {return <div><span>{new Date(item*1).toLocaleString()}</span></div> }
+    },
     {
       title: 'Action',
       dataIndex: '',
-      key: 'x',
-      render: () => <a href="javascript:;">Delete</a>,
-    },
-  ];
-
-  const data = [
-    {
-      key: 1,
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-    },
-    {
-      key: 2,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-    },
-    {
-      key: 3,
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
+      key: 5,
+      render: (item) =>  <Link to={{ pathname: `/exam/listDetail`, search: `id=${item.exam_exam_id}` }}>详情</Link>
     },
   ];
 
@@ -94,8 +84,7 @@ function Examlist(props) {
           <div>
             <Table
               columns={columns}
-              expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
-              dataSource={data}
+              dataSource={props.management.testList}
             />
           </div>
         </div>
@@ -121,6 +110,11 @@ const mapDispatchToProps = dispatch => {
         type: 'exam/subjectTypea'
       })
     },
+    getTestList() {
+      dispatch({
+        type: 'management/getTestLists'
+      })
+    }
   }
 }
 

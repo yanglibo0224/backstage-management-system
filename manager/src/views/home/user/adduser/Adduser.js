@@ -100,7 +100,6 @@ function Adduser(props) {
     });
   }
   const { getFieldDecorator } = props.form
-  const { flag } = true
   return (
     <div className="content" style={{ padding: '15px' }}>
       <h1 className="title">添加用户</h1>
