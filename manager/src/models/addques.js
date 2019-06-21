@@ -66,7 +66,8 @@ export default {
     },
     // 获取所有试题
     *getQuestions({ payload }, { call, put }) {
-      let data = yield call(getQuestions)
+      let data = yield call(getQuestions);
+      console.log(data);
       yield put({
         type: 'getQuestionsAll',
         action: data.data

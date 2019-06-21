@@ -25,3 +25,16 @@
     border: 1px solid #ccc;
     position: relative;
 }
+.lis{
+    position: relative;
+    width: 100%;
+}
+.event{
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+.event>span{
+    color: blue;
+    margin-right: 5px;
+}
