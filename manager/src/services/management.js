@@ -28,10 +28,11 @@ export function getTestList() {
 
 
 //删除试卷
-export function delTest(params){
+export function delTest(params) {
     return request({
-        url:`/exam/exam/${params}`,
-        method:'DELETE'
+        url: `/exam/exam/${params}`,
+        method: 'DELETE',
+        // params
     })
 }
 

@@ -1,4 +1,3 @@
-
 import {userAdd ,userGet,userAddthe,userAddapi,relationGet,AddeditGet,setIdentityViewGet,authorityGet,setIdentityApiGet} from '../services'
 
 export default {

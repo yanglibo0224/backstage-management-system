@@ -117,7 +117,6 @@ function examine(props) {
         </div>
       </Form>
       <Switch><Route path='/question/examlist' component={examLists} ></Route></Switch>
-
     </div>
 
   )

@@ -9,7 +9,7 @@ export default {
         createTestList: [],
         examDetailList: [],
         testList: [],
-        del:[]
+        del:0
     },
 
     subscriptions: {
@@ -49,11 +49,11 @@ export default {
         },
         //删除试卷
         *delTestList({ payload }, { call, put }) {
-            let data = yield call(delTest);
+            let data = yield call(delTest,payload);
             console.log('del', data);
             yield put({
                 type: 'delTests',
-                action: data
+                action: data.code === 1 ? 1 : -1
             })
         }
     },
