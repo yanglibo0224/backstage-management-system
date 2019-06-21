@@ -1,4 +1,4 @@
-import {mangerRoomGet,mangerGradeGet,mangerGradGet,mangerGradeupdateGet,mangerdeleteGet,RoomaddGet} from '../services'
+import {mangerRoomGet,mangerGradeGet,StudentNewGet,mangerGradGet,mangerGradeupdateGet,roomDeleteGet,mangerdeleteGet,RoomaddGet} from '../services'
 
 export default {
   // 命名空间
@@ -11,11 +11,14 @@ export default {
     mangerGradList:[],
     mangerGradeupdateList:0,
     usermangerdeleteList:0,
-    userRoomaddList:0
+    userRoomaddList:0,
+    userroomDeleteList:0,
+    userStudentNewList:[]
   },
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
+
     },
   },
 
@@ -76,6 +79,24 @@ export default {
         action:data.code === 1 ? 1 : -1
       });
     },
+    *roomDelete({ payload }, { call, put }) {
+      // console.log('payload...',payload)
+      let data = yield call(roomDeleteGet,payload)
+      console.log('add..data...', data)
+      yield put({
+        type: 'userroomDelete',
+        action:data.code === 1 ? 1 : -1
+      });
+    },
+    *mangerStudentNew({ payload }, { call, put }) {
+      // console.log('payload...',payload)
+      let data = yield call(StudentNewGet)
+      console.log('add..data...', data)
+      yield put({
+        type: 'userStudentNew',
+        action:data.data
+      });
+    },
   },
 
   // 同步操作
@@ -115,6 +136,18 @@ export default {
       return {
         ...state,
         userRoomaddList: action
+      };
+    },
+    userroomDelete(state, { action }) {
+      return {
+        ...state,
+        userroomDeleteList: action
+      };
+    },
+    userStudentNew(state, { action }) {
+      return {
+        ...state,
+        userStudentNewList: action
       };
     },
   },

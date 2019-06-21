@@ -34,7 +34,12 @@ class Classroom extends Component {
     })
     mangeroom()
   };
-
+  delete=(id)=>{
+    let {mangeroom,mangeroomDelete} =this.props
+    mangeroomDelete({room_id:id})
+    mangeroom()
+    // /manger/grade/delete
+  }
 
   componentDidMount() {
     let { mangeroom } = this.props
@@ -55,7 +60,7 @@ class Classroom extends Component {
           <span>
             {/* <Button type="primary" onClick={() => this.recompose({ grade_id: record.grade_id, grade_name: record.grade_name, subject_id: record.subject_id, room_id: record.room_id })} > 修改  </Button> */}
             <Divider type="vertical" />
-            <Button type="primary" onClick={()=>this.delete(record.grade_id)} > 删除</Button>
+            <Button type="primary" onClick={()=>this.delete(record.room_id)} > 删除</Button>
           </span>
         ),
       }
@@ -112,6 +117,13 @@ const mapDispatchToProps = dispatch => {
     mangeRoomadd(payload) {
       dispatch({
         type: 'class/Roomadd',
+        payload
+      })
+    },
+    mangeroomDelete(payload) {
+      console.log(payload)
+      dispatch({
+        type: 'class/roomDelete',
         payload
       })
     },
