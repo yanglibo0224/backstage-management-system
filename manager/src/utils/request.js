@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { getToken } from './user';
 const service = axios.create({
+<<<<<<< HEAD
   baseURL: 'http://169.254.12.77:7001/',
   // baseURL: 'http://192.168.43.187:7001/',
+=======
+  baseURL: 'http://169.254.22.72:7001/',
+  // baseURL: 'http://172.20.10.4:7001/',
+>>>>>>> ylb
   timeout: 5000
 })
 

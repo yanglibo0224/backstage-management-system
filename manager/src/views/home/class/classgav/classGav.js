@@ -12,7 +12,7 @@ class classGav extends Component {
       value2: "",
       value3: "",
       visibles: false,
-      list: []
+      list: [],
     }
   }
 
@@ -62,10 +62,9 @@ class classGav extends Component {
   }
 
   delete=(id)=>{
-    console.log(id)
+  
     let {Getmangerdelete,GetmangerGrade} =this.props
-    let grade_id=id
-    Getmangerdelete(grade_id)
+    Getmangerdelete({grade_id:id})
     GetmangerGrade()
     // /manger/grade/delete
   }
@@ -227,7 +226,8 @@ const mapDispatchToProps = dispatch => {
     mangerGrade(payload) {
       console.log(payload)
       dispatch({
-        type: 'class/mangerGradeupdate', payload
+        type: 'class/mangerGradeupdate',
+        payload
       })
     },
     //获取所有的课程
@@ -243,9 +243,11 @@ const mapDispatchToProps = dispatch => {
       })
     },
     // /manger/grade/delete
-    Getmangerdelete() {
+    Getmangerdelete(payload) {
+      console.log(payload)
       dispatch({
-        type: 'class/mangerdelete'
+        type: 'class/mangerdelete',
+        payload
       })
     },
   }
