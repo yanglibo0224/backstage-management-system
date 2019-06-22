@@ -50,7 +50,7 @@ export function mangerdeleteGet(params) {
     return request({
         url: '/manger/grade/delete',
         method: 'DELETE',
-        data: params
+        data:params
     })
 }
 //RoomaddGet
@@ -58,6 +58,23 @@ export function RoomaddGet(params) {
     return request({
         url: '/manger/room',
         method: 'POST',
-        params
+        data:params
+    })
+}
+
+// roomDeleteGet
+export function roomDeleteGet(params) {
+    return request({
+        url: '/manger/room/delete',
+        method: 'DELETE',
+        data:params
+    })
+}
+
+// StudentNewGet
+export function StudentNewGet(params) {
+    return request({
+        url: '/manger/student/new',
+        method: 'GET',
     })
 }
