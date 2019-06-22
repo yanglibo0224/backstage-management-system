@@ -1,4 +1,4 @@
-import { login, userInfo } from '../services';
+import { login, userInfo, getViewAuthory } from '../services';
 import { setToken, getToken } from '../utils/user';
 import { routerRedux } from 'dva/router';
 
@@ -43,19 +43,28 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       console.log('payload...', payload, login);
+      //1.调用登录接口
       let data = yield call(login, payload);
       console.log('data...', data);
-      //设置登录态到cookie里
+      //2.设置登录态到cookie里
       if (data.code === 1) {
         setToken(data.token)
       }
+      //3.更新redux重登陆状态
       yield put({
         type: 'updateLogin',
         payload: data.code === 1 ? 1 : -1
       })
+      //4.获取用户信息
+      // let getUserInfo = yield call(userInfo);
+      // console.log('userInfo', getUserInfo);
+      //5.根据id获取视图权限
+      // let viewAuthory = yield call(getViewAuthory, userInfo.data.user_id)
+      // console.log(viewAuthory);
     },
     *userInfo({ payload }, { call, put }) {
       let data = yield call(userInfo);
+      console.log(data);
       yield put({
         type: 'getUserInfo',
         action: data.data

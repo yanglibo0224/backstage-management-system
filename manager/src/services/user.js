@@ -9,81 +9,87 @@ export function login(params) {
   })
 }
 //获取用户信息
-export function userInfo(params){
+export function userInfo() {
   return request({
-      url:'/user/userInfo',
-      method:'GET'
+    url: '/user/userInfo',
+    method: 'GET'
+  })
+}
+//获取用户权限
+export function getViewAuthory(user_id) {
+  return request({
+    url: '/user/new?user_id=' + user_id
   })
 }
 //添加用户
-export function userAdd(params){
+export function userAdd(params) {
   return request({
-      url:'/user',
-      method:'POST',
-      data:params
+    url: '/user',
+    method: 'POST',
+    data: params
   })
 }
 
 //获取身份信息
-export function userGet(params){
+export function userGet(params) {
   return request({
-      url:'/user/identity',
-      method:'GET'
+    url: '/user/identity',
+    method: 'GET'
   })
 }
 
 //添加身份
-export function userAddthe(params){
+export function userAddthe(params) {
   return request({
-      url:'/user/identity/edit',
-      method:'GET',
-      params
+    url: '/user/identity/edit',
+    method: 'GET',
+    params
   })
 }
 //添加api
-export function userAddapi(params){
+export function userAddapi(params) {
   return request({
-      url:'/user/authorityApi/edit',
-      method:'GET',
-      params
+    url: '/user/authorityApi/edit',
+    method: 'GET',
+    params
   })
 }
 //relationGet
-export function relationGet(params){
+export function relationGet(params) {
   return request({
-      url:'/user/identity_view_authority_relation',
-      method:'GET'
+    url: '/user/identity_view_authority_relation',
+    method: 'GET'
   })
 }
 
 //添加视图
-export function AddeditGet(params){
+export function AddeditGet(params) {
   return request({
-      url:'/user/authorityView/edit',
-      method:'GET',
-      params
+    url: '/user/authorityView/edit',
+    method: 'GET',
+    params
   })
 }
 //获取api接口权限
-export function authorityGet(params){
+export function authorityGet(params) {
   return request({
-      url:'/user/api_authority',
-      method:'GET'
+    url: '/user/api_authority',
+    method: 'GET'
   })
 }
 
-export function setIdentityApiGet(params){
+export function setIdentityApiGet(params) {
   return request({
-      url:'/user/setIdentityApi',
-      method:'POST',
-      data:params
+    url: '/user/setIdentityApi',
+    method: 'POST',
+    data: params
   })
 }
 // setIdentityViewGet
-export function setIdentityViewGet(params){
+export function setIdentityViewGet(params) {
   return request({
-      url:'/user/setIdentityView',
-      method:'POST',
-      data:params
+    url: '/user/setIdentityView',
+    method: 'POST',
+    data: params
   })
 }
