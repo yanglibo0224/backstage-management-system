@@ -18,6 +18,7 @@ import Classgav from './class/classgav/classGav'
 import Classroom from './class/classroom/classRoom'
 import Student from './class/student/student'
 import Awaiting from './papers/awaiting/Awaiting'
+import Marking from './papers/marking/marking'
 import Detail from './questions/addques/detail'
 import './IndexPage.css';
 
@@ -161,6 +162,7 @@ class Products extends React.Component {
                 >
                   <Menu.Item key="11">
                     <Link to='/papers/awaiting'>{this.props.intl.formatMessage({ id: 'router.mark.Awaiting' })}</Link>
+                    {/* <Link to='/papers/marking'>{this.props.intl.formatMessage({ id: 'router.mark.Marking' })}</Link> */}
                   </Menu.Item>
                 </SubMenu>
               </Menu>
@@ -187,7 +189,9 @@ class Products extends React.Component {
               <Route path="/class/classroom" component={Classroom}></Route>
               <Route path="/class/student" component={Student}></Route>
 
-              <Route path="/papers/awaiting" component={Awaiting}></Route>
+              <Route path="/papers/awaiting" component={Awaiting}></Route>  
+              <Route path="/papers/marking" component={Marking}></Route>
+
             </Switch>
             {this.props.loading ? <div style={{ width: '87%', height: '88%', position: 'absolute', left: '200px', top: '80px', background: 'rgba(0,0,0,.5)' }}>
               <Spin />

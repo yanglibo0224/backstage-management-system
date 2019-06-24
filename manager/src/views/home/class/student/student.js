@@ -5,10 +5,10 @@ import studentStyle from './index.scss'
 
 function Student(props) {
   const { Option } = Select;
-
+  let { StudentNew } = props
   useEffect(() => {
     // props.GetRooms()
-    props.StudentNew()
+    StudentNew()
     console.log(props)
   })
 
@@ -116,7 +116,7 @@ const mapDispatchToprops = (dispatch) => {
       })
     },
     // /manger/student/new
-    StudentNew(){
+    StudentNew() {
       dispatch({
         type: 'class/mangerStudentNew'
       })
