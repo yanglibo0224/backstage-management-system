@@ -1,5 +1,5 @@
-import { mangerRoomGet, mangerGradeGet, getGradeDatas, StudentNewGet, mangerGradGet, mangerGradeupdateGet, roomDeleteGet, mangerdeleteGet, RoomaddGet } from '../services'
-
+import { mangerRoomGet, getClassNameData, getStudent, remoteStuden, mangerGradeGet, getGradeDatas, StudentNewGet, mangerGradGet, mangerGradeupdateGet, roomDeleteGet, mangerdeleteGet, RoomaddGet } from '../services'
+import { message } from 'antd'
 export default {
   // 命名空间
   namespace: 'class',
@@ -14,7 +14,10 @@ export default {
     userRoomaddList: 0,
     userroomDeleteList: 0,
     userStudentNewList: [],
-    getGradeViewData: []
+    getGradeViewData: [],
+    getClassRoomDataS: [],
+    getStudentDatas: [],
+    getStudentDatasAll: []
   },
 
   subscriptions: {
@@ -25,6 +28,17 @@ export default {
 
   // 异步操作
   effects: {
+    *getStudetS({ payload }, { call, put }) {
+      let data = yield call(getStudent)
+      yield put({
+        type: 'getStudestData',
+        action: data.data
+      })
+    },
+    *remoteS({ payload }, { call, put }) {
+      let data = yield call(remoteStuden, payload);
+      data.code === 1 ? message.success(data.msg) : message.error(data.msg)
+    },
     *getGradeData({ payload }, { call, put }) {
       let data = yield call(getGradeDatas)
       yield put({
@@ -105,10 +119,42 @@ export default {
         action: data.data
       });
     },
+    *getClassName({ payload }, { call, put }) {
+      let data = yield call(getClassNameData)
+      yield put({
+        type: 'getClassRoomDatas',
+        action: data.data
+      })
+    },
+
   },
 
   // 同步操作
   reducers: {
+    getStudestData(state, { action }) {
+      return {
+        ...state,
+        getStudentDatas: action,
+        getStudentDatasAll: action
+      }
+    },
+    filterStudentData(state, { action }) {
+      return {
+        ...state,
+        getStudentDatas: state.getStudentDatasAll.filter(item => {
+          return item.student_name.includes(action.studentName) &&
+            item.room_text.includes(action.roomName) &&
+            item.grade_name.includes(action.classNames);
+        })
+      }
+    },
+
+    getClassRoomDatas(state, { action }) {
+      return {
+        ...state,
+        getClassRoomDataS: action
+      }
+    },
     //获取身份信息
     usermangerRoom(state, { action }) {
       return {

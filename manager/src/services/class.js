@@ -23,11 +23,33 @@ export function mangerGradGet() {
     method:'GET'
   })
 }
+export function remoteStuden(params){
+  return request({
+      data:{
+          params:{id:params.student_id}
+      },
+      url:'/manger/student/:id=>student_id',
+      method:'DELETE'
+  })
+}
 
+export function getStudent(){
+  return request({
+      url:'/manger/student',
+      method:'GET'
+  })
+}
 
 export function getGradeDatas(){
   return request({
       url:'/manger/grade',
+      method:'GET'
+  })
+}
+
+export function getClassNameData(){
+  return request({
+      url:'/manger/room',
       method:'GET'
   })
 }
