@@ -21,7 +21,7 @@ function Student(props){
           title: '姓名',
           dataIndex: 'student_name',
           key: 'name',
-          render: text => <a>{text}</a>,
+          render: text => <span>{text}</span>,
         },
         {
           title: '学号',
@@ -97,8 +97,8 @@ function Student(props){
                             )}
                         </Form.Item>
                         <Form.Item style={{display:'flex'}}>
-                            <Button type="primary" onClick={()=>{search('submit')}}>添加提交</Button>
-                            <Button type="primary" style={{margin:'0 20px'}} onClick={()=>{search('sub')}}>取消</Button>
+                            <Button type="primary" onClick={()=>{search('submit')}}>搜索</Button>
+                            <Button type="primary" style={{margin:'0 20px'}} onClick={()=>{search('sub')}}>重置</Button>
                         </Form.Item>
                     </Form>
                 </div>
