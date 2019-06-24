@@ -5,20 +5,8 @@ import { Menu, Icon } from 'antd';
 import { Link, Switch, Route, Redirect } from 'dva/router';
 import { connect } from 'dva';
 import { injectIntl } from 'react-intl';
-import Addques from './questions/addques/Addques'
-import Classify from './questions/classify/classify'
-import Examine from './questions/examine/examine'
-import Adduser from './user/adduser/Adduser'
-import Usershow from './user/usershow/Usershow'
-import Addexam from './exam/addexam/Addexam'
-import Examlist from './exam/examlist/examList'
 import listDetail from './exam/listDetail'
 import AddDetail from './exam/addDetail/index'
-import Classgav from './class/classgav/classGav'
-import Classroom from './class/classroom/classRoom'
-import Student from './class/student/student'
-import Awaiting from './papers/awaiting/Awaiting'
-import Marking from './papers/marking/marking'
 import Detail from './questions/addques/detail'
 import './IndexPage.css';
 
@@ -43,7 +31,13 @@ class Products extends React.Component {
       collapsed: !this.state.collapsed,
     });
   };
+
+
   render() {
+    console.log(this.props);
+    if (!this.props.myView.length) {
+      return null;
+    }
     return (
       <Layout style={{ width: '100%', height: '100%', overflow: "hidden" }} >
         <Header className="header" style={{ background: "#fff" }}>
@@ -73,98 +67,31 @@ class Products extends React.Component {
           <Sider width={200} style={{ background: '#232A41', color: 'rgba(255, 255, 255, 0.65)', overflowY: "auto", overflowX: "hidden" }} >
             <div style={{ width: 256 }}>
               <Menu
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={['0']}
+                defaultOpenKeys={['router.questions']}
                 mode="inline"
                 theme="dark"
               >
-                <SubMenu
-                  key="sub1"
-                  title={
-                    <span  >
-                      <Icon type="sliders" />
-                      {this.props.intl.formatMessage({ id: 'router.questions' })}
-                    </span>
-
-                  }
-                >
-                  <Menu.Item key="1">
-                    <Link to="/products/addques">{this.props.intl.formatMessage({ id: 'router.questions.add' })}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="2">
-                    <Link to="/products/classify">{this.props.intl.formatMessage({ id: 'router.questions.type' })}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="3">
-                    <Link to="/products/examine">{this.props.intl.formatMessage({ id: 'router.questions.check' })}</Link>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  title={
-                    <span>
-                      <Icon type="user" />
-                      {this.props.intl.formatMessage({ id: 'router.user' })}
-                    </span>
-                  }
-                >
-                  <Menu.Item key="4">
-                    <Link to="/user/adduser">{this.props.intl.formatMessage({ id: 'router.user.add' })}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="5">
-                    <Link to="/user/usershow">{this.props.intl.formatMessage({ id: 'router.user.display' })}</Link>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  title={
-                    <span>
-                      <Icon type="schedule" />
-                      {this.props.intl.formatMessage({ id: 'router.exam' })}
-                    </span>
-                  }
-                >
-                  <Menu.Item key="6">
-                    <Link to="/exam/addexam">{this.props.intl.formatMessage({ id: 'router.exam.add' })}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="7">
-                    <Link to="/exam/examlist">{this.props.intl.formatMessage({ id: 'router.exam.list' })}</Link>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub4"
-                  title={
-                    <span  >
-                      <Icon type="project" />
-                      {this.props.intl.formatMessage({ id: 'router.class' })}
-                    </span>
-                  }
-
-                >
-                  <Menu.Item key="8">
-                    <Link to="/class/classgav">{this.props.intl.formatMessage({ id: 'router.class.management' })}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="9">
-                    <Link to="/class/classroom">{this.props.intl.formatMessage({ id: 'router.class.classRoom' })}</Link>
-                  </Menu.Item>
-                  <Menu.Item key="10">
-                    <Link to="/class/student">{this.props.intl.formatMessage({ id: 'router.class.student' })}</Link>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub5"
-                  title={
-                    <span  >
-                      <Icon type="sliders" />
-                      {this.props.intl.formatMessage({ id: 'router.mark' })}
-                    </span>
-                  }
-
-                >
-                  <Menu.Item key="11">
-                    <Link to='/papers/awaiting'>{this.props.intl.formatMessage({ id: 'router.mark.Awaiting' })}</Link>
-                    {/* <Link to='/papers/marking'>{this.props.intl.formatMessage({ id: 'router.mark.Marking' })}</Link> */}
-                  </Menu.Item>
-                </SubMenu>
+                {
+                  this.props.myView.map((item, index) => {
+                    return <SubMenu
+                      key={item.name}
+                      title={
+                        <span>
+                          <Icon type={item.icon} />
+                          {this.props.intl.formatMessage({ id: item.name })}
+                        </span>
+                      }
+                    >{
+                        item.children.map((value, key) => {
+                          return <Menu.Item key={key}>
+                            <Link to={value.path}>{this.props.intl.formatMessage({ id: value.name })}</Link>
+                          </Menu.Item>
+                        })
+                      }
+                    </SubMenu>
+                  })
+                }
               </Menu>
             </div>
           </Sider>
@@ -172,26 +99,22 @@ class Products extends React.Component {
           <Content>
             <Switch>
               <Redirect exact from='/' to='/products/addques'></Redirect>
-              <Route path="/products/addques" component={Addques}></Route>
-              <Route path="/products/classify" component={Classify}></Route>
-              <Route path="/products/examine" component={Examine}></Route>
               <Route path="/products/detail" component={Detail}></Route>
-
-              <Route path="/user/adduser" component={Adduser}></Route>
-              <Route path="/user/usershow" component={Usershow}></Route>
-
-              <Route path="/exam/addexam" component={Addexam}></Route>
-              <Route path="/exam/examlist" component={Examlist}></Route>
-              <Route path="/exam/addDetail" component={AddDetail}></Route>
               <Route path="/exam/listDetail" component={listDetail}></Route>
-
-              <Route path="/class/classgav" component={Classgav}></Route>
-              <Route path="/class/classroom" component={Classroom}></Route>
-              <Route path="/class/student" component={Student}></Route>
-
-              <Route path="/papers/awaiting" component={Awaiting}></Route>  
-              <Route path="/papers/marking" component={Marking}></Route>
-
+              
+              {/* 渲染该用户拥有的路由 */}
+              {this.props.myView.map(item => {
+                if (item.children) {
+                  return item.children.map((value,index) => {
+                    return <Route key={index} path={value.path} component={value.component} />
+                  })
+                }
+              })}
+              {/* 403路由 */}
+              {this.props.forbiddenView.map((item,index) => {
+                return <Redirect key={index} form={item} to="/403" />
+              })}
+              <Redirect to="/404" />
             </Switch>
             {this.props.loading ? <div style={{ width: '87%', height: '88%', position: 'absolute', left: '200px', top: '80px', background: 'rgba(0,0,0,.5)' }}>
               <Spin />
@@ -207,7 +130,9 @@ const mapStateToProps = state => {
   // console.log('state',state);
   return {
     loading: state.loading.global,
-    locale: state.global.locale
+    locale: state.global.locale,
+    myView: state.user.myView,
+    forbiddenView: state.user.forbiddenView
   }
 }
 const mapDispatchToProps = dispatch => {
