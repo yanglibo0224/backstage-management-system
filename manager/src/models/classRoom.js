@@ -1,4 +1,4 @@
-import {mangerRoomGet,mangerGradeGet,StudentNewGet,mangerGradGet,mangerGradeupdateGet,roomDeleteGet,mangerdeleteGet,RoomaddGet} from '../services'
+import { mangerRoomGet, mangerGradeGet, getGradeDatas, StudentNewGet, mangerGradGet, mangerGradeupdateGet, roomDeleteGet, mangerdeleteGet, RoomaddGet } from '../services'
 
 export default {
   // 命名空间
@@ -6,14 +6,15 @@ export default {
 
   // 模块内部的状态
   state: {
-    mangerRoomList:[],
-    mangerGradeList:0,
-    mangerGradList:[],
-    mangerGradeupdateList:0,
-    usermangerdeleteList:0,
-    userRoomaddList:0,
-    userroomDeleteList:0,
-    userStudentNewList:[]
+    mangerRoomList: [],
+    mangerGradeList: 0,
+    mangerGradList: [],
+    mangerGradeupdateList: 0,
+    usermangerdeleteList: 0,
+    userRoomaddList: 0,
+    userroomDeleteList: 0,
+    userStudentNewList: [],
+    getGradeViewData: []
   },
 
   subscriptions: {
@@ -24,6 +25,13 @@ export default {
 
   // 异步操作
   effects: {
+    *getGradeData({ payload }, { call, put }) {
+      let data = yield call(getGradeDatas)
+      yield put({
+        type: 'getGradeClass',
+        action: data.data
+      })
+    },
     //获取身份信息
     *mangerRoom({ payload }, { call, put }) {
       // console.log('payload...',payload)
@@ -37,55 +45,55 @@ export default {
     // mangerGrade 添加班级
     *mangerGrade({ payload }, { call, put }) {
       // console.log('payload...',payload)
-      let data = yield call(mangerGradeGet,payload)
+      let data = yield call(mangerGradeGet, payload)
       // console.log('add..data...', data)
       yield put({
         type: 'usermangerGrade',
-        action:data.code === 1 ? 1 : -1
+        action: data.code === 1 ? 1 : -1
       });
     },
-    *mangerGrad({  }, { call, put }) {
+    *mangerGrad({ }, { call, put }) {
       let data = yield call(mangerGradGet);
       console.log('add..data...', data)
       yield put({
         type: 'usermangerGrad',
-        action:data.data
+        action: data.data
       });
     },
     *mangerGradeupdate({ payload }, { call, put }) {
       // console.log('payload...',payload)
-      let data = yield call(mangerGradeupdateGet,payload)
+      let data = yield call(mangerGradeupdateGet, payload)
       // console.log('add..data...', data)
       yield put({
         type: 'usermangerGradeupdate',
-        action:data.code === 1 ? 1 : -1
+        action: data.code === 1 ? 1 : -1
       });
     },
     *mangerdelete({ payload }, { call, put }) {
       // console.log('payload...',payload)
-      let data = yield call(mangerdeleteGet,payload)
+      let data = yield call(mangerdeleteGet, payload)
       // console.log('add..data...', data)
       yield put({
         type: 'usermangerdelete',
-        action:data.code === 1 ? 1 : -1
+        action: data.code === 1 ? 1 : -1
       });
     },
     *Roomadd({ payload }, { call, put }) {
       // console.log('payload...',payload)
-      let data = yield call(RoomaddGet,payload)
+      let data = yield call(RoomaddGet, payload)
       console.log('add..data...', data)
       yield put({
         type: 'userRoomadd',
-        action:data.code === 1 ? 1 : -1
+        action: data.code === 1 ? 1 : -1
       });
     },
     *roomDelete({ payload }, { call, put }) {
       // console.log('payload...',payload)
-      let data = yield call(roomDeleteGet,payload)
+      let data = yield call(roomDeleteGet, payload)
       console.log('add..data...', data)
       yield put({
         type: 'userroomDelete',
-        action:data.code === 1 ? 1 : -1
+        action: data.code === 1 ? 1 : -1
       });
     },
     *mangerStudentNew({ payload }, { call, put }) {
@@ -94,7 +102,7 @@ export default {
       console.log('add..data...', data)
       yield put({
         type: 'userStudentNew',
-        action:data.data
+        action: data.data
       });
     },
   },
@@ -113,6 +121,12 @@ export default {
         ...state,
         mangerGradeList: action
       };
+    },
+    getGradeClass(state, { action }) {
+      return {
+        ...state,
+        getGradeViewData: action
+      }
     },
     usermangerGrad(state, { action }) {
       return {

@@ -23,3 +23,11 @@ export function mangerGradGet() {
     method:'GET'
   })
 }
+
+
+export function getGradeDatas(){
+  return request({
+      url:'/manger/grade',
+      method:'GET'
+  })
+}
