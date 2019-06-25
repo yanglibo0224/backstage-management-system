@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Modal, Select, Form, Divider } from 'antd';
+import { Button, Input, Table, Modal, Form, Divider } from 'antd';
 import { connect } from 'dva';
 import typeStyle from './index.scss';
 
@@ -12,7 +12,7 @@ class classGav extends Component {
       value2: "",
       value3: "",
       visibles: false,
-      list: [],
+      list: []
     }
   }
 

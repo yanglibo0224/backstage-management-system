@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import { Link } from 'dva/router';
 import { Form, Input, Select, InputNumber, DatePicker, Button } from 'antd';
 import styles from './index.scss';
 

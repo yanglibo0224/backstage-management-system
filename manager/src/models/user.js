@@ -1,5 +1,5 @@
 import { login, userInfo, getViewAuthory } from '../services';
-import { setToken, getToken } from '../utils/user';
+import { setToken, getToken, removeToken} from '../utils/user';
 import { routerRedux } from 'dva/router';
 import allView from './router/config.js'; //引入路由表
 
@@ -80,7 +80,7 @@ export default {
       console.log('userInfo', getUserInfo);
       yield put({
         type: 'getUserInfo',
-        payload: userInfo.data
+        payload: getUserInfo.data
       })
       //3.根据id获取视图权限
       let viewAuthory = yield call(getViewAuthory, getUserInfo.data.user_id)
@@ -115,6 +115,13 @@ export default {
         })
       })
       return { ...state, viewAuthoryList: payload, myView, forbiddenView }
+    },
+    //退出登陆
+    logout(state){
+      //1.清除登陆态
+      removeToken();
+      //2.清除权限
+      return {...state,userInfo:{},myView:[],forbiddenView:[],viewAuthoryList:[]}
     }
   }
 };

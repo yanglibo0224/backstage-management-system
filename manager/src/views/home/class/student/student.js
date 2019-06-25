@@ -66,9 +66,9 @@ function Student(props){
     }
     let data = getStudentDatas;
     return (
-        <div>
-            <p className={studentStyle.title}>学生管理</p>
-            <div className={studentStyle.bottom}>
+        <div className="content">
+            <p className="title">学生管理</p>
+            <div className="main">
                 <div>
                     <Form className={studentStyle.form} >
                         <Form.Item>

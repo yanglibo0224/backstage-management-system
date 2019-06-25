@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
+import { Input, Select, Button, Form, message, Modal } from 'antd';
 import Editor from 'for-editor';
 import styles from './index.scss';
-import { Input, Select, Button, Form, message, Modal } from 'antd';
 
 const { Option } = Select;
 
@@ -21,6 +21,7 @@ function Addques(props) {
       message.error('添加失败！')
     }
   }, [props.addQuestionsFlag])
+  console.log(props);
 
   // 表单提交
   let handleSubmit = e => {
@@ -31,7 +32,7 @@ function Addques(props) {
         let params = values;
         params.user_id = props.user.userInfoData.user_id;
         console.log(params);
-        props.add(params)
+        props.add(params);
       }
     });
   }
@@ -58,10 +59,10 @@ function Addques(props) {
             {getFieldDecorator('title', {
               rules: [{ required: true, message: '请输入题目标题!' }],
             })(
-              <Input placeholder="请输入题目标题,不超过20个" style={{ width: '400px', height: '44px' }} />
+              <Input placeholder="请输入题目标题，不超过20个字" style={{ width: '400px', height: '44px' }} />
               )}
           </Form.Item>
-          <p>题目管理</p>
+          <p>题目主题</p>
           <Form.Item>
             {getFieldDecorator('questions_stem', {
               initialValue: ''

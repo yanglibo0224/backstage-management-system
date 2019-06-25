@@ -39,19 +39,23 @@ class classify extends Component {
       {
         title: '类型ID',
         dataIndex: 'questions_type_id',
-        key:'questions_type_id'
+        key:1
       },
       {
         title: '类型名称',
         dataIndex: 'questions_type_text',
-        key:'questions_type_text'
+        key:2
       },
       {
         title: '操作',
         dataIndex: "",
-        key:''
+        key:3
       },
     ];
+    let data=[];
+        this.props.exam.getQuestionsTypeData&&this.props.exam.getQuestionsTypeData.map((item,index)=>{
+            return data.push({...item,key:"'"+index+"'"})
+        })
     return (
       <div className="content">
         <h2 className='title'>试题分类</h2>
@@ -72,8 +76,9 @@ class classify extends Component {
             </Modal>
           </div>
           <div className={typeStyle.list}>
-          
-            <Table rowKey={item=>item.questions_type_sort}  columns={columns} dataSource={this.props.exam.getQuestionsTypeData} />
+            <Table rowKey={item=>item.questions_type_sort}  
+              columns={columns} 
+              dataSource={data} />
           </div>
         </div>
       </div>

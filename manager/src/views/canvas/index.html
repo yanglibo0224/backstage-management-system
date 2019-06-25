@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        canvas{
+            width: 280px;
+            height: 144px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <input type="file" />
+    <img src="" alt="">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+       var cnavas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d');
+        
+        // 1.设置画布的宽高
+        canvas.width = 280;
+        canvas.height = 144;
+        // 2.绘制背景图
+        var img = new Image();
+        axios({
+            method: 'post',
+            url: 'http://123.206.55.50:11000/tobase64',
+            data: {url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561460304755&di=3c930db23d0bcfb5303ee53272da60ba&imgtype=0&src=http%3A%2F%2Fwww.soppt.com%2Fsoftimg%2F2014%2F02%2F201442595130979.jpg'}
+        }).then(body=>{
+            console.log('body...', body);
+            img.src = body.data.data.base64;
+        }).catch(e=>{
+            console.log('e..', e);
+        })
+        
+        img.onload = function(){
+            ctx.drawImage(img, 0, 0, 674, 502, 0, 0, 280, 144);
+        }
+        // 3.监听图片上传
+        var ele = document.querySelector('input');
+        ele.onchange = function(e){
+          
+            let files = e.target.files;
+            // 创建一个fileReader       
+            for (let i=0,len=files.length; i<len;i++){
+                var reader = new FileReader();
+                reader.onload = function(){
+                    // console.log('result...', this.result);
+                    // 4.绘制上传的图片
+                    var avatar = new Image();
+                    avatar.src = this.result;
+                    avatar.onload = function(){
+                        ctx.drawImage(avatar, 0, 0, 300, 300, 100, 40, 100, 100);
+                        // 5.合成一张图片
+                        var result = canvas.toDataURL('jpg', 0.8);
+                        console.log('result...', result);
+                         
+                    }
+                }
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    </script>
+</body>
+</html>

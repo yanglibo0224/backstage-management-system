@@ -76,7 +76,7 @@ export default {
     // 按条件获取试题
     *getQuestion({ payload }, { call, put }) {
       let data = yield call(getQuestion, payload)
-      // console.log("获取试题.....", data)
+      console.log("获取试题.....", data)
       yield put({
         type: 'getQuestionSearch',
         action: data.data
