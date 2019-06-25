@@ -1,7 +1,7 @@
 
 import React,{useEffect} from 'react'
 import MarkingStyle from './index.scss'
-import { Table } from 'antd'
+import { Table,Divider, Tag } from 'antd'
 import { connect } from 'dva'
 import { Link } from 'dva/router'
 function Awaiting (props){
@@ -9,7 +9,7 @@ function Awaiting (props){
     useEffect(()=>{
       getClass()
     },[])
-    const columns = [
+    let columns = [
         {
           title: '班级名',
           dataIndex: 'grade_name',
