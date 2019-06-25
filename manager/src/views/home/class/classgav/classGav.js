@@ -124,7 +124,7 @@ class classGav extends Component {
             >
               <li>
                 <p>班级名:</p>
-                <Input placeholder="班级名" value={this.state.value1}
+                  <Input placeholder="班级名" value={this.state.value1}
                   onChange={(e) => { this.setState({ value1: e.target.value }) }}
                 />
               </li>
