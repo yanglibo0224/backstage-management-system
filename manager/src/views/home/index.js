@@ -6,6 +6,7 @@ import { Link, Switch, Route, Redirect } from 'dva/router';
 import { connect } from 'dva';
 import { injectIntl } from 'react-intl';
 import listDetail from './exam/listDetail'
+import examList from './questions/examine/examList'
 import AddDetail from './exam/addDetail/index'
 import Detail from './questions/addques/detail'
 import axios from 'axios';
@@ -190,7 +191,9 @@ class Products extends React.Component {
 
             <Switch>
               <Redirect exact from='/' to='/products/addques'></Redirect>
+              <Route path="/products/examList" component={examList}></Route>
               <Route path="/products/detail" component={Detail}></Route>
+              <Route path="/exam/addDetail" component={AddDetail}></Route>
               <Route path="/exam/listDetail" component={listDetail}></Route>
 
               {/* 渲染该用户拥有的路由 */}

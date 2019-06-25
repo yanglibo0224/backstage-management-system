@@ -42,9 +42,9 @@ function Awaiting (props){
       ];
       let data=getGradeViewData
     return (
-        <div>
-            <p className={MarkingStyle.title}>待批班级</p>
-            <div className={MarkingStyle.bottom}>
+        <div className="content">
+            <p className="title">待批班级</p>
+            <div className="main">
                 <Table columns={columns} dataSource={data} rowKey={data=>data.grade_id}/>
             </div>
         </div>

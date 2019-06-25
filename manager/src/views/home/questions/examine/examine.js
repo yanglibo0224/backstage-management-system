@@ -35,7 +35,7 @@ function examine(props) {
   return (
     <div className='content' style={{ width: '100%' }}>
         <h2 className='title'>查看试题</h2>
-      <Form onSubmit={handleSearch} className={styleSee.login_form} style={{ maxWidth: '1200px' }} >
+      <Form onSubmit={handleSearch} className={styleSee.login_form} >
         <div className={styleSee.bottom}>
           <div className={styleSee.Bottom_top}>
             <div className={styleSee.Bottom_tit}>课程类型:</div>
@@ -98,8 +98,7 @@ function examine(props) {
             style={{ padding: 20 }}
             dataSource={props.exam.getQuestionsData && props.exam.getQuestionsData}
             renderItem={item => (
-
-              <List.Item actions={[<Link to={{ pathname: `/products/addques`, state: item.questions_id }}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
+              <List.Item actions={[<Link to={{pathname:`/products/examList`,search:`questions_id=${item.questions_id}`}}>编辑</Link>]} style={{ display: 'flex', justifyContent: 'space-between' }} className="table-list">
                 <Link to={{ pathname: `/products/detail`, state: item.questions_id }} className="table-href">
                   <div>
                     <p>{item.title}</p>
