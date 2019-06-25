@@ -3,14 +3,14 @@ import { Table } from 'antd'
 import { connect } from 'dva'
 import { Link } from 'dva/router'
 function Marking(props){
-    // let { getData }= props
-    // useEffect(()=>{
-    //     getData()
-    // },[])
-    // let { getStudentDatas } = props
-    // let classData=getStudentDatas.filter((item)=>{
-    //     return props.match.params.grade_id===item.grade_id;
-    //  })
+    let { getData }= props
+    useEffect(()=>{
+        getData()
+    },[])
+    let { getStudentDatas } = props
+    let classData=getStudentDatas.filter((item)=>{
+        return props.match.params.grade_id===item.grade_id;
+     })
     const columns = [
       {
         title: '班级',
@@ -36,7 +36,7 @@ function Marking(props){
     return (
       <div style={{padding:'20px',background:'#fff'}}>
         <p>试卷列表</p>
-        {/* <Table columns={columns} dataSource={classData} rowKey={data=>data.student_id}/> */}
+        <Table columns={columns} dataSource={classData} rowKey={data=>data.student_id}/>
       </div>
     )
 }
@@ -47,9 +47,9 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps=(dispatch)=>{
     return {
-      // getData(){
-      //     dispatch({type:'class/getStudetS'})
-      // }
+      getData(){
+          dispatch({type:'class/getStudetS'})
+      }
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Marking)
