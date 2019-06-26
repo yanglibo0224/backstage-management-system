@@ -1,6 +1,5 @@
 import React from 'react';
-import { Avatar } from 'antd';
-import { Layout, Spin, Modal, Input } from 'antd';
+import { Layout, Spin, Modal } from 'antd';
 import { Menu, Icon } from 'antd';
 import { Link, Switch, Route, Redirect } from 'dva/router';
 import { connect } from 'dva';
@@ -11,9 +10,11 @@ import AddDetail from './exam/addDetail/index'
 import Detail from './questions/addques/detail'
 import axios from 'axios';
 import './IndexPage.css';
+import { removeToken } from '../../utils/user';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
+const { confirm } = Modal;
 
 class Products extends React.Component {
   state = {
@@ -38,7 +39,6 @@ class Products extends React.Component {
       current: e.key,
     });
   };
-
   toggleCollapsed = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -48,8 +48,7 @@ class Products extends React.Component {
     this.setState({
       visible: true
     })
-  }
-  
+  } 
   handChange = (event) => {
     var eleImgUploadX = document.getElementById('imgUploadX');
     var imgs = document.querySelector('.imgs');
@@ -84,44 +83,26 @@ class Products extends React.Component {
           imgs.src=result
           console.log(result)
         }
+      }
+      reader.readAsDataURL(files[i]);
     }
-    reader.readAsDataURL(files[i]);
   }
-}
-  //     reader.onload = function(){
-  //       console.log('result...', this.result);
-  //       // 使用canvas合成图片，并base64化
-  //       var base64 = this.result;
-  //     imgTogether(base64, function (url) {
-  //         // 尺寸
-  //         var size = 180 / (window.devicePixelRatio || 1);
-  //         // 预览
-  //         eleImgUploadX.innerHTML = '<img src="' + url + '" width="' + size + '" height="' + size + '">';
-  //       });
-  //     }
-  //     reader.readAsDataURL(file);
-      
-  //   reader.readAsDataURL(file);
-  //   var imgTogether = function (url, callback) {
-      
-      
-  //     // 这是上传图像
-  //     var imgUpload = new Image();
-  //     imgUpload.src=url;
-  //     imgUpload.onload = function () {
-  //       // 绘制
-  //       context.drawImage(eleImgCover, 0, 0, size, size, 0, 0, size, size);
-  //       // 再次绘制
-  //       context.drawImage(imgUpload, 0, 0, size, size, 0, 0, size, size);
-  //       // 回调
-  //       callback(canvas.toDataURL('jpeg'));
-  //     };
-      
-  //   };
-  // }
+  exitLogin=()=>{
+    let that=this;
+     confirm({
+      title: '您确定要退出吗？',
+      onOk() {
+        removeToken();
+        that.props.history.push('/');
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     if (!this.props.myView.length) {
       return null
     }
@@ -133,14 +114,12 @@ class Products extends React.Component {
             <SubMenu style={{ float: "right" }}
               title={
                 <span className="submenu-title-wrapper">
-                  <img style={{ marginRight: "15px",width:"40px",height:"40px",borderRadius:"50%" }} className='imgs'  />
+                  <img style={{ marginRight: "15px",width:"40px",height:"40px",borderRadius:"50%" }} className='imgs' alt="" />
                   chenmanjie
-
                 </span>
 
               }
             >
-              {/*  */}
               <Menu.ItemGroup style={{ borderBottom: "1px solid #ccc" }}  >
                 <Menu.Item key="setting:1">个人中心</Menu.Item>
                 <Menu.Item key="setting:2">我的班级</Menu.Item>
@@ -149,7 +128,7 @@ class Products extends React.Component {
               <Menu.ItemGroup>
                 <Menu.Item key="setting:3">设置</Menu.Item>
                 <Menu.Item key="setting:4" onClick={() => this.props.changeLocal(this.props.locale === 'zh' ? 'en' : 'zh')}>{this.props.locale === 'zh' ? '中文' : '英文'}</Menu.Item>
-                <Menu.Item key="setting:5">退出登录</Menu.Item>
+                <Menu.Item key="setting:5" onClick={()=>this.exitLogin()}>退出登录</Menu.Item>
               </Menu.ItemGroup>
             </SubMenu>
           </Menu>
@@ -188,7 +167,6 @@ class Products extends React.Component {
           </Sider>
 
           <Content>
-
             <Switch>
               <Redirect exact from='/' to='/products/addques'></Redirect>
               <Route path="/products/examList" component={examList}></Route>

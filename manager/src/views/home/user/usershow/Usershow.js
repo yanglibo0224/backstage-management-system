@@ -122,7 +122,7 @@ function Adduser(props) {
   return (
     <div className="content">
       <h1 className="title">用户展示</h1>
-      <Tabs onChange={callback} type="card" className="main">
+      <Tabs onChange={callback} type="card">
         <TabPane tab="用户数据" key="1">
           <h2>用户数据</h2>
           <Table columns={columns_user} dataSource={props.userData.userdataList} />

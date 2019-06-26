@@ -1,9 +1,8 @@
+import React,{useEffect} from 'react';
+import { Table } from 'antd';
+import { connect } from 'dva';
+import { Link } from 'dva/router';
 
-import React,{useEffect} from 'react'
-import MarkingStyle from './index.scss'
-import { Table,Divider, Tag } from 'antd'
-import { connect } from 'dva'
-import { Link } from 'dva/router'
 function Awaiting (props){
   let { getClass , getGradeViewData } = props
     useEffect(()=>{
