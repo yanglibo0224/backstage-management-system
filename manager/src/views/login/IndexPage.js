@@ -4,7 +4,7 @@ import { Form, Input, Icon, Checkbox, Button, message } from 'antd';
 import './index.scss';
 
 function IndexPage(props) {
-  console.log(props.isLogin);
+  // console.log(props.isLogin);
   //判断是否登陆
   useEffect(() => {
     if (props.isLogin === 1) {

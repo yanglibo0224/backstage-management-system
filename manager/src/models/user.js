@@ -118,6 +118,7 @@ export default {
     },
     //退出登陆
     logout(state){
+      console.log(state)
       //1.清除登陆态
       removeToken();
       //2.清除权限

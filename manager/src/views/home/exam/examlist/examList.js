@@ -19,16 +19,59 @@ function Examlist(props) {
     props.getTestList();
   }, [])
 
+  // 计算考试时间
+  function computTime(obj) {
+    let startTime = obj.start_time*1;
+    let endTime = obj.end_time*1;
+    let newTime = endTime - startTime;
+    //计算出小时数
+    var leave1 = newTime % (24 * 3600 * 1000);   
+    var hours = Math.floor(leave1 / (3600 * 1000));
+    //计算相差分钟数
+    var leave2 = leave1 % (3600 * 1000);     
+    var minutes = Math.floor(leave2 / (60 * 1000));
+    //计算相差秒数
+    var leave3 = leave2 % (60 * 1000);    
+    var seconds = Math.round(leave3 / 1000);
+    return hours + ":" + minutes + ":" + seconds;
+  }
+
   const columns = [
-    { title: 'Name', dataIndex: 'title', key: 0 },
-    { title: 'Age', dataIndex: 'grade_name', key: 1 },
-    { title: 'Address', dataIndex: 'user_name', key: 2 },
-    { title: 'Address', 
+    { title: '试卷信息', 
+      dataIndex: 'title', 
+      key: 0,
+      render: (tags,obj) => {
+        return <div>
+                  <h4>{tags}</h4>
+                  <p><span style={{marginRight:'10px'}}>考试时间：{computTime(obj)}</span><span>{obj.number}道题作弊{obj.status}分</span></p>
+            </div>
+        },
+    },
+    { title: '班级', 
+      dataIndex: 'grade_name', 
+      key: 1 ,
+      render: tags => (
+              <div>
+                  <h4>考试班级</h4>
+                    {tags.map((tag,index) => {
+                        return (
+                          <p key={index} style={{margin:0}}>{tag}</p>
+                    );
+                })}
+              </div>
+          ),
+    },
+    { title: '创建人', dataIndex: 'user_name', key: 2 },
+    { title: '开始时间', 
       dataIndex: 'start_time',
       key: 3 ,
-      render: (item) => {return <div><span>{new Date(item*1).toLocaleString()}</span></div> }
+      render: (item) => {
+                return <div>
+                    <p>{new Date(item*1).toLocaleDateString()}&nbsp;&nbsp;{new Date(item*1).toLocaleTimeString()}</p>            
+                </div>
+            }  
     },
-    { title: 'Address',
+    { title: '结束时间',
       dataIndex: 'end_time',
       key: 4, 
       render: (item) => {return <div><span>{new Date(item*1).toLocaleString()}</span></div> }

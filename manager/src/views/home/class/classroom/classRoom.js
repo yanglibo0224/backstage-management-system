@@ -3,8 +3,6 @@ import { Button, Input, Table, Modal, Form, Divider } from 'antd';
 import { connect } from 'dva';
 import typeStyle from './index.scss';
 
-
-
 class Classroom extends Component {
   constructor(props) {
     super(props)
@@ -67,7 +65,6 @@ class Classroom extends Component {
     ];
     
     return (
-      
       <div className="content">
         <h2 className='title'>教室管理</h2>
         <div className='main'>
